@@ -9,7 +9,7 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
-require_once get_template_directory() . '/src/config/breakpoints.php';
+require_once get_stylesheet_directory() . '/src/config/breakpoints.php';
 
 /**
  * Compile CSS styles for a Carbon Block with media query wrapping
@@ -21,9 +21,9 @@ function carbon_blocks_compile_styles($block_name)
 {
     // Handle both category/block-name and block-name formats
     if (strpos($block_name, '/') !== false) {
-        $block_path = get_template_directory() . '/src/blocks/' . $block_name;
+        $block_path = get_stylesheet_directory() . '/src/blocks/' . $block_name;
     } else {
-        $block_path = get_template_directory() . '/src/blocks/' . $block_name;
+        $block_path = get_stylesheet_directory() . '/src/blocks/' . $block_name;
     }
     $styles_path = $block_path . '/styles/';
 
@@ -66,9 +66,9 @@ function carbon_blocks_compile_scripts($block_name)
 {
     // Handle both category/block-name and block-name formats
     if (strpos($block_name, '/') !== false) {
-        $block_path = get_template_directory() . '/src/blocks/' . $block_name;
+        $block_path = get_stylesheet_directory() . '/src/blocks/' . $block_name;
     } else {
-        $block_path = get_template_directory() . '/src/blocks/' . $block_name;
+        $block_path = get_stylesheet_directory() . '/src/blocks/' . $block_name;
     }
     $scripts_path = $block_path . '/scripts/';
 

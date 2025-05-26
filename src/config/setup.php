@@ -11,19 +11,19 @@ if (! defined('ABSPATH')) {
 }
 
 /* Require Vendor Autoload and Config Files */
-require_once get_template_directory() . '/vendor/autoload.php';
-require_once get_template_directory() . '/src/config/compile_helpers.php';
-require_once get_template_directory() . '/src/config/timber/paths.php';
-require_once get_template_directory() . '/src/config/admin_pages.php';
-require_once get_template_directory() . '/src/config/post_types.php';
-require_once get_template_directory() . '/src/config/taxonomy.php';
+require_once get_stylesheet_directory() . '/vendor/autoload.php';
+require_once get_stylesheet_directory() . '/src/config/compile_helpers.php';
+require_once get_stylesheet_directory() . '/src/config/timber/paths.php';
+require_once get_stylesheet_directory() . '/src/config/admin_pages.php';
+require_once get_stylesheet_directory() . '/src/config/post_types.php';
+require_once get_stylesheet_directory() . '/src/config/taxonomy.php';
 
 /**
  * Load Carbon Fields via Composer autoloader
  */
 function crb_load()
 {
-    $autoload_path = get_template_directory() . '/vendor/autoload.php';
+    $autoload_path = get_stylesheet_directory() . '/vendor/autoload.php';
 
     if (file_exists($autoload_path)) {
         require_once $autoload_path;
@@ -46,7 +46,7 @@ function example_theme_init_timber()
  */
 function carbon_blocks_register_all()
 {
-    $blocks_dir = get_template_directory() . '/src/blocks/';
+    $blocks_dir = get_stylesheet_directory() . '/src/blocks/';
 
     if (! is_dir($blocks_dir)) {
         return;
@@ -77,7 +77,7 @@ function carbon_blocks_register_all()
  */
 function carbon_blocks_get_categories()
 {
-    $blocks_dir = get_template_directory() . '/src/blocks/';
+    $blocks_dir = get_stylesheet_directory() . '/src/blocks/';
     $categories = [];
 
     if (! is_dir($blocks_dir)) {

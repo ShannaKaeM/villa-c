@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
  * Auto-discover and register admin pages
  */
 function carbon_admin_pages_register_all() {
-    $admin_pages_dir = get_template_directory() . '/src/admin-pages/';
+    $admin_pages_dir = get_stylesheet_directory() . '/src/admin-pages/';
     
     if (!is_dir($admin_pages_dir)) {
         return;

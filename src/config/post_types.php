@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
  * Auto-discover and register post types (config.php only)
  */
 function carbon_post_types_register_all() {
-    $post_types_dir = get_template_directory() . '/src/post-types/';
+    $post_types_dir = get_stylesheet_directory() . '/src/post-types/';
     
     if (!is_dir($post_types_dir)) {
         return;
@@ -42,7 +42,7 @@ function carbon_post_types_register_all() {
  * Auto-discover and register post type field groups
  */
 function carbon_post_types_register_field_groups_all() {
-    $post_types_dir = get_template_directory() . '/src/post-types/';
+    $post_types_dir = get_stylesheet_directory() . '/src/post-types/';
     
     if (!is_dir($post_types_dir)) {
         return;

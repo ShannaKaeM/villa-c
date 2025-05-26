@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
  * Auto-discover and register taxonomies (config.php only)
  */
 function carbon_taxonomies_register_all() {
-    $taxonomies_dir = get_template_directory() . '/src/taxonomy/';
+    $taxonomies_dir = get_stylesheet_directory() . '/src/taxonomy/';
     
     if (!is_dir($taxonomies_dir)) {
         return;
@@ -57,7 +57,7 @@ function carbon_taxonomies_register_all() {
  * Auto-discover and register taxonomy field groups
  */
 function carbon_taxonomies_register_field_groups_all() {
-    $taxonomies_dir = get_template_directory() . '/src/taxonomy/';
+    $taxonomies_dir = get_stylesheet_directory() . '/src/taxonomy/';
     
     if (!is_dir($taxonomies_dir)) {
         return;
