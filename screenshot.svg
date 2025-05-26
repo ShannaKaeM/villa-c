@@ -1,0 +1,128 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient backgrounds -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#161616;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f0f0f;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Shadow filter -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="8" stdDeviation="24" flood-opacity="0.3"/>
+    </filter>
+    
+    <!-- Subtle shadow for cards -->
+    <filter id="cardShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="4" stdDeviation="16" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="url(#bgGradient)" />
+  
+  <!-- Subtle grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#333" stroke-width="0.5" opacity="0.1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="900" fill="url(#grid)" />
+  
+  <!-- Main content area -->
+  <g transform="translate(100, 120)">
+    
+    <!-- Header card -->
+    <rect x="0" y="0" width="1000" height="80" rx="12" fill="url(#cardGradient)" stroke="#333" stroke-width="1" filter="url(#cardShadow)" />
+    
+    <!-- Navigation items -->
+    <circle cx="32" cy="40" r="6" fill="#3b82f6" />
+    <circle cx="56" cy="40" r="6" fill="#ef4444" />
+    <circle cx="80" cy="40" r="6" fill="#10b981" />
+    
+    <!-- Nav text -->
+    <text x="120" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#a1a1aa" font-weight="500">Carbon Blocks Framework</text>
+    <text x="120" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#71717a">File-based routing for WordPress</text>
+    
+    <!-- Status indicator -->
+    <rect x="880" y="25" width="100" height="30" rx="15" fill="#059669" opacity="0.1" />
+    <text x="930" y="43" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#10b981" font-weight="500" text-anchor="middle">ACTIVE</text>
+    
+    <!-- Main CARBON text -->
+    <text x="500" y="200" font-family="system-ui, -apple-system, sans-serif" font-size="120" fill="#ffffff" font-weight="800" text-anchor="middle" letter-spacing="-0.02em">CARBON</text>
+    
+    <!-- Subtitle -->
+    <text x="500" y="240" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#71717a" font-weight="400" text-anchor="middle">Blocks Framework</text>
+    
+    <!-- Feature cards row -->
+    <g transform="translate(0, 280)">
+      
+      <!-- Blocks card -->
+      <rect x="0" y="0" width="240" height="160" rx="12" fill="url(#cardGradient)" stroke="#333" stroke-width="1" filter="url(#cardShadow)" />
+      <rect x="20" y="20" width="40" height="40" rx="8" fill="url(#accentGradient)" />
+      <text x="30" y="36" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="white" font-weight="600">🧱</text>
+      <text x="20" y="85" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#ffffff" font-weight="600">Gutenberg Blocks</text>
+      <text x="20" y="105" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#a1a1aa">Responsive CSS compilation</text>
+      <text x="20" y="125" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#a1a1aa">Component architecture</text>
+      
+      <!-- Post Types card -->
+      <rect x="260" y="0" width="240" height="160" rx="12" fill="url(#cardGradient)" stroke="#333" stroke-width="1" filter="url(#cardShadow)" />
+      <rect x="280" y="20" width="40" height="40" rx="8" fill="#059669" />
+      <text x="290" y="36" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="white" font-weight="600">📄</text>
+      <text x="280" y="85" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#ffffff" font-weight="600">Post Types</text>
+      <text x="280" y="105" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#a1a1aa">Auto-discovery system</text>
+      <text x="280" y="125" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#a1a1aa">Carbon Fields integration</text>
+      
+      <!-- Taxonomies card -->
+      <rect x="520" y="0" width="240" height="160" rx="12" fill="url(#cardGradient)" stroke="#333" stroke-width="1" filter="url(#cardShadow)" />
+      <rect x="540" y="20" width="40" height="40" rx="8" fill="#7c3aed" />
+      <text x="550" y="36" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="white" font-weight="600">🏷️</text>
+      <text x="540" y="85" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#ffffff" font-weight="600">Taxonomies</text>
+      <text x="540" y="105" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#a1a1aa">Multi-post type support</text>
+      <text x="540" y="125" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#a1a1aa">Term meta fields</text>
+      
+      <!-- Admin Pages card -->
+      <rect x="760" y="0" width="240" height="160" rx="12" fill="url(#cardGradient)" stroke="#333" stroke-width="1" filter="url(#cardShadow)" />
+      <rect x="780" y="20" width="40" height="40" rx="8" fill="#dc2626" />
+      <text x="790" y="36" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="white" font-weight="600">⚙️</text>
+      <text x="780" y="85" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#ffffff" font-weight="600">Admin Pages</text>
+      <text x="780" y="105" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#a1a1aa">Hierarchical structure</text>
+      <text x="780" y="125" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#a1a1aa">Settings management</text>
+      
+    </g>
+    
+    <!-- Bottom feature highlight -->
+    <g transform="translate(200, 480)">
+      <rect x="0" y="0" width="600" height="100" rx="12" fill="url(#cardGradient)" stroke="#333" stroke-width="1" filter="url(#cardShadow)" />
+      <text x="300" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="20" fill="#ffffff" font-weight="600" text-anchor="middle">Zero Configuration Development</text>
+      <text x="300" y="58" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#a1a1aa" text-anchor="middle">File structure defines functionality • Auto-discovery • Responsive by default</text>
+      <text x="300" y="78" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#71717a" text-anchor="middle">Built with Carbon Fields + Timber + Modern WordPress</text>
+    </g>
+    
+    <!-- Decorative elements -->
+    <circle cx="50" cy="300" r="2" fill="#3b82f6" opacity="0.6" />
+    <circle cx="950" cy="200" r="3" fill="#10b981" opacity="0.4" />
+    <circle cx="150" cy="500" r="1.5" fill="#ef4444" opacity="0.5" />
+    <circle cx="850" cy="450" r="2.5" fill="#7c3aed" opacity="0.3" />
+    
+  </g>
+  
+  <!-- Subtle vignette effect -->
+  <defs>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:0" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0.3" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#vignette)" />
+  
+</svg>

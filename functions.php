@@ -1,4 +1,4 @@
 <?php
 
 // Load theme setup and dependencies
-require_once get_template_directory() . '/config/setup.php';
+require_once get_template_directory() . '/src/config/setup.php';

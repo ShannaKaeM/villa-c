@@ -12,31 +12,31 @@ if (! defined('ABSPATH')) {
 }
 
 add_filter('timber/locations', function ($paths) {
-    $blocks_base_dir = get_template_directory() . '/carbon-blocks';
-    $stylesheet_blocks_dir = get_stylesheet_directory() . '/carbon-blocks';
-    
+    $blocks_base_dir       = get_template_directory() . '/src/blocks';
+    $stylesheet_blocks_dir = get_stylesheet_directory() . '/src/blocks';
+
     // Initialize blocks array
     $paths['blocks'] = [];
-    
+
     // Add main blocks directory first (for backward compatibility)
     $paths['blocks'][] = $blocks_base_dir;
     if ($stylesheet_blocks_dir !== $blocks_base_dir) {
         $paths['blocks'][] = $stylesheet_blocks_dir;
     }
-    
+
     // Auto-discover category directories and add them to paths
     if (is_dir($blocks_base_dir)) {
         $category_dirs = glob($blocks_base_dir . '/*', GLOB_ONLYDIR);
-        
+
         foreach ($category_dirs as $category_dir) {
             $paths['blocks'][] = $category_dir;
         }
     }
-    
+
     // Do the same for child theme if different
     if ($stylesheet_blocks_dir !== $blocks_base_dir && is_dir($stylesheet_blocks_dir)) {
         $stylesheet_category_dirs = glob($stylesheet_blocks_dir . '/*', GLOB_ONLYDIR);
-        
+
         foreach ($stylesheet_category_dirs as $category_dir) {
             $paths['blocks'][] = $category_dir;
         }

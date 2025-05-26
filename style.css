@@ -1,13 +1,8 @@
-/*
-Theme Name: Example Theme
-Description: A minimal WordPress theme for Gutenberg styles development
-Version: 1.0
-Author: Developer
-*/
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 20px;
-}
+/**
+ * Theme Name: Carbon Blocksy
+ * Description: Blocksy Advance Child Theme for Developers using Carbon Fields.
+ * Version: 1.0.0
+ * Author: Daniel Snell
+ * Template: blocksy
+ * Text Domain: blocksy
+ */
