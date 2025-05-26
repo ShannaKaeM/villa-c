@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'danielsnell/carbon-blocks',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '2c7bf9a5aae2ca00fd1ea81452823ace4a6ed03f',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'danielsnell/carbon-blocks' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '2c7bf9a5aae2ca00fd1ea81452823ace4a6ed03f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
