@@ -2,11 +2,11 @@
     height: 350px;
     border-radius: 2rem;
     margin: 0 3%;
-    width: 94%;
+    width: calc(100% - 6%);
 }
 
 .carbon-block--hero-section::before {
-    background: rgba(52, 73, 94, 0.5); /* 50% primary-dark overlay */
+    background: rgba(52, 73, 94, 0.65); /* 65% primary-dark overlay */
     border-radius: 2rem;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .carbon-block--hero-section__title {
-    font-size: 2.5rem;
+    font-size: 2.25rem; /* Reduced from 2.5rem */
     font-weight: 600;
     margin: 0 0 0.75rem 0; /* Reduced gap */
     color: #f8f9fa;
