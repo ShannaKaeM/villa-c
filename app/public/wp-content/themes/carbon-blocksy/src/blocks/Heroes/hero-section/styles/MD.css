@@ -1,22 +1,28 @@
 .carbon-block--hero-section {
-    min-height: 80vh;
+    height: 350px;
+    border-radius: 2rem;
+    margin: 0 5%;
+    width: 90%;
 }
 
 .carbon-block--hero-section__container {
-    max-width: 100%;
+    width: 100%;
     padding: 4rem 2rem;
+    color: #f8f9fa;
 }
 
 .carbon-block--hero-section__content {
-    max-width: 800px;
+    max-width: 100%;
 }
 
 .carbon-block--hero-section__title {
     font-size: 3rem;
     margin: 0 0 1.5rem 0;
+    color: #f8f9fa;
 }
 
 .carbon-block--hero-section__subtitle {
     font-size: 1.25rem;
     margin: 0 0 3rem 0;
+    color: #f8f9fa;
 }
