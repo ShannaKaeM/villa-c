@@ -1,6 +1,6 @@
 .carbon-block--hero-section {
     position: relative;
-    min-height: 100vh;
+    min-height: 85vh;
     display: flex;
     align-items: center;
     background-size: cover;
@@ -12,13 +12,13 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 5rem 2rem;
 }
 
 .carbon-block--hero-section__content {
     text-align: center;
     color: white;
-    max-width: 600px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -35,14 +35,18 @@
 .carbon-block--hero-section__title {
     font-size: 3.5rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin: 0 0 2rem 0;
     line-height: 1.2;
+    letter-spacing: -0.02em;
 }
 
 .carbon-block--hero-section__subtitle {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
+    font-size: 1.375rem;
+    margin: 0 0 3.5rem 0;
     line-height: 1.6;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .carbon-block--hero-section__button {
