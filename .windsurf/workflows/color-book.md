@@ -166,6 +166,17 @@ a:6:{
    - Blocksy generates `--paletteColor1` through `--paletteColor16`
    - Villa also provides semantic variables like `--villa-primary`
 
+## Related Files and Exports
+
+### Current Color Files
+- **theme.json**: Current WordPress color palette definitions
+- **inc/colorbook.php**: ColorBook system functionality
+- **assets/css/theme-integration.css**: CSS variable mappings
+
+### Blocksy Integration Files
+- Use Villa Stylebook export feature to generate Blocksy-compatible JSON files
+- Import these files via Blocksy Customizer → Import/Export for theme setup
+
 ## Troubleshooting
 
 ### Colors Not Showing in Blocksy
