@@ -1,26 +1,23 @@
 .carbon-block--hero-section {
-    height: 350px;
-    border-radius: 2rem;
-    /* Break out of content container */
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    /* Add the 3% margins after breaking out */
-    padding-left: 3vw;
-    padding-right: 3vw;
-    box-sizing: border-box;
+    height: 375px; /* Same as LG base */
+    border-radius: 2.5rem;
+    /* Alternative breakout method for constrained containers */
+    margin-left: calc(-50vw + 50% + 5vw);
+    margin-right: calc(-50vw + 50% + 5vw);
+    width: calc(100vw - 10vw);
+    max-width: none;
 }
 
 .carbon-block--hero-section::before {
-    background: rgba(52, 73, 94, 0.65); /* 65% primary-dark overlay */
-    border-radius: 2rem;
+    background: rgba(from var(--theme-palette-color-3) r g b / 0.65); /* 65% primary-dark overlay using theme color 3 */
+    border-radius: 2.5rem;
 }
 
 .carbon-block--hero-section__container {
     width: 100%;
-    padding: 4rem 2rem;
+    padding: 4rem 2rem; /* Scaled down from LG 5rem */
     color: #f8f9fa;
-    max-width: none; /* Remove any max-width constraints */
+    max-width: 1200px; /* Scaled down from LG 1400px */
 }
 
 .carbon-block--hero-section__content {
@@ -28,17 +25,19 @@
 }
 
 .carbon-block--hero-section__title {
-    font-size: 2.75rem; /* Reduced from 3rem */
-    font-weight: 600;
-    margin: 0 0 1rem 0; /* Reduced gap */
-    color: #f8f9fa;
+    font-size: 2.25rem; /* Scaled down from LG 2.75rem */
+    font-weight: 500;
+    margin: 0 0 0.875rem 0; /* Scaled down from LG 1rem */
+    line-height: 1.05;
+    letter-spacing: 0.1em; /* loose tracking */
+    color: var(--base-white);
     text-transform: uppercase;
-    letter-spacing: 0.05em; /* loose tracking */
 }
 
 .carbon-block--hero-section__subtitle {
-    font-size: 1.25rem;
-    font-weight: 500;
-    margin: 0 0 3rem 0;
-    color: #e9ecef; /* base-lightest */
+    font-size: 1.25rem; /* Scaled down from LG 1.375rem */
+    font-weight: 400;
+    margin: 0 0 2.5rem 0; /* Scaled down from LG 3rem */
+    line-height: 1.6;
+    color: var(--base-lightest);
 }

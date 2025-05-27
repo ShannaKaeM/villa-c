@@ -1,5 +1,5 @@
 ---
-description: Theme and block documentation
+description: Review the Theme Overview
 ---
 
 # Documentation Review Workflow
