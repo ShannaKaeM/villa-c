@@ -6,8 +6,14 @@
     background-size: cover;
     background-position: center;
     border-radius: 2rem;
-    margin: 0 3%;
-    width: calc(100% - 6%);
+    /* Break out of content container */
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    /* Add the 3% margins after breaking out */
+    padding-left: 3vw;
+    padding-right: 3vw;
+    box-sizing: border-box;
 }
 
 .carbon-block--hero-section__container {
@@ -17,6 +23,7 @@
     margin: 0 auto;
     padding: 5rem 2rem;
     color: #f8f9fa;
+    max-width: none; /* Remove any max-width constraints */
 }
 
 .carbon-block--hero-section__content {
