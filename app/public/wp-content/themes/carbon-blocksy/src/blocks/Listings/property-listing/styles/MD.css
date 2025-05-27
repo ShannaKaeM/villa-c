@@ -1,0 +1,59 @@
+/* Property Listing Block - Medium Devices (MD) */
+
+.carbon-block--property-listing {
+  padding: 3rem 0;
+}
+
+.carbon-block--property-listing__container {
+  padding: 0 1rem;
+}
+
+.carbon-block--property-listing__header {
+  margin-bottom: 2.5rem;
+}
+
+.carbon-block--property-listing__title {
+  font-size: 2rem;
+}
+
+.carbon-block--property-listing__description {
+  font-size: 1rem;
+}
+
+/* Grid Adjustments */
+.carbon-block--property-listing__grid--grid.carbon-block--property-listing__grid--columns-4 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.carbon-block--property-listing__grid--grid.carbon-block--property-listing__grid--columns-3 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* List Layout Adjustments */
+.carbon-block--property-listing__grid--list .carbon-block--property-listing__item {
+  grid-template-columns: 250px 1fr;
+  gap: 1rem;
+}
+
+/* Carousel Adjustments */
+.carbon-block--property-listing__grid--carousel .carbon-block--property-listing__item {
+  flex: 0 0 300px;
+}
+
+/* Content Adjustments */
+.carbon-block--property-listing__content {
+  padding: 1.25rem;
+}
+
+.carbon-block--property-listing__property-title {
+  font-size: 1.125rem;
+}
+
+.carbon-block--property-listing__details {
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.carbon-block--property-listing__detail {
+  justify-content: center;
+}

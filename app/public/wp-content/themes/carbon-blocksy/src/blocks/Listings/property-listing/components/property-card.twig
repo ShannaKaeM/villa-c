@@ -1,0 +1,83 @@
+{# Property Card Component #}
+{# Usage: {% include 'components/property-card.twig' with { property: property, fields: fields } %} #}
+
+<article class="carbon-block--property-listing__item {% if property.is_featured %}carbon-block--property-listing__item--featured{% endif %}">
+    
+    {# Property Image #}
+    <div class="carbon-block--property-listing__image-wrapper">
+        <img 
+            src="/wp-content/themes/carbon-blocksy/miDocs/SITE DATA/Images/Properties-Featured/{{ property.featured_image }}" 
+            alt="{{ property.title }}"
+            class="carbon-block--property-listing__image"
+            loading="lazy"
+        >
+        
+        {% if property.is_featured %}
+        <span class="carbon-block--property-listing__featured-badge">Featured</span>
+        {% endif %}
+        
+        {% if fields.show_price and property.nightly_rate %}
+        <div class="carbon-block--property-listing__price-badge">
+            ${{ property.nightly_rate }}<span>/night</span>
+        </div>
+        {% endif %}
+    </div>
+    
+    {# Property Content #}
+    <div class="carbon-block--property-listing__content">
+        
+        {# Property Type & Location #}
+        <div class="carbon-block--property-listing__meta">
+            <span class="carbon-block--property-listing__type">{{ property.property_type_label }}</span>
+            <span class="carbon-block--property-listing__location">{{ property.location_label }}</span>
+        </div>
+        
+        {# Property Title #}
+        <h3 class="carbon-block--property-listing__property-title">
+            <a href="/properties/{{ property.slug }}" class="carbon-block--property-listing__link">
+                {{ property.title }}
+            </a>
+        </h3>
+        
+        {# Property Description #}
+        <p class="carbon-block--property-listing__excerpt">{{ property.description }}</p>
+        
+        {# Property Details #}
+        {% if fields.show_details %}
+        <div class="carbon-block--property-listing__details">
+            <span class="carbon-block--property-listing__detail">
+                <span class="carbon-block--property-listing__detail-icon">🛏️</span>
+                {{ property.bedrooms }} BR
+            </span>
+            <span class="carbon-block--property-listing__detail">
+                <span class="carbon-block--property-listing__detail-icon">🛁</span>
+                {{ property.bathrooms }} BA
+            </span>
+            <span class="carbon-block--property-listing__detail">
+                <span class="carbon-block--property-listing__detail-icon">👥</span>
+                {{ property.max_guests }} Guests
+            </span>
+        </div>
+        {% endif %}
+        
+        {# Amenities #}
+        {% if fields.show_amenities and property.amenities %}
+        <div class="carbon-block--property-listing__amenities">
+            {% for amenity in property.amenities %}
+            <span class="carbon-block--property-listing__amenity">
+                <span class="carbon-block--property-listing__amenity-icon">{{ amenity.icon }}</span>
+                {{ amenity.name }}
+            </span>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        {# Call to Action #}
+        <div class="carbon-block--property-listing__actions">
+            <a href="/properties/{{ property.slug }}" class="carbon-block--property-listing__cta">
+                {{ fields.cta_text|default('View Property') }}
+            </a>
+        </div>
+        
+    </div>
+</article>

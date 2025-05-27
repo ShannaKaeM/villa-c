@@ -1,0 +1,72 @@
+/* Property Listing Block - Small Devices (SM) */
+
+.carbon-block--property-listing {
+  padding: 2.5rem 0;
+}
+
+.carbon-block--property-listing__container {
+  padding: 0 1rem;
+}
+
+.carbon-block--property-listing__header {
+  margin-bottom: 2rem;
+}
+
+.carbon-block--property-listing__title {
+  font-size: 1.75rem;
+}
+
+/* Force single column on small devices */
+.carbon-block--property-listing__grid--grid {
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+/* List layout becomes single column */
+.carbon-block--property-listing__grid--list .carbon-block--property-listing__item {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.carbon-block--property-listing__grid--list .carbon-block--property-listing__image-wrapper {
+  aspect-ratio: 4/3;
+}
+
+/* Carousel adjustments */
+.carbon-block--property-listing__grid--carousel .carbon-block--property-listing__item {
+  flex: 0 0 280px;
+}
+
+/* Content adjustments */
+.carbon-block--property-listing__content {
+  padding: 1rem;
+}
+
+.carbon-block--property-listing__property-title {
+  font-size: 1.125rem;
+}
+
+.carbon-block--property-listing__excerpt {
+  font-size: 0.875rem;
+}
+
+/* Details stack vertically */
+.carbon-block--property-listing__details {
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.carbon-block--property-listing__detail {
+  justify-content: flex-start;
+}
+
+/* Amenities wrap better */
+.carbon-block--property-listing__amenities {
+  gap: 0.25rem;
+}
+
+.carbon-block--property-listing__amenity {
+  font-size: 0.6875rem;
+  padding: 0.25rem 0.5rem;
+}

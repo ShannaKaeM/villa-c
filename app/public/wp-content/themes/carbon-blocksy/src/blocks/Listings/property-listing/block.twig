@@ -1,0 +1,196 @@
+{% set mock_properties = [
+    {
+        'id': 1,
+        'title': 'Luxury Oceanfront Beach House',
+        'slug': 'luxury-oceanfront-beach-house',
+        'description': 'Wake up to the sound of waves in this newly renovated 4BR/3BA home right on North Topsail Beach.',
+        'property_type': 'house',
+        'property_type_label': '🏠 House',
+        'location': 'north-topsail-beach',
+        'location_label': '🌊 North Topsail Beach',
+        'address': '123 Ocean Blvd, North Topsail Beach, NC',
+        'bedrooms': 4,
+        'bathrooms': 3,
+        'max_guests': 10,
+        'nightly_rate': 450,
+        'is_featured': true,
+        'featured_image': 'villa-feature-1R.png',
+        'amenities': [
+            {'icon': '🏊', 'name': 'Pool'},
+            {'icon': '🌊', 'name': 'Ocean View'},
+            {'icon': '🐶', 'name': 'Pet Friendly'}
+        ]
+    },
+    {
+        'id': 2,
+        'title': 'Coastal Condo with Pier View',
+        'slug': 'coastal-condo-with-pier-view',
+        'description': 'Modern 2BR condo steps from the fishing pier and local shops.',
+        'property_type': 'condo',
+        'property_type_label': '🏢 Condo',
+        'location': 'north-topsail-beach',
+        'location_label': '🌊 North Topsail Beach',
+        'address': '234 Pier Ave, North Topsail Beach, NC',
+        'bedrooms': 2,
+        'bathrooms': 2,
+        'max_guests': 4,
+        'nightly_rate': 250,
+        'is_featured': false,
+        'featured_image': 'villa-featured-2.png',
+        'amenities': [
+            {'icon': '🌊', 'name': 'Ocean View'},
+            {'icon': '🛁', 'name': 'Hot Tub'}
+        ]
+    },
+    {
+        'id': 3,
+        'title': 'Pet-Friendly Cottage',
+        'slug': 'pet-friendly-cottage',
+        'description': 'Charming 3BR cottage with fenced yard, perfect for families and pets.',
+        'property_type': 'cottage',
+        'property_type_label': '🏡 Cottage',
+        'location': 'north-topsail-beach',
+        'location_label': '🌊 North Topsail Beach',
+        'address': '345 Coastal Dr, North Topsail Beach, NC',
+        'bedrooms': 3,
+        'bathrooms': 2,
+        'max_guests': 5,
+        'nightly_rate': 200,
+        'is_featured': true,
+        'featured_image': 'villa-featured-3.png',
+        'amenities': [
+            {'icon': '🐶', 'name': 'Pet Friendly'},
+            {'icon': '🏊', 'name': 'Pool'}
+        ]
+    },
+    {
+        'id': 4,
+        'title': 'Resort-Style Villa with Pool',
+        'slug': 'resort-style-villa-with-pool',
+        'description': 'Spacious villa with resort amenities and private pool.',
+        'property_type': 'house',
+        'property_type_label': '🏠 House',
+        'location': 'north-topsail-beach',
+        'location_label': '🌊 North Topsail Beach',
+        'address': '456 Resort Ln, North Topsail Beach, NC',
+        'bedrooms': 5,
+        'bathrooms': 4,
+        'max_guests': 12,
+        'nightly_rate': 600,
+        'is_featured': true,
+        'featured_image': 'villa-featured-4.png',
+        'amenities': [
+            {'icon': '🏊', 'name': 'Pool'},
+            {'icon': '🛁', 'name': 'Hot Tub'},
+            {'icon': '🌊', 'name': 'Ocean View'}
+        ]
+    },
+    {
+        'id': 5,
+        'title': 'Modern Apartment Near Attractions',
+        'slug': 'modern-apartment-near-attractions',
+        'description': '1BR apartment close to shops, restaurants, and the beach.',
+        'property_type': 'condo',
+        'property_type_label': '🏢 Condo',
+        'location': 'north-topsail-beach',
+        'location_label': '🌊 North Topsail Beach',
+        'address': '567 Main St, North Topsail Beach, NC',
+        'bedrooms': 1,
+        'bathrooms': 1,
+        'max_guests': 2,
+        'nightly_rate': 175,
+        'is_featured': false,
+        'featured_image': 'Bedroom1.png',
+        'amenities': [
+            {'icon': '🌊', 'name': 'Ocean View'},
+            {'icon': '🐶', 'name': 'Pet Friendly'}
+        ]
+    },
+    {
+        'id': 6,
+        'title': 'Seaside Bungalow with Deck',
+        'slug': 'seaside-bungalow-with-deck',
+        'description': 'Cozy bungalow with large deck and ocean breeze.',
+        'property_type': 'cottage',
+        'property_type_label': '🏡 Cottage',
+        'location': 'north-topsail-beach',
+        'location_label': '🌊 North Topsail Beach',
+        'address': '678 Seaside Rd, North Topsail Beach, NC',
+        'bedrooms': 2,
+        'bathrooms': 2,
+        'max_guests': 4,
+        'nightly_rate': 225,
+        'is_featured': false,
+        'featured_image': 'Bedroom2.png',
+        'amenities': [
+            {'icon': '🏊', 'name': 'Pool'},
+            {'icon': '🌊', 'name': 'Ocean View'},
+            {'icon': '🛁', 'name': 'Hot Tub'}
+        ]
+    }
+] %}
+
+{% set filtered_properties = [] %}
+{% set count = 0 %}
+
+{# Filter properties based on block settings #}
+{% for property in mock_properties %}
+    {% if count < fields.properties_to_show %}
+        {% set include_property = true %}
+        
+        {# Filter by featured status #}
+        {% if fields.show_featured_only and not property.is_featured %}
+            {% set include_property = false %}
+        {% endif %}
+        
+        {# Filter by property type #}
+        {% if fields.property_types and property.property_type not in fields.property_types %}
+            {% set include_property = false %}
+        {% endif %}
+        
+        {# Filter by location #}
+        {% if fields.locations and property.location not in fields.locations %}
+            {% set include_property = false %}
+        {% endif %}
+        
+        {% if include_property %}
+            {% set filtered_properties = filtered_properties|merge([property]) %}
+            {% set count = count + 1 %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+<section class="carbon-block--property-listing" style="--accent-color: {{ fields.accent_color|default('#5a7f80') }}">
+    <div class="carbon-block--property-listing__container">
+        
+        {# Section Header #}
+        {% if fields.section_title or fields.section_description %}
+        <header class="carbon-block--property-listing__header">
+            {% if fields.section_title %}
+            <h2 class="carbon-block--property-listing__title">{{ fields.section_title }}</h2>
+            {% endif %}
+            
+            {% if fields.section_description %}
+            <p class="carbon-block--property-listing__description">{{ fields.section_description }}</p>
+            {% endif %}
+        </header>
+        {% endif %}
+        
+        {# Properties Grid/List #}
+        <div class="carbon-block--property-listing__grid carbon-block--property-listing__grid--{{ fields.layout_style|default('grid') }} carbon-block--property-listing__grid--columns-{{ fields.columns|default('3') }}">
+            
+            {% for property in filtered_properties %}
+            {% include 'components/property-card.twig' with { property: property, fields: fields } %}
+            {% endfor %}
+            
+        </div>
+        
+        {# No Properties Message #}
+        {% if filtered_properties|length == 0 %}
+        <div class="carbon-block--property-listing__empty">
+            <p>No properties match your current filters. Please adjust your criteria and try again.</p>
+        </div>
+        {% endif %}
+        
+    </div>
+</section>
