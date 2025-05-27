@@ -1,8 +1,13 @@
 .carbon-block--hero-section {
     height: 350px;
     border-radius: 2rem;
-    margin: 0 5%;
-    width: 90%;
+    margin: 0 3%;
+    width: 94%;
+}
+
+.carbon-block--hero-section::before {
+    background: rgba(52, 73, 94, 0.5); /* 50% primary-dark overlay */
+    border-radius: 2rem;
 }
 
 .carbon-block--hero-section__container {
@@ -19,14 +24,18 @@
 
 .carbon-block--hero-section__title {
     font-size: 2.5rem;
-    margin: 0 0 1.25rem 0;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0; /* Reduced gap */
     color: #f8f9fa;
+    text-transform: uppercase;
+    letter-spacing: 0.05em; /* loose tracking */
 }
 
 .carbon-block--hero-section__subtitle {
     font-size: 1.125rem;
+    font-weight: 500;
     margin: 0 0 2.5rem 0;
-    color: #f8f9fa;
+    color: #e9ecef; /* base-lightest */
 }
 
 .carbon-block--hero-section__button {

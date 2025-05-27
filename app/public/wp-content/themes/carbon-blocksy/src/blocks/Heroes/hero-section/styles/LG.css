@@ -6,8 +6,8 @@
     background-size: cover;
     background-position: center;
     border-radius: 2rem;
-    margin: 0 5%;
-    width: 90%;
+    margin: 0 3%;
+    width: 94%;
 }
 
 .carbon-block--hero-section__container {
@@ -33,28 +33,30 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(52, 73, 94, 0.5); /* 50% primary-dark overlay */
     z-index: 1;
     border-radius: 2rem;
 }
 
 .carbon-block--hero-section__title {
     font-size: 3.5rem;
-    font-weight: bold;
-    margin: 0 0 2rem 0;
+    font-weight: 600;
+    margin: 0 0 1.25rem 0; /* Reduced gap */
     line-height: 1.2;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.05em; /* loose tracking */
     color: #f8f9fa;
+    text-transform: uppercase;
 }
 
 .carbon-block--hero-section__subtitle {
     font-size: 1.375rem;
+    font-weight: 500;
     margin: 0 0 3.5rem 0;
     line-height: 1.6;
     max-width: 80%;
     margin-left: auto;
     margin-right: auto;
-    color: #f8f9fa;
+    color: #e9ecef; /* base-lightest */
 }
 
 .carbon-block--hero-section--left .carbon-block--hero-section__content {
