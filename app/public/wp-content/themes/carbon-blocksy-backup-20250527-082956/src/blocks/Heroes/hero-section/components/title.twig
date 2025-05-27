@@ -1,0 +1,13 @@
+{# 
+Title Component
+Variants: hero (default), card
+Usage: {{ include('@blocks/hero-section/components/title.twig', { text: 'Title', variant: 'hero', color: 'base-black' }) }}
+#}
+
+{% set variant = variant ? variant : 'hero' %}
+{% set color = color ? color : 'base-black' %}
+{% set tag = tag ? tag : 'h1' %}
+
+<{{ tag }} class="carbon-title carbon-title--{{ variant }}" style="color: var(--colorbook-{{ color }}, #000000);">
+    {{ text }}
+</{{ tag }}>

@@ -22,6 +22,28 @@
         ]
     },
     {
+        'id': 4,
+        'title': 'Resort-Style Villa with Pool',
+        'slug': 'resort-style-villa-with-pool',
+        'description': 'Spacious villa with resort amenities and private pool.',
+        'property_type': 'house',
+        'property_type_label': '🏠 House',
+        'location': 'north-topsail-beach',
+        'location_label': '🌊 North Topsail Beach',
+        'address': '456 Resort Ln, North Topsail Beach, NC',
+        'bedrooms': 5,
+        'bathrooms': 4,
+        'max_guests': 12,
+        'nightly_rate': 600,
+        'is_featured': true,
+        'featured_image': 'villa-featured-4.png',
+        'amenities': [
+            {'icon': '🏊', 'name': 'Pool'},
+            {'icon': '🛁', 'name': 'Hot Tub'},
+            {'icon': '🌊', 'name': 'Ocean View'}
+        ]
+    },
+    {
         'id': 2,
         'title': 'Coastal Condo with Pier View',
         'slug': 'coastal-condo-with-pier-view',
@@ -56,33 +78,11 @@
         'bathrooms': 2,
         'max_guests': 5,
         'nightly_rate': 200,
-        'is_featured': true,
+        'is_featured': false,
         'featured_image': 'villa-featured-3.png',
         'amenities': [
             {'icon': '🐶', 'name': 'Pet Friendly'},
             {'icon': '🏊', 'name': 'Pool'}
-        ]
-    },
-    {
-        'id': 4,
-        'title': 'Resort-Style Villa with Pool',
-        'slug': 'resort-style-villa-with-pool',
-        'description': 'Spacious villa with resort amenities and private pool.',
-        'property_type': 'house',
-        'property_type_label': '🏠 House',
-        'location': 'north-topsail-beach',
-        'location_label': '🌊 North Topsail Beach',
-        'address': '456 Resort Ln, North Topsail Beach, NC',
-        'bedrooms': 5,
-        'bathrooms': 4,
-        'max_guests': 12,
-        'nightly_rate': 600,
-        'is_featured': true,
-        'featured_image': 'villa-featured-4.png',
-        'amenities': [
-            {'icon': '🏊', 'name': 'Pool'},
-            {'icon': '🛁', 'name': 'Hot Tub'},
-            {'icon': '🌊', 'name': 'Ocean View'}
         ]
     },
     {
@@ -144,12 +144,12 @@
         {% endif %}
         
         {# Filter by property type #}
-        {% if fields.property_types and property.property_type not in fields.property_types %}
+        {% if fields.filter_property_type and property.property_type != fields.filter_property_type %}
             {% set include_property = false %}
         {% endif %}
         
         {# Filter by location #}
-        {% if fields.locations and property.location not in fields.locations %}
+        {% if fields.filter_location and property.location != fields.filter_location %}
             {% set include_property = false %}
         {% endif %}
         
@@ -160,7 +160,17 @@
     {% endif %}
 {% endfor %}
 
-<section class="carbon-block--property-listing" style="--accent-color: {{ fields.accent_color|default('#5a7f80') }}">
+{# Output compiled CSS styles #}
+{% if block.styles %}
+<style>{{ block.styles|raw }}</style>
+{% endif %}
+
+{# Output compiled JavaScript #}
+{% if block.scripts %}
+<script>{{ block.scripts|raw }}</script>
+{% endif %}
+
+<section class="carbon-block--property-listing">
     <div class="carbon-block--property-listing__container">
         
         {# Section Header #}
@@ -176,21 +186,132 @@
         </header>
         {% endif %}
         
-        {# Properties Grid/List #}
-        <div class="carbon-block--property-listing__grid carbon-block--property-listing__grid--{{ fields.layout_style|default('grid') }} carbon-block--property-listing__grid--columns-{{ fields.columns|default('3') }}">
+        {# Main Content Area with Sidebar Layout #}
+        <div class="carbon-block--property-listing__content">
             
-            {% for property in filtered_properties %}
-            {% include 'components/property-card.twig' with { property: property, fields: fields } %}
-            {% endfor %}
+            {# Sidebar Filters (MD+ screens) #}
+            {% if fields.show_filters %}
+            <aside class="carbon-block--property-listing__sidebar">
+                <div class="carbon-block--property-listing__sidebar-content">
+                    <h3 class="carbon-block--property-listing__filter-title">Filter Properties</h3>
+                    
+                    {# Property Type Filter #}
+                    <div class="carbon-block--property-listing__filter-group">
+                        <label class="carbon-block--property-listing__filter-label">Property Type</label>
+                        <select id="property-type-filter" class="carbon-block--property-listing__select">
+                            <option value="">All Types</option>
+                            <option value="house">🏠 House</option>
+                            <option value="condo">🏢 Condo</option>
+                            <option value="cottage">🏡 Cottage</option>
+                            <option value="villa">🏖️ Villa</option>
+                            <option value="apartment">🏠 Apartment</option>
+                        </select>
+                    </div>
+                    
+                    {# Location Filter #}
+                    <div class="carbon-block--property-listing__filter-group">
+                        <label class="carbon-block--property-listing__filter-label">Location</label>
+                        <select id="location-filter" class="carbon-block--property-listing__select">
+                            <option value="">All Locations</option>
+                            <option value="north-topsail-beach">🌊 North Topsail Beach</option>
+                            <option value="surf-city">📍 Surf City</option>
+                            <option value="topsail-beach">🏖️ Topsail Beach</option>
+                        </select>
+                    </div>
+                    
+                    {# Price Range Filter #}
+                    <div class="carbon-block--property-listing__filter-group">
+                        <label class="carbon-block--property-listing__filter-label">Price Range</label>
+                        <select id="price-filter" class="carbon-block--property-listing__select">
+                            <option value="">Any Price</option>
+                            <option value="0-200">$0 - $200</option>
+                            <option value="200-400">$200 - $400</option>
+                            <option value="400-600">$400 - $600</option>
+                            <option value="600+">$600+</option>
+                        </select>
+                    </div>
+                    
+                    {# Bedrooms Filter #}
+                    <div class="carbon-block--property-listing__filter-group">
+                        <label class="carbon-block--property-listing__filter-label">Bedrooms</label>
+                        <select id="bedrooms-filter" class="carbon-block--property-listing__select">
+                            <option value="">Any</option>
+                            <option value="1">1+ Bedroom</option>
+                            <option value="2">2+ Bedrooms</option>
+                            <option value="3">3+ Bedrooms</option>
+                            <option value="4">4+ Bedrooms</option>
+                        </select>
+                    </div>
+                    
+                    {# Featured Filter #}
+                    <div class="carbon-block--property-listing__filter-group">
+                        <label class="carbon-block--property-listing__filter-label">Show</label>
+                        <select id="featured-filter" class="carbon-block--property-listing__select">
+                            <option value="">All Properties</option>
+                            <option value="featured">⭐ Featured Only</option>
+                        </select>
+                    </div>
+                    
+                    {# Clear Filters #}
+                    <button type="button" class="carbon-block--property-listing__clear-filters">
+                        Clear All Filters
+                    </button>
+                </div>
+            </aside>
+            {% endif %}
+            
+            {# Main Properties Area #}
+            <main class="carbon-block--property-listing__main">
+                
+                {# Top Filter Bar (Small screens only) #}
+                {% if fields.show_filters %}
+                <div class="carbon-block--property-listing__mobile-filters">
+                    <div class="carbon-block--property-listing__mobile-filter-row">
+                        <select class="carbon-block--property-listing__mobile-select">
+                            <option value="">All Types</option>
+                            <option value="house">🏠 House</option>
+                            <option value="condo">🏢 Condo</option>
+                            <option value="cottage">🏡 Cottage</option>
+                        </select>
+                        
+                        <select class="carbon-block--property-listing__mobile-select">
+                            <option value="">All Locations</option>
+                            <option value="north-topsail-beach">🌊 North Topsail Beach</option>
+                            <option value="surf-city">📍 Surf City</option>
+                            <option value="topsail-beach">🏖️ Topsail Beach</option>
+                        </select>
+                        
+                        <button type="button" class="carbon-block--property-listing__mobile-filter-toggle">
+                            More Filters
+                        </button>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {# Results Count #}
+                <div class="carbon-block--property-listing__results">
+                    <span class="carbon-block--property-listing__results-count">
+                        <span id="results-count">{{ filtered_properties|length }}</span> properties found
+                    </span>
+                </div>
+                
+                {# Properties Grid #}
+                <div class="carbon-block--property-listing__grid">
+                    {% for property in filtered_properties %}
+                    {% include '@blocks/Listings/property-listing/components/property-card.twig' with { property: property, fields: fields } %}
+                    {% endfor %}
+                </div>
+                
+                {# No Properties Message #}
+                {% if filtered_properties|length == 0 %}
+                <div class="carbon-block--property-listing__empty">
+                    <p>No properties match your current filters. Please adjust your criteria and try again.</p>
+                </div>
+                {% endif %}
+                
+            </main>
             
         </div>
-        
-        {# No Properties Message #}
-        {% if filtered_properties|length == 0 %}
-        <div class="carbon-block--property-listing__empty">
-            <p>No properties match your current filters. Please adjust your criteria and try again.</p>
-        </div>
-        {% endif %}
         
     </div>
 </section>

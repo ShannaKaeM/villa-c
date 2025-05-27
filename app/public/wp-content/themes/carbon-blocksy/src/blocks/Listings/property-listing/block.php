@@ -13,8 +13,13 @@ Block::make(__(ucwords(str_replace('-', ' ', $component))))
             ->set_default_value('Featured Properties'),
         
         Field::make('textarea', 'section_description', __('Section Description'))
+            ->set_help_text('Optional description text below the title')
             ->set_default_value('Discover our handpicked selection of premium vacation rentals in North Topsail Beach.')
             ->set_rows(3),
+        
+        Field::make('checkbox', 'show_filters', __('Show Filter Bar'))
+            ->set_default_value(true)
+            ->set_help_text('Display property filtering options'),
         
         Field::make('select', 'layout_style', __('Layout Style'))
             ->set_options(array(
@@ -23,20 +28,6 @@ Block::make(__(ucwords(str_replace('-', ' ', $component))))
                 'carousel' => 'Carousel Layout'
             ))
             ->set_default_value('grid'),
-        
-        Field::make('select', 'columns', __('Columns'))
-            ->set_options(array(
-                '2' => '2 Columns',
-                '3' => '3 Columns', 
-                '4' => '4 Columns'
-            ))
-            ->set_default_value('3')
-            ->set_conditional_logic(array(
-                array(
-                    'field' => 'layout_style',
-                    'value' => 'grid'
-                )
-            )),
         
         Field::make('text', 'properties_to_show', __('Number of Properties'))
             ->set_attribute('type', 'number')

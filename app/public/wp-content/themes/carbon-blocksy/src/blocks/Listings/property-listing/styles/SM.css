@@ -1,7 +1,7 @@
 /* Property Listing Block - Small Devices (SM) */
 
 .carbon-block--property-listing {
-  padding: 2.5rem 0;
+  padding: 2rem 0;
 }
 
 .carbon-block--property-listing__container {
@@ -12,61 +12,116 @@
   margin-bottom: 2rem;
 }
 
-.carbon-block--property-listing__title {
-  font-size: 1.75rem;
-}
-
-/* Force single column on small devices */
-.carbon-block--property-listing__grid--grid {
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-/* List layout becomes single column */
-.carbon-block--property-listing__grid--list .carbon-block--property-listing__item {
-  grid-template-columns: 1fr;
-  gap: 0;
-}
-
-.carbon-block--property-listing__grid--list .carbon-block--property-listing__image-wrapper {
-  aspect-ratio: 4/3;
-}
-
-/* Carousel adjustments */
-.carbon-block--property-listing__grid--carousel .carbon-block--property-listing__item {
-  flex: 0 0 280px;
-}
-
-/* Content adjustments */
+/* Single column layout */
 .carbon-block--property-listing__content {
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* Hide desktop sidebar */
+.carbon-block--property-listing__sidebar {
+  display: none;
+}
+
+/* Restore mobile filters */
+.carbon-block--property-listing__mobile-filters {
+  display: block;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.carbon-block--property-listing__mobile-filter-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.carbon-block--property-listing__mobile-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+}
+
+.carbon-block--property-listing__mobile-filter-toggle {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Single column for properties */
+.carbon-block--property-listing__grid {
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* Adjust property cards for mobile */
+.carbon-block--property-card__image {
+  height: 200px;
+}
+
+.carbon-block--property-card__content {
   padding: 1rem;
 }
 
-.carbon-block--property-listing__property-title {
-  font-size: 1.125rem;
+.carbon-block--property-card__details {
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
-.carbon-block--property-listing__excerpt {
-  font-size: 0.875rem;
+.carbon-block--property-card__amenities {
+  gap: 0.375rem;
 }
 
-/* Details stack vertically */
-.carbon-block--property-listing__details {
+.carbon-block--property-card__footer {
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.5rem;
+  gap: 1rem;
+  align-items: stretch;
 }
 
-.carbon-block--property-listing__detail {
-  justify-content: flex-start;
+.carbon-block--property-card__cta {
+  width: 100%;
+  text-align: center;
 }
 
-/* Amenities wrap better */
-.carbon-block--property-listing__amenities {
-  gap: 0.25rem;
-}
-
-.carbon-block--property-listing__amenity {
-  font-size: 0.6875rem;
-  padding: 0.25rem 0.5rem;
+/* Property Listing Block - Small Screens */
+@media (max-width: 767.98px) {
+    .carbon-block--property-listing {
+        padding: 2rem 0;
+    }
+    
+    .carbon-block--property-listing__container {
+        padding: 0 1rem;
+    }
+    
+    .carbon-block--property-listing__header {
+        margin-bottom: 2rem;
+    }
+    
+    /* Grid - Single column on small screens */
+    .carbon-block--property-listing__grid--columns-2,
+    .carbon-block--property-listing__grid--columns-3,
+    .carbon-block--property-listing__grid--columns-4 {
+        grid-template-columns: 1fr;
+    }
+    
+    .carbon-block--property-listing__grid {
+        gap: 1.5rem;
+    }
+    
+    /* List layout - Stack vertically */
+    .carbon-block--property-listing__grid--list .carbon-block--property-listing__item {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .carbon-block--property-listing__image-wrapper {
+        aspect-ratio: 16/10;
+    }
 }

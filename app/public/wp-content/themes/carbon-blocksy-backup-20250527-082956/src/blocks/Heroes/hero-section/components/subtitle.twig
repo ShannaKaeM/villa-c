@@ -1,0 +1,18 @@
+{# 
+Subtitle Component - Hero Section Local
+This is a local reference to the global subtitle component
+#}
+
+{# 
+Subtitle Component
+Variants: hero (default), card, caption
+Usage: {{ include('@blocks/hero-section/components/subtitle.twig', { text: 'Subtitle', variant: 'hero', color: 'base-dark' }) }}
+#}
+
+{% set variant = variant ? variant : 'hero' %}
+{% set color = color ? color : 'base-dark' %}
+{% set tag = tag ? tag : 'p' %}
+
+<{{ tag }} class="carbon-subtitle carbon-subtitle--{{ variant }}" style="color: var(--colorbook-{{ color }}, #737373);">
+    {{ text }}
+</{{ tag }}>

@@ -1,310 +1,235 @@
-/* Property Listing Block - Base Styles (LG) */
+/* Property Listing Block - Large Screens */
 .carbon-block--property-listing {
-  --primary-light: #759e9d;
-  --primary: #5a7f80;
-  --primary-dark: #425a5b;
-  --secondary-light: #d1a896;
-  --secondary: #a36b57;
-  --secondary-dark: #744d3e;
-  --neutral-light: #e2ded2;
-  --neutral: #cec7b5;
-  --neutral-dark: #b6ad95;
-  --base-white: #ffffff;
-  --base-lightest: #e5e5e5;
-  --base-light: #bfbfbf;
-  --base: #9c9c9c;
-  --base-dark: #737373;
-  --base-darkest: #4d4d4d;
-  --base-black: #000000;
-  
-  padding: 4rem 0;
-  background: var(--base-white);
+    padding: 3rem 0;
+    background: var(--wp--preset--color--base-white);
 }
 
 .carbon-block--property-listing__container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
-/* Section Header */
+/* Header */
 .carbon-block--property-listing__header {
-  text-align: center;
-  margin-bottom: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
 }
 
 .carbon-block--property-listing__title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--primary-dark);
-  margin-bottom: 1rem;
-  line-height: 1.2;
+    color: var(--wp--preset--color--villa-navy);
+    margin-bottom: 1rem;
 }
 
 .carbon-block--property-listing__description {
-  font-size: 1.125rem;
-  color: var(--base-dark);
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
+    color: var(--wp--preset--color--villa-charcoal);
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-/* Grid Layout */
-.carbon-block--property-listing__grid {
-  display: grid;
-  gap: 2rem;
-}
-
-.carbon-block--property-listing__grid--grid.carbon-block--property-listing__grid--columns-2 {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.carbon-block--property-listing__grid--grid.carbon-block--property-listing__grid--columns-3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.carbon-block--property-listing__grid--grid.carbon-block--property-listing__grid--columns-4 {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.carbon-block--property-listing__grid--list {
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-.carbon-block--property-listing__grid--carousel {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  gap: 1.5rem;
-  padding-bottom: 1rem;
-}
-
-.carbon-block--property-listing__grid--carousel .carbon-block--property-listing__item {
-  flex: 0 0 350px;
-  scroll-snap-align: start;
-}
-
-/* Property Item */
-.carbon-block--property-listing__item {
-  background: var(--base-white);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  border: 1px solid var(--base-lightest);
-}
-
-.carbon-block--property-listing__item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.06);
-}
-
-.carbon-block--property-listing__item--featured {
-  border: 2px solid var(--accent-color, var(--primary));
-  position: relative;
-}
-
-/* List Layout Modifications */
-.carbon-block--property-listing__grid--list .carbon-block--property-listing__item {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 1.5rem;
-  align-items: start;
-}
-
-/* Image Wrapper */
-.carbon-block--property-listing__image-wrapper {
-  position: relative;
-  aspect-ratio: 4/3;
-  overflow: hidden;
-}
-
-.carbon-block--property-listing__grid--list .carbon-block--property-listing__image-wrapper {
-  aspect-ratio: 1;
-}
-
-.carbon-block--property-listing__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.carbon-block--property-listing__item:hover .carbon-block--property-listing__image {
-  transform: scale(1.05);
-}
-
-/* Badges */
-.carbon-block--property-listing__featured-badge {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  background: var(--accent-color, var(--primary));
-  color: var(--base-white);
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.carbon-block--property-listing__price-badge {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  background: rgba(0, 0, 0, 0.8);
-  color: var(--base-white);
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 1.125rem;
-}
-
-.carbon-block--property-listing__price-badge span {
-  font-size: 0.875rem;
-  font-weight: 400;
-  opacity: 0.9;
-}
-
-/* Content */
+/* Main Content Layout - Sidebar + Main */
 .carbon-block--property-listing__content {
-  padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    align-items: start;
 }
 
-.carbon-block--property-listing__meta {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
-  font-size: 0.875rem;
+/* Sidebar Styles */
+.carbon-block--property-listing__sidebar {
+    background: var(--wp--preset--color--base-white);
+    border: 1px solid var(--wp--preset--color--base-light);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 2rem;
 }
 
-.carbon-block--property-listing__type,
-.carbon-block--property-listing__location {
-  color: var(--base-dark);
-  font-weight: 500;
+.carbon-block--property-listing__filter-title {
+    color: var(--wp--preset--color--villa-navy);
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
 }
 
-.carbon-block--property-listing__property-title {
-  margin-bottom: 0.75rem;
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.3;
+.carbon-block--property-listing__filter-group {
+    margin-bottom: 1.5rem;
 }
 
-.carbon-block--property-listing__link {
-  color: var(--primary-dark);
-  text-decoration: none;
-  transition: color 0.2s ease;
+.carbon-block--property-listing__filter-label {
+    display: block;
+    color: var(--wp--preset--color--villa-charcoal);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
 }
 
-.carbon-block--property-listing__link:hover {
-  color: var(--accent-color, var(--primary));
+.carbon-block--property-listing__select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--wp--preset--color--base-light);
+    border-radius: 8px;
+    background: var(--wp--preset--color--base-white);
+    color: var(--wp--preset--color--villa-charcoal);
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease;
 }
 
-.carbon-block--property-listing__excerpt {
-  color: var(--base-dark);
-  line-height: 1.5;
-  margin-bottom: 1rem;
-  font-size: 0.9375rem;
+.carbon-block--property-listing__select:focus {
+    outline: none;
+    border-color: var(--wp--preset--color--villa-teal);
+    box-shadow: 0 0 0 3px rgba(var(--wp--preset--color--villa-teal-rgb), 0.1);
 }
 
-/* Property Details */
-.carbon-block--property-listing__details {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  padding: 0.75rem;
-  background: var(--neutral-light);
-  border-radius: 8px;
+.carbon-block--property-listing__clear-filters {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--wp--preset--color--villa-coral);
+    color: var(--wp--preset--color--base-white);
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
-.carbon-block--property-listing__detail {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--primary-dark);
+.carbon-block--property-listing__clear-filters:hover {
+    background: var(--wp--preset--color--villa-coral-dark);
 }
 
-.carbon-block--property-listing__detail-icon {
-  font-size: 1rem;
+/* Hide mobile filters on desktop */
+.carbon-block--property-listing__mobile-filters {
+    display: none;
 }
 
-/* Amenities */
-.carbon-block--property-listing__amenities {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+/* Main Content Area */
+.carbon-block--property-listing__main {
+    min-width: 0; /* Prevents grid overflow */
 }
 
-.carbon-block--property-listing__amenity {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.25rem 0.75rem;
-  background: var(--base-lightest);
-  border-radius: 20px;
-  font-size: 0.75rem;
-  color: var(--base-dark);
-  font-weight: 500;
+.carbon-block--property-listing__results {
+    margin-bottom: 2rem;
 }
 
-.carbon-block--property-listing__amenity-icon {
-  font-size: 0.875rem;
+.carbon-block--property-listing__results-count {
+    color: var(--wp--preset--color--villa-charcoal);
+    font-weight: 500;
 }
 
-/* Call to Action */
-.carbon-block--property-listing__actions {
-  margin-top: auto;
+/* Properties Grid */
+.carbon-block--property-listing__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
 }
 
-.carbon-block--property-listing__cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.5rem;
-  background: var(--accent-color, var(--primary));
-  color: var(--base-white);
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.9375rem;
-  transition: all 0.2s ease;
-  width: 100%;
-}
-
-.carbon-block--property-listing__cta:hover {
-  background: var(--primary-dark);
-  transform: translateY(-1px);
-}
-
-/* Empty State */
+/* No Results Message */
 .carbon-block--property-listing__empty {
-  text-align: center;
-  padding: 3rem;
-  color: var(--base-dark);
-  font-size: 1.125rem;
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--wp--preset--color--villa-charcoal);
 }
 
-/* Carousel Scrollbar */
-.carbon-block--property-listing__grid--carousel::-webkit-scrollbar {
-  height: 8px;
+.carbon-block--property-listing__empty p {
+    margin: 0;
+    font-size: 1.125rem;
 }
 
-.carbon-block--property-listing__grid--carousel::-webkit-scrollbar-track {
-  background: var(--base-lightest);
-  border-radius: 4px;
+/* Property Cards */
+.carbon-block--property-card {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.carbon-block--property-listing__grid--carousel::-webkit-scrollbar-thumb {
-  background: var(--accent-color, var(--primary));
-  border-radius: 4px;
+.carbon-block--property-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-.carbon-block--property-listing__grid--carousel::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-dark);
+.carbon-block--property-card__featured-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 2;
+}
+
+.carbon-block--property-card__image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.carbon-block--property-card__content {
+    padding: 1.5rem;
+}
+
+.carbon-block--property-card__meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.carbon-block--property-card__title {
+    margin-bottom: 0.5rem;
+}
+
+.carbon-block--property-card__description {
+    opacity: 0.7;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.carbon-block--property-card__details {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.carbon-block--property-card__amenities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.carbon-block--property-card__amenity {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.carbon-block--property-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.carbon-block--property-card__price {
+    font-weight: 700;
+}
+
+.carbon-block--property-card__price-label {
+    font-weight: 400;
+}
+
+.carbon-block--property-card__cta {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.carbon-block--property-card__cta:hover {
+    opacity: 0.8;
 }

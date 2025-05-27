@@ -1,7 +1,7 @@
 /* Property Listing Block - Extra Small Devices (XS) */
 
 .carbon-block--property-listing {
-  padding: 2rem 0;
+  padding: 1.5rem 0;
 }
 
 .carbon-block--property-listing__container {
@@ -12,92 +12,104 @@
   margin-bottom: 1.5rem;
 }
 
-.carbon-block--property-listing__title {
-  font-size: 1.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.carbon-block--property-listing__description {
-  font-size: 0.9375rem;
-}
-
-/* Grid spacing */
-.carbon-block--property-listing__grid {
-  gap: 1rem;
-}
-
-/* Carousel adjustments */
-.carbon-block--property-listing__grid--carousel {
-  gap: 1rem;
-}
-
-.carbon-block--property-listing__grid--carousel .carbon-block--property-listing__item {
-  flex: 0 0 260px;
-}
-
-/* Content spacing */
+/* Single column layout */
 .carbon-block--property-listing__content {
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* Hide desktop sidebar */
+.carbon-block--property-listing__sidebar {
+  display: none;
+}
+
+/* Compact mobile filters */
+.carbon-block--property-listing__mobile-filters {
+  display: block;
+  background: var(--wp--preset--color--base-white);
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--wp--preset--color--base-light);
+}
+
+.carbon-block--property-listing__mobile-filter-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.carbon-block--property-listing__mobile-select {
+  width: 100%;
+  padding: 0.625rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.carbon-block--property-listing__mobile-filter-toggle {
+  width: 100%;
+  padding: 0.625rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Single column for properties */
+.carbon-block--property-listing__grid {
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+/* Compact property cards */
+.carbon-block--property-card {
+  border-radius: 8px;
+}
+
+.carbon-block--property-card__image {
+  height: 180px;
+}
+
+.carbon-block--property-card__content {
   padding: 0.75rem;
 }
 
-.carbon-block--property-listing__meta {
-  flex-direction: column;
-  gap: 0.25rem;
+.carbon-block--property-card__title {
   margin-bottom: 0.5rem;
 }
 
-.carbon-block--property-listing__property-title {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.carbon-block--property-listing__excerpt {
-  font-size: 0.8125rem;
+.carbon-block--property-card__description {
   margin-bottom: 0.75rem;
 }
 
-/* Details adjustments */
-.carbon-block--property-listing__details {
-  padding: 0.5rem;
+.carbon-block--property-card__details {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.carbon-block--property-card__amenities {
   gap: 0.25rem;
-}
-
-.carbon-block--property-listing__detail {
-  font-size: 0.75rem;
-}
-
-/* Amenities adjustments */
-.carbon-block--property-listing__amenities {
   margin-bottom: 1rem;
 }
 
-.carbon-block--property-listing__amenity {
-  font-size: 0.625rem;
-  padding: 0.1875rem 0.375rem;
-}
-
-/* CTA adjustments */
-.carbon-block--property-listing__cta {
-  padding: 0.625rem 1rem;
-  font-size: 0.875rem;
-}
-
-/* Price badge adjustments */
-.carbon-block--property-listing__price-badge {
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  bottom: 0.75rem;
-  right: 0.75rem;
-}
-
-.carbon-block--property-listing__price-badge span {
-  font-size: 0.75rem;
-}
-
-/* Featured badge adjustments */
-.carbon-block--property-listing__featured-badge {
+.carbon-block--property-card__amenity {
   padding: 0.1875rem 0.5rem;
-  font-size: 0.6875rem;
-  top: 0.75rem;
-  left: 0.75rem;
+}
+
+.carbon-block--property-card__footer {
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.carbon-block--property-card__price {
+  text-align: center;
+}
+
+.carbon-block--property-card__cta {
+  width: 100%;
+  text-align: center;
+  padding: 0.625rem;
 }

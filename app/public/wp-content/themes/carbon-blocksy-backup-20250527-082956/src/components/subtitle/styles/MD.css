@@ -1,0 +1,15 @@
+/* Subtitle Component - MD Breakpoint */
+
+.carbon-subtitle--hero {
+    font-size: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+.carbon-subtitle--card {
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+}
+
+.carbon-subtitle--caption {
+    font-size: 0.8rem;
+}

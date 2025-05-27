@@ -21,8 +21,8 @@
 !/app/public/wp-content/plugins/.gitkeep
 
 # WordPress Themes (keep only our custom theme)
-/app/public/wp-content/themes/*/
-!/app/public/wp-content/themes/carbon-blocksy/
+# /app/public/wp-content/themes/*/
+# !/app/public/wp-content/themes/carbon-blocksy/
 
 # Local Development
 .DS_Store
