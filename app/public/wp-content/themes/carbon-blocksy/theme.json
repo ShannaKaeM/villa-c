@@ -20,22 +20,22 @@
                 },
                 {
                     "slug": "secondary-light",
-                    "color": "#d1a896",
+                    "color": "#75825b",
                     "name": "Secondary Light"
                 },
                 {
                     "slug": "secondary",
-                    "color": "#a36b57",
+                    "color": "#c6d3ce",
                     "name": "Secondary"
                 },
                 {
                     "slug": "secondary-dark",
-                    "color": "#744d3e",
+                    "color": "#a3b9b4",
                     "name": "Secondary Dark"
                 },
                 {
                     "slug": "neutral-light",
-                    "color": "#c4b5a0",
+                    "color": "#c9ccc5",
                     "name": "Neutral Light"
                 },
                 {
