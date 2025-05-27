@@ -57,46 +57,6 @@ function carbon_blocks_compile_styles($block_name)
 }
 
 /**
- * Compile CSS styles for a component with media query wrapping
- *
- * @param string $component_name The component directory name
- * @return string Compiled CSS with media queries
- */
-function carbon_blocks_compile_component_styles($component_name)
-{
-    $component_path = get_stylesheet_directory() . '/src/components/' . $component_name;
-    $styles_path = $component_path . '/styles/';
-
-    if (! is_dir($styles_path)) {
-        return '';
-    }
-
-    $breakpoints  = carbon_blocks_get_breakpoints();
-    $compiled_css = '';
-
-    foreach ($breakpoints as $breakpoint => $media_query) {
-        $css_file = $styles_path . $breakpoint . '.css';
-
-        if (file_exists($css_file)) {
-            $css_content = file_get_contents($css_file);
-            $css_content = trim($css_content);
-
-            if (! empty($css_content)) {
-                if (empty($media_query)) {
-                    // LG breakpoint - no media query wrapper
-                    $compiled_css .= $css_content . "\n";
-                } else {
-                    // Wrap with media query
-                    $compiled_css .= $media_query . " {\n" . $css_content . "\n}\n";
-                }
-            }
-        }
-    }
-
-    return $compiled_css;
-}
-
-/**
  * Compile JavaScript for a Carbon Block
  *
  * @param string $block_name The block directory name
