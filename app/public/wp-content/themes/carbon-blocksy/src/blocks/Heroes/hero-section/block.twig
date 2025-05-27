@@ -1,0 +1,53 @@
+{% set overlay_bg = 'var(--colorbook-' ~ (fields.overlay_color ? fields.overlay_color : 'base-white') ~ ', #ffffff)' %}
+{% set overlay_opacity = fields.overlay_opacity is defined ? fields.overlay_opacity / 100 : 0.8 %}
+{% set width_type = fields.width_type ? fields.width_type : 'full' %}
+{% set height = fields.height ? fields.height : 350 %}
+
+<div class="{{ block.css_class }} {{ block.css_class }}--{{ fields.text_alignment }} {{ block.css_class }}--{{ width_type }}-width" 
+     style="
+         {% if fields.background_image %}background-image: url('{{ Image(fields.background_image).src }}');{% endif %}
+         min-height: {{ height }}px;
+     ">
+     
+    {% if block.styles %}
+        <style>{{ block.styles|raw }}</style>
+    {% endif %}
+    
+    <!-- Overlay Layer -->
+    <div class="{{ block.css_class }}__overlay" 
+         style="background-color: {{ overlay_bg|trim }}; opacity: {{ overlay_opacity }};"></div>
+    
+    <div class="{{ block.css_class }}__container">
+        <div class="{{ block.css_class }}__content">
+            {% if fields.title %}
+                {{ include('@blocks/hero-section/components/title.twig', {
+                    text: fields.title,
+                    variant: fields.title_variant ? fields.title_variant : 'hero',
+                    color: fields.title_color ? fields.title_color : 'base-black',
+                    tag: fields.title_tag ? fields.title_tag : 'h1'
+                }) }}
+            {% endif %}
+            
+            {% if fields.subtitle %}
+                {{ include('@blocks/hero-section/components/subtitle.twig', {
+                    text: fields.subtitle,
+                    variant: fields.subtitle_variant ? fields.subtitle_variant : 'hero',
+                    color: fields.subtitle_color ? fields.subtitle_color : 'base-dark',
+                    tag: fields.subtitle_tag ? fields.subtitle_tag : 'p'
+                }) }}
+            {% endif %}
+            
+            {% if fields.button_text and fields.button_url %}
+                {{ include('@blocks/hero-section/components/button.twig', {
+                    text: fields.button_text,
+                    url: fields.button_url,
+                    block_name: block.name
+                }) }}
+            {% endif %}
+        </div>
+    </div>
+    
+    {% if block.scripts %}
+        <script>{{ block.scripts|raw }}</script>
+    {% endif %}
+</div>

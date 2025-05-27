@@ -1,0 +1,90 @@
+# WordPress Core Files
+/app/public/wp-admin/
+/app/public/wp-includes/
+/app/public/wp-content/index.php
+/app/public/wp-content/languages/
+/app/public/wp-content/upgrade/
+/app/public/wp-*.php
+/app/public/xmlrpc.php
+/app/public/readme.html
+/app/public/license.txt
+
+# WordPress Config
+/app/public/wp-config.php
+/app/public/wp-config-sample.php
+
+# WordPress Uploads
+/app/public/wp-content/uploads/
+
+# WordPress Plugins (exclude if using composer)
+/app/public/wp-content/plugins/
+!/app/public/wp-content/plugins/.gitkeep
+
+# WordPress Themes (keep only our custom theme)
+/app/public/wp-content/themes/*/
+!/app/public/wp-content/themes/carbon-blocksy/
+
+# Local Development
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+node_modules/
+vendor/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Local WordPress development
+/app/public/.htaccess
+/app/sql/
+
+# Composer
+composer.phar
+/vendor/
+
+# NPM
+npm-debug.log
+yarn-error.log
+
+# Database
+*.sql
+*.sqlite
+
+# Cache
+/app/public/wp-content/cache/
+/app/public/wp-content/w3tc-config/
+
+# Backup files
+*.bak
+*.backup
+*.old

@@ -1,0 +1,116 @@
+/**
+ * Theme Integration CSS for ColorBook
+ * Maps Blocksy's color palette to semantic ColorBook names
+ */
+
+:root {
+    /* Primary Colors - Teal/Turquoise tones */
+    --colorbook-primary-light: var(--paletteColor1, #8dabac);
+    --colorbook-primary: var(--paletteColor2, #5a7f80);
+    --colorbook-primary-dark: var(--paletteColor3, #425a5b);
+    
+    /* Secondary Colors - Terracotta/Warm tones */
+    --colorbook-secondary-light: var(--paletteColor4, #d1a896);
+    --colorbook-secondary: var(--paletteColor5, #a36b57);
+    --colorbook-secondary-dark: var(--paletteColor6, #744d3e);
+    
+    /* Neutral Colors - Warm Gray tones */
+    --colorbook-neutral-light: var(--paletteColor7, #c4b5a0);
+    --colorbook-neutral: var(--paletteColor8, #9b8974);
+    --colorbook-neutral-dark: var(--paletteColor9, #736654);
+    
+    /* Base Colors - True Gray scale */
+    --colorbook-base-white: var(--paletteColor10, #ffffff);
+    --colorbook-base-lightest: var(--paletteColor11, #e5e5e5);
+    --colorbook-base-light: var(--paletteColor12, #bfbfbf);
+    --colorbook-base: var(--paletteColor13, #9c9c9c);
+    --colorbook-base-dark: var(--paletteColor14, #737373);
+    --colorbook-base-darkest: var(--paletteColor15, #4d4d4d);
+    --colorbook-base-black: var(--paletteColor16, #000000);
+}
+
+/* Legacy support for villa- prefixed variables */
+:root {
+    --villa-primary-light: var(--colorbook-primary-light);
+    --villa-primary: var(--colorbook-primary);
+    --villa-primary-dark: var(--colorbook-primary-dark);
+    
+    --villa-secondary-light: var(--colorbook-secondary-light);
+    --villa-secondary: var(--colorbook-secondary);
+    --villa-secondary-dark: var(--colorbook-secondary-dark);
+    
+    --villa-neutral-light: var(--colorbook-neutral-light);
+    --villa-neutral: var(--colorbook-neutral);
+    --villa-neutral-dark: var(--colorbook-neutral-dark);
+    
+    --villa-base-white: var(--colorbook-base-white);
+    --villa-base-lightest: var(--colorbook-base-lightest);
+    --villa-base-light: var(--colorbook-base-light);
+    --villa-base: var(--colorbook-base);
+    --villa-base-dark: var(--colorbook-base-dark);
+    --villa-base-darkest: var(--colorbook-base-darkest);
+    --villa-base-black: var(--colorbook-base-black);
+}
+
+/* Utility classes for ColorBook colors */
+.has-colorbook-primary-light-color { color: var(--colorbook-primary-light) !important; }
+.has-colorbook-primary-color { color: var(--colorbook-primary) !important; }
+.has-colorbook-primary-dark-color { color: var(--colorbook-primary-dark) !important; }
+
+.has-colorbook-secondary-light-color { color: var(--colorbook-secondary-light) !important; }
+.has-colorbook-secondary-color { color: var(--colorbook-secondary) !important; }
+.has-colorbook-secondary-dark-color { color: var(--colorbook-secondary-dark) !important; }
+
+.has-colorbook-neutral-light-color { color: var(--colorbook-neutral-light) !important; }
+.has-colorbook-neutral-color { color: var(--colorbook-neutral) !important; }
+.has-colorbook-neutral-dark-color { color: var(--colorbook-neutral-dark) !important; }
+
+.has-colorbook-base-white-color { color: var(--colorbook-base-white) !important; }
+.has-colorbook-base-lightest-color { color: var(--colorbook-base-lightest) !important; }
+.has-colorbook-base-light-color { color: var(--colorbook-base-light) !important; }
+.has-colorbook-base-color { color: var(--colorbook-base) !important; }
+.has-colorbook-base-dark-color { color: var(--colorbook-base-dark) !important; }
+.has-colorbook-base-darkest-color { color: var(--colorbook-base-darkest) !important; }
+.has-colorbook-base-black-color { color: var(--colorbook-base-black) !important; }
+
+/* Background color utility classes */
+.has-colorbook-primary-light-background-color { background-color: var(--colorbook-primary-light) !important; }
+.has-colorbook-primary-background-color { background-color: var(--colorbook-primary) !important; }
+.has-colorbook-primary-dark-background-color { background-color: var(--colorbook-primary-dark) !important; }
+
+.has-colorbook-secondary-light-background-color { background-color: var(--colorbook-secondary-light) !important; }
+.has-colorbook-secondary-background-color { background-color: var(--colorbook-secondary) !important; }
+.has-colorbook-secondary-dark-background-color { background-color: var(--colorbook-secondary-dark) !important; }
+
+.has-colorbook-neutral-light-background-color { background-color: var(--colorbook-neutral-light) !important; }
+.has-colorbook-neutral-background-color { background-color: var(--colorbook-neutral) !important; }
+.has-colorbook-neutral-dark-background-color { background-color: var(--colorbook-neutral-dark) !important; }
+
+.has-colorbook-base-white-background-color { background-color: var(--colorbook-base-white) !important; }
+.has-colorbook-base-lightest-background-color { background-color: var(--colorbook-base-lightest) !important; }
+.has-colorbook-base-light-background-color { background-color: var(--colorbook-base-light) !important; }
+.has-colorbook-base-background-color { background-color: var(--colorbook-base) !important; }
+.has-colorbook-base-dark-background-color { background-color: var(--colorbook-base-dark) !important; }
+.has-colorbook-base-darkest-background-color { background-color: var(--colorbook-base-darkest) !important; }
+.has-colorbook-base-black-background-color { background-color: var(--colorbook-base-black) !important; }
+
+/* Border color utility classes */
+.has-colorbook-primary-light-border-color { border-color: var(--colorbook-primary-light) !important; }
+.has-colorbook-primary-border-color { border-color: var(--colorbook-primary) !important; }
+.has-colorbook-primary-dark-border-color { border-color: var(--colorbook-primary-dark) !important; }
+
+.has-colorbook-secondary-light-border-color { border-color: var(--colorbook-secondary-light) !important; }
+.has-colorbook-secondary-border-color { border-color: var(--colorbook-secondary) !important; }
+.has-colorbook-secondary-dark-border-color { border-color: var(--colorbook-secondary-dark) !important; }
+
+.has-colorbook-neutral-light-border-color { border-color: var(--colorbook-neutral-light) !important; }
+.has-colorbook-neutral-border-color { border-color: var(--colorbook-neutral) !important; }
+.has-colorbook-neutral-dark-border-color { border-color: var(--colorbook-neutral-dark) !important; }
+
+.has-colorbook-base-white-border-color { border-color: var(--colorbook-base-white) !important; }
+.has-colorbook-base-lightest-border-color { border-color: var(--colorbook-base-lightest) !important; }
+.has-colorbook-base-light-border-color { border-color: var(--colorbook-base-light) !important; }
+.has-colorbook-base-border-color { border-color: var(--colorbook-base) !important; }
+.has-colorbook-base-dark-border-color { border-color: var(--colorbook-base-dark) !important; }
+.has-colorbook-base-darkest-border-color { border-color: var(--colorbook-base-darkest) !important; }
+.has-colorbook-base-black-border-color { border-color: var(--colorbook-base-black) !important; }
