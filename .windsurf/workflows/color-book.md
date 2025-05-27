@@ -1,3 +1,7 @@
+---
+description: Villa Community ColorBook system documentation and color palette reference
+---
+
 # Villa 16-Color System Setup Documentation
 
 ## Overview
