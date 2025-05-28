@@ -75,7 +75,7 @@
 
 .carbon-block--hero-section__button {
     display: inline-block;
-    background: #007cba;
+    background: var(--theme-palette-color-2);
     color: white;
     padding: 1rem 2rem;
     text-decoration: none;
@@ -85,5 +85,5 @@
 }
 
 .carbon-block--hero-section__button:hover {
-    background: #005a8c;
+    background: var(--theme-palette-color-3);
 }

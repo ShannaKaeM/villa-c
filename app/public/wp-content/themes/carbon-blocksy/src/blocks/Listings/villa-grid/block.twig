@@ -31,9 +31,10 @@
                         'link': fn('get_permalink', villa_post.ID),
                         'excerpt': villa_post.post_excerpt ?: (villa_post.post_content|striptags|slice(0, 150) ~ '...'),
                         'featured_image': fn('get_post_thumbnail_id', villa_post.ID),
-                        'nightly_rate': fn('get_post_meta', villa_post.ID, 'nightly_rate', true),
-                        'bedrooms': fn('get_post_meta', villa_post.ID, 'bedrooms', true),
-                        'bathrooms': fn('get_post_meta', villa_post.ID, 'bathrooms', true),
+                        'nightly_rate': fn('get_post_meta', villa_post.ID, '_nightly_rate', true),
+                        'bedrooms': fn('get_post_meta', villa_post.ID, '_bedrooms', true),
+                        'bathrooms': fn('get_post_meta', villa_post.ID, '_bathrooms', true),
+                        'max_guests': fn('get_post_meta', villa_post.ID, '_max_guests', true),
                         'amenities': fn('get_the_terms', villa_post.ID, 'amenities') ?: []
                     } %}
                     
@@ -51,7 +52,7 @@
         
         {% if fields.show_view_all_button and fields.view_all_text and fields.view_all_url %}
             <div class="{{ block.css_class }}__footer">
-                {{ include('@blocks/villa-grid/components/button.twig', {
+                {{ include('@blocks/Heroes/hero-section/components/button.twig', {
                     text: fields.view_all_text,
                     url: fields.view_all_url,
                     block_name: block.name

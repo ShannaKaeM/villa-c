@@ -10,9 +10,13 @@
             </div>
         {% endif %}
         
-        {% if villa.nightly_rate %}
-            <div class="carbon-block--{{ block_name }}__price-badge">
-                ${{ villa.nightly_rate }}/night
+        {# Single amenity tag in top right #}
+        {% if villa.amenities and villa.amenities|length > 0 %}
+            <div class="carbon-block--{{ block_name }}__amenity-tag">
+                {{ include('@blocks/Listings/villa-grid/components/tag-style1.twig', {
+                    text: (villa.amenities[0].icon ? villa.amenities[0].icon ~ ' ' : '') ~ villa.amenities[0].name,
+                    block_name: block_name
+                }) }}
             </div>
         {% endif %}
     </div>
@@ -30,36 +34,33 @@
             </p>
         {% endif %}
         
-        <div class="carbon-block--{{ block_name }}__card-meta">
-            {% if villa.bedrooms or villa.bathrooms %}
-                <div class="carbon-block--{{ block_name }}__card-specs">
-                    {% if villa.bedrooms %}
-                        <span class="carbon-block--{{ block_name }}__spec">
-                            <i class="icon-bed"></i>{{ villa.bedrooms }} bed{{ villa.bedrooms != 1 ? 's' : '' }}
-                        </span>
-                    {% endif %}
-                    {% if villa.bathrooms %}
-                        <span class="carbon-block--{{ block_name }}__spec">
-                            <i class="icon-bath"></i>{{ villa.bathrooms }} bath{{ villa.bathrooms != 1 ? 's' : '' }}
-                        </span>
-                    {% endif %}
-                </div>
+        {# Property details with icons using tag-style2 #}
+        <div class="carbon-block--{{ block_name }}__card-specs">
+            {% if villa.bedrooms %}
+                {{ include('@blocks/Listings/villa-grid/components/tag-style2.twig', {
+                    icon: 'fas fa-bed',
+                    text: villa.bedrooms ~ ' bed' ~ (villa.bedrooms != 1 ? 's' : ''),
+                    block_name: block_name
+                }) }}
             {% endif %}
-            
-            {% if villa.amenities %}
-                <div class="carbon-block--{{ block_name }}__card-amenities">
-                    {% for amenity in villa.amenities|slice(0, 3) %}
-                        <span class="carbon-block--{{ block_name }}__amenity">{{ amenity.name }}</span>
-                    {% endfor %}
-                    {% if villa.amenities|length > 3 %}
-                        <span class="carbon-block--{{ block_name }}__amenity-more">+{{ villa.amenities|length - 3 }} more</span>
-                    {% endif %}
-                </div>
+            {% if villa.bathrooms %}
+                {{ include('@blocks/Listings/villa-grid/components/tag-style2.twig', {
+                    icon: 'fas fa-bath',
+                    text: villa.bathrooms ~ ' bath' ~ (villa.bathrooms != 1 ? 's' : ''),
+                    block_name: block_name
+                }) }}
+            {% endif %}
+            {% if villa.max_guests %}
+                {{ include('@blocks/Listings/villa-grid/components/tag-style2.twig', {
+                    icon: 'fas fa-users',
+                    text: villa.max_guests ~ ' guest' ~ (villa.max_guests != 1 ? 's' : ''),
+                    block_name: block_name
+                }) }}
             {% endif %}
         </div>
         
         <div class="carbon-block--{{ block_name }}__card-actions">
-            {{ include('@blocks/villa-grid/components/button.twig', {
+            {{ include('@blocks/Heroes/hero-section/components/button.twig', {
                 text: 'View Details',
                 url: villa.link,
                 block_name: block_name
