@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villa Community - Property Listing Test</title>
+    <style>
+        /* CSS Variables for Villa Community Theme */
+        :root {
+            --wp--preset--color--villa-navy: #425a5b;
+            --wp--preset--color--villa-teal: #5a7f80;
+            --wp--preset--color--villa-charcoal: #2d3748;
+            --base-white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        /* Base Styles (LG) - 3 Column Layout */
+        .carbon-block--property-listing {
+            padding: 3rem 0;
+            background: #f8f9fa;
+        }
+
+        .carbon-block--property-listing__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            box-sizing: border-box;
+        }
+
+        .carbon-block--property-listing__header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .carbon-block--property-listing__title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--wp--preset--color--villa-navy);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .carbon-block--property-listing__description {
+            font-size: 1.125rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Main Content Layout - Desktop: Sidebar + Grid */
+        .carbon-block--property-listing__content {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        /* Sidebar Filters */
+        .carbon-block--property-listing__sidebar {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 2rem;
+        }
+
+        .carbon-block--property-listing__filter-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--wp--preset--color--villa-navy);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .carbon-block--property-listing__filter-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .carbon-block--property-listing__filter-label {
+            display: block;
+            font-weight: 600;
+            color: var(--wp--preset--color--villa-navy);
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .carbon-block--property-listing__select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            color: #374151;
+            background: white;
+        }
+
+        /* Mobile Filters (hidden on desktop) */
+        .carbon-block--property-listing__mobile-filters {
+            display: none;
+        }
+
+        /* Properties Grid - 3 columns (BASE LAYOUT) */
+        .carbon-block--property-listing__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            min-width: 0;
+        }
+
+        /* Property Card */
+        .carbon-block--property-listing__item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            min-width: 0;
+        }
+
+        .carbon-block--property-listing__item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .carbon-block--property-listing__image-wrapper {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+        }
+
+        .carbon-block--property-listing__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .carbon-block--property-listing__item:hover .carbon-block--property-listing__image {
+            transform: scale(1.05);
+        }
+
+        .carbon-block--property-listing__content {
+            padding: 1.5rem;
+        }
+
+        .carbon-block--property-listing__property-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--wp--preset--color--villa-navy);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .carbon-block--property-listing__property-description {
+            color: #6b7280;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .carbon-block--property-listing__cta {
+            width: 100%;
+            padding: 0.875rem;
+            background: linear-gradient(135deg, var(--wp--preset--color--villa-teal), var(--wp--preset--color--villa-navy));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .carbon-block--property-listing__cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(90, 127, 128, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Medium Screens (MD) - 2 Column Layout */
+        @media (max-width: 1024px) {
+            .carbon-block--property-listing__content {
+                grid-template-columns: 260px 1fr;
+                gap: 1.5rem;
+            }
+
+            .carbon-block--property-listing__sidebar {
+                padding: 1.25rem;
+            }
+
+            .carbon-block--property-listing__grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.25rem;
+            }
+
+            .carbon-block--property-listing__image-wrapper {
+                height: 200px;
+            }
+
+            .carbon-block--property-listing__property-title {
+                font-size: 1.125rem;
+            }
+        }
+
+        /* Small Screens (SM) - 1 Column Layout */
+        @media (max-width: 768px) {
+            .carbon-block--property-listing {
+                padding: 2rem 0;
+            }
+
+            .carbon-block--property-listing__container {
+                padding: 0 1rem;
+            }
+
+            .carbon-block--property-listing__title {
+                font-size: 2rem;
+            }
+
+            .carbon-block--property-listing__content {
+                display: block;
+                gap: 1rem;
+            }
+
+            .carbon-block--property-listing__sidebar {
+                display: none;
+            }
+
+            .carbon-block--property-listing__mobile-filters {
+                display: block;
+                background: white;
+                border-radius: 12px;
+                padding: 1.25rem;
+                margin-bottom: 1.5rem;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            }
+
+            .carbon-block--property-listing__grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .carbon-block--property-listing__image-wrapper {
+                height: 180px;
+            }
+        }
+
+        /* Responsive indicator */
+        .responsive-indicator {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: var(--wp--preset--color--villa-navy);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            z-index: 1000;
+        }
+
+        .responsive-indicator::after {
+            content: "LG (3 columns)";
+        }
+
+        @media (max-width: 1024px) {
+            .responsive-indicator::after {
+                content: "MD (2 columns)";
+            }
+        }
+
+        @media (max-width: 768px) {
+            .responsive-indicator::after {
+                content: "SM (1 column)";
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="responsive-indicator"></div>
+    
+    <div class="carbon-block--property-listing">
+        <div class="carbon-block--property-listing__container">
+            <div class="carbon-block--property-listing__header">
+                <h2 class="carbon-block--property-listing__title">Featured Properties</h2>
+                <p class="carbon-block--property-listing__description">
+                    Discover our handpicked selection of premium vacation rentals in the beautiful Topsail Island area.
+                </p>
+            </div>
+
+            <div class="carbon-block--property-listing__content">
+                <!-- Desktop Sidebar Filters -->
+                <div class="carbon-block--property-listing__sidebar">
+                    <h3 class="carbon-block--property-listing__filter-title">🔍 Filters</h3>
+                    
+                    <div class="carbon-block--property-listing__filter-group">
+                        <label class="carbon-block--property-listing__filter-label">🏠 Property Type</label>
+                        <select class="carbon-block--property-listing__select">
+                            <option>All Types</option>
+                            <option>House</option>
+                            <option>Condo</option>
+                            <option>Villa</option>
+                        </select>
+                    </div>
+
+                    <div class="carbon-block--property-listing__filter-group">
+                        <label class="carbon-block--property-listing__filter-label">📍 Location</label>
+                        <select class="carbon-block--property-listing__select">
+                            <option>All Locations</option>
+                            <option>North Topsail Beach</option>
+                            <option>Surf City</option>
+                            <option>Topsail Beach</option>
+                        </select>
+                    </div>
+
+                    <div class="carbon-block--property-listing__filter-group">
+                        <label class="carbon-block--property-listing__filter-label">🛏️ Bedrooms</label>
+                        <select class="carbon-block--property-listing__select">
+                            <option>Any</option>
+                            <option>1+</option>
+                            <option>2+</option>
+                            <option>3+</option>
+                            <option>4+</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Mobile Filters -->
+                <div class="carbon-block--property-listing__mobile-filters">
+                    <h3 class="carbon-block--property-listing__filter-title">🔍 Quick Filters</h3>
+                    <p style="color: #6b7280; font-size: 0.875rem;">Tap to filter properties (mobile layout)</p>
+                </div>
+
+                <!-- Properties Grid -->
+                <div class="carbon-block--property-listing__main">
+                    <div class="carbon-block--property-listing__grid">
+                        <!-- Property Card 1 -->
+                        <div class="carbon-block--property-listing__item">
+                            <div class="carbon-block--property-listing__image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=240&fit=crop" 
+                                     alt="Oceanfront Villa" 
+                                     class="carbon-block--property-listing__image">
+                            </div>
+                            <div class="carbon-block--property-listing__content">
+                                <h3 class="carbon-block--property-listing__property-title">Oceanfront Villa Paradise</h3>
+                                <p class="carbon-block--property-listing__property-description">
+                                    Stunning beachfront villa with panoramic ocean views, private pool, and direct beach access.
+                                </p>
+                                <a href="#" class="carbon-block--property-listing__cta">View Details</a>
+                            </div>
+                        </div>
+
+                        <!-- Property Card 2 -->
+                        <div class="carbon-block--property-listing__item">
+                            <div class="carbon-block--property-listing__image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&h=240&fit=crop" 
+                                     alt="Beach House" 
+                                     class="carbon-block--property-listing__image">
+                            </div>
+                            <div class="carbon-block--property-listing__content">
+                                <h3 class="carbon-block--property-listing__property-title">Cozy Beach House</h3>
+                                <p class="carbon-block--property-listing__property-description">
+                                    Charming 3-bedroom beach house just steps from the shore, perfect for family getaways.
+                                </p>
+                                <a href="#" class="carbon-block--property-listing__cta">View Details</a>
+                            </div>
+                        </div>
+
+                        <!-- Property Card 3 -->
+                        <div class="carbon-block--property-listing__item">
+                            <div class="carbon-block--property-listing__image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&h=240&fit=crop" 
+                                     alt="Modern Condo" 
+                                     class="carbon-block--property-listing__image">
+                            </div>
+                            <div class="carbon-block--property-listing__content">
+                                <h3 class="carbon-block--property-listing__property-title">Modern Surf City Condo</h3>
+                                <p class="carbon-block--property-listing__property-description">
+                                    Contemporary 2-bedroom condo with ocean views and resort-style amenities.
+                                </p>
+                                <a href="#" class="carbon-block--property-listing__cta">View Details</a>
+                            </div>
+                        </div>
+
+                        <!-- Property Card 4 -->
+                        <div class="carbon-block--property-listing__item">
+                            <div class="carbon-block--property-listing__image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=400&h=240&fit=crop" 
+                                     alt="Luxury Villa" 
+                                     class="carbon-block--property-listing__image">
+                            </div>
+                            <div class="carbon-block--property-listing__content">
+                                <h3 class="carbon-block--property-listing__property-title">Luxury Topsail Villa</h3>
+                                <p class="carbon-block--property-listing__property-description">
+                                    Elegant 4-bedroom villa with private pool, hot tub, and stunning sunset views.
+                                </p>
+                                <a href="#" class="carbon-block--property-listing__cta">View Details</a>
+                            </div>
+                        </div>
+
+                        <!-- Property Card 5 -->
+                        <div class="carbon-block--property-listing__item">
+                            <div class="carbon-block--property-listing__image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&h=240&fit=crop" 
+                                     alt="Beach Cottage" 
+                                     class="carbon-block--property-listing__image">
+                            </div>
+                            <div class="carbon-block--property-listing__content">
+                                <h3 class="carbon-block--property-listing__property-title">Charming Beach Cottage</h3>
+                                <p class="carbon-block--property-listing__property-description">
+                                    Quaint cottage with coastal charm, perfect for romantic getaways and small families.
+                                </p>
+                                <a href="#" class="carbon-block--property-listing__cta">View Details</a>
+                            </div>
+                        </div>
+
+                        <!-- Property Card 6 -->
+                        <div class="carbon-block--property-listing__item">
+                            <div class="carbon-block--property-listing__image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=240&fit=crop" 
+                                     alt="Waterfront Home" 
+                                     class="carbon-block--property-listing__image">
+                            </div>
+                            <div class="carbon-block--property-listing__content">
+                                <h3 class="carbon-block--property-listing__property-title">Waterfront Retreat</h3>
+                                <p class="carbon-block--property-listing__property-description">
+                                    Spacious waterfront home with dock access, perfect for fishing and water activities.
+                                </p>
+                                <a href="#" class="carbon-block--property-listing__cta">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

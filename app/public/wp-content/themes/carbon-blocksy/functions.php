@@ -9,8 +9,8 @@ require_once get_stylesheet_directory() . '/inc/colorbook.php';
 // Load Property Filter Widget
 require_once get_stylesheet_directory() . '/inc/widgets/property-filter-widget.php';
 
-// Load Property Sidebar Integration
-require_once get_stylesheet_directory() . '/inc/property-sidebar.php';
+// Load CSV Importer
+require_once get_stylesheet_directory() . '/src/import/villa-csv-importer.php';
 
 // Enqueue theme integration CSS
 add_action('wp_enqueue_scripts', function() {
