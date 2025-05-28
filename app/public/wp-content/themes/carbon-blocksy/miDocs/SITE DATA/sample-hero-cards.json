@@ -1,0 +1,77 @@
+{
+  "hero_cards_sample_data": {
+    "description": "Sample hero cards data for the HomeHero block - bento-style layout with villa images",
+    "right_content_type": "hero-cards",
+    "hero_cards": [
+      {
+        "image": "villa-featured-2.png",
+        "title": "Ocean Villa Paradise",
+        "subtitle": "Luxury Oceanfront",
+        "description": "Stunning beachfront villa with panoramic ocean views, private pool, and luxury amenities perfect for your dream vacation.",
+        "badge": "$850/night",
+        "overlay_text": "Featured Property",
+        "url": "/properties/ocean-villa-paradise",
+        "button_text": "View Details",
+        "background_color": "#8FA68E",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "image": "villa-featured-3.png",
+        "title": "Mountain Retreat",
+        "subtitle": "Serene Escape",
+        "description": "Peaceful mountain villa surrounded by nature, featuring modern amenities and breathtaking views.",
+        "badge": "$425/night",
+        "url": "/properties/mountain-retreat",
+        "button_text": "Book Now",
+        "background_color": "#B8D4D1",
+        "text_color": "#2C3E50"
+      }
+    ]
+  },
+  "alternative_use_cases": {
+    "service_cards": [
+      {
+        "image": "Bedroom1.png",
+        "title": "Luxury Concierge",
+        "subtitle": "24/7 Premium Service",
+        "description": "Personal concierge service to handle all your vacation needs and requests.",
+        "badge": "Premium",
+        "url": "/services/concierge",
+        "button_text": "Learn More"
+      },
+      {
+        "image": "Kitchen1.png",
+        "title": "Private Chef",
+        "subtitle": "Gourmet Dining",
+        "description": "Professional chef service for intimate dinners and special occasions.",
+        "badge": "Available",
+        "url": "/services/chef",
+        "button_text": "Book Chef"
+      }
+    ],
+    "amenity_showcase": [
+      {
+        "image": "villa-feature-1R.png",
+        "title": "Private Pool",
+        "subtitle": "Exclusive Access",
+        "description": "Enjoy your own private swimming pool with stunning views.",
+        "badge": "Included",
+        "overlay_text": "Premium Amenity"
+      },
+      {
+        "image": "Bathroom1.png",
+        "title": "Spa Bathroom",
+        "subtitle": "Luxury Wellness",
+        "description": "Indulge in spa-quality bathrooms with premium fixtures.",
+        "badge": "Luxury",
+        "overlay_text": "Spa Experience"
+      }
+    ]
+  },
+  "usage_instructions": {
+    "admin_setup": "Copy the hero_cards array from 'hero_cards_sample_data' into the WordPress admin Home Hero block settings",
+    "customization": "Modify images, titles, descriptions, and colors to match your brand",
+    "layout_options": "Cards automatically arrange in a 2-column bento grid on desktop",
+    "image_path": "Images should be placed in /miDocs/SITE DATA/Images/Properties-Featured/ directory"
+  }
+}

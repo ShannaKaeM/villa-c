@@ -1,0 +1,423 @@
+/* UiBook Admin Styles */
+.uibook-admin {
+    background: #f1f1f1;
+    margin: 0 0 0 -20px;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.uibook-header {
+    background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+    color: white;
+    padding: 2rem;
+    margin: 0 0 0 -20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.uibook-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.uibook-header .dashicons {
+    font-size: 2rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+.uibook-subtitle {
+    margin: 0.5rem 0 0 0;
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+.uibook-container {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.uibook-main {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.uibook-section {
+    padding: 2rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.uibook-section:last-child {
+    border-bottom: none;
+}
+
+.uibook-section h2 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.uibook-section h3 {
+    margin: 1.5rem 0 1rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+    padding-top: 1rem;
+    border-top: 1px solid #f3f4f6;
+}
+
+.uibook-section h3:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+.uibook-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.uibook-control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.uibook-control-group label {
+    font-weight: 500;
+    color: #374151;
+    font-size: 0.875rem;
+}
+
+.uibook-slider-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #f9fafb;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.uibook-slider-container input[type="range"] {
+    flex: 1;
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.uibook-slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #6b7280;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.uibook-slider-container input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: #6b7280;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.uibook-value {
+    background: #6b7280;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    min-width: 60px;
+    text-align: center;
+}
+
+.uibook-control-group select {
+    padding: 0.75rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #f9fafb;
+    font-size: 0.875rem;
+}
+
+/* Toggle Switch */
+.uibook-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.uibook-toggle input[type="checkbox"] {
+    display: none;
+}
+
+.uibook-toggle-label {
+    position: relative;
+    width: 50px;
+    height: 24px;
+    background: #e5e7eb;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.uibook-toggle-slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.uibook-toggle input[type="checkbox"]:checked + .uibook-toggle-label {
+    background: #6b7280;
+}
+
+.uibook-toggle input[type="checkbox"]:checked + .uibook-toggle-label .uibook-toggle-slider {
+    transform: translateX(26px);
+}
+
+/* Actions */
+.uibook-actions {
+    padding: 2rem;
+    background: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.uibook-actions .button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.uibook-actions .button-primary {
+    background: #6b7280;
+    border-color: #6b7280;
+}
+
+.uibook-actions .button-primary:hover {
+    background: #4b5563;
+    border-color: #4b5563;
+}
+
+/* Preview Panel */
+.uibook-preview {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+}
+
+.uibook-preview h3 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.uibook-preview-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Preview Card */
+.uibook-preview-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    max-width: 100%;
+}
+
+.uibook-preview-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+}
+
+.uibook-preview-card-image {
+    position: relative;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+}
+
+.uibook-preview-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.uibook-preview-card:hover .uibook-preview-card-image img {
+    transform: scale(1.05);
+}
+
+.uibook-preview-tag-style1 {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    color: #1f2937;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.uibook-preview-card-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.uibook-preview-card-content h3 {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.uibook-preview-card-content p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.uibook-preview-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.uibook-preview-tag-style2 {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    background: #f3f4f6;
+    color: #374151;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.uibook-preview-button-container {
+    margin-top: auto;
+    padding-top: 1rem;
+}
+
+.uibook-preview-button {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background: #6b7280;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.uibook-preview-button:hover {
+    background: #4b5563;
+}
+
+/* Message Styles */
+.uibook-message {
+    position: fixed;
+    top: 32px;
+    right: 20px;
+    z-index: 10000;
+    max-width: 400px;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.uibook-message.notice-success {
+    background: #d1fae5;
+    color: #065f46;
+    border-left: 4px solid #10b981;
+}
+
+.uibook-message.notice-error {
+    background: #fee2e2;
+    color: #991b1b;
+    border-left: 4px solid #ef4444;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .uibook-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .uibook-preview {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .uibook-header {
+        padding: 1.5rem;
+    }
+    
+    .uibook-container {
+        padding: 1rem;
+    }
+    
+    .uibook-section {
+        padding: 1.5rem;
+    }
+    
+    .uibook-controls {
+        grid-template-columns: 1fr;
+    }
+}

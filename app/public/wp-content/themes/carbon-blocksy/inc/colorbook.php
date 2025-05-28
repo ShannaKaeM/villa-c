@@ -40,43 +40,43 @@ function colorbook_save_colors_handler() {
     
     $colors = json_decode(stripslashes($_POST['colors']), true);
     
+    // Save to dedicated ColorBook JSON file
+    $colorbook_json_path = get_stylesheet_directory() . '/miDocs/SITE DATA/colorbook.json';
+    
+    // Ensure directory exists
+    $colorbook_dir = dirname($colorbook_json_path);
+    if (!file_exists($colorbook_dir)) {
+        wp_mkdir_p($colorbook_dir);
+    }
+    
+    // Create ColorBook JSON structure
+    $colorbook_data = [
+        'version' => '1.0.0',
+        'updated' => current_time('mysql'),
+        'theme' => 'carbon-blocksy',
+        'colors' => $colors,
+        'css_variables' => []
+    ];
+    
+    // Generate CSS variables for easy access
+    foreach ($colors as $index => $color) {
+        $colorbook_data['css_variables']['--theme-palette-color-' . ($index + 1)] = $color['hex'];
+        $colorbook_data['css_variables']['--color-' . $color['slug']] = $color['hex'];
+    }
+    
+    // Save ColorBook JSON
+    file_put_contents($colorbook_json_path, json_encode($colorbook_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+    
     // Update theme.json
-    $theme_json_path = get_stylesheet_directory() . '/theme.json';
+    colorbook_sync_with_theme_json($colors);
     
-    // Create theme.json if it doesn't exist
-    if (!file_exists($theme_json_path)) {
-        $theme_json = [
-            'version' => 2,
-            'settings' => [
-                'color' => [
-                    'palette' => []
-                ]
-            ]
-        ];
-    } else {
-        $theme_json = json_decode(file_get_contents($theme_json_path), true);
-    }
+    // Sync to Blocksy
+    colorbook_sync_with_blocksy($colors);
     
-    // Update the palette
-    $theme_json['settings']['color']['palette'] = [];
-    
-    foreach ($colors as $color) {
-        $theme_json['settings']['color']['palette'][] = [
-            'slug' => $color['slug'],
-            'color' => $color['hex'],
-            'name' => $color['name']
-        ];
-    }
-    
-    // Save theme.json
-    file_put_contents($theme_json_path, json_encode($theme_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    
-    // Sync to Blocksy if requested
-    if (!empty($_POST['sync_blocksy'])) {
-        colorbook_sync_with_blocksy($colors);
-    }
-    
-    wp_send_json_success(['message' => 'Colors saved successfully']);
+    wp_send_json_success([
+        'message' => 'Colors saved successfully to ColorBook, theme.json, and Blocksy',
+        'colorbook_path' => $colorbook_json_path
+    ]);
 }
 
 // Sync colors with Blocksy
@@ -89,7 +89,7 @@ function colorbook_sync_with_blocksy($colors) {
         $theme_mods['colorPalette'] = [];
     }
     
-    // Define the expected color order
+    // Define the expected color order (from your original documentation)
     $color_order = [
         'primary-light', 'primary', 'primary-dark',
         'secondary-light', 'secondary', 'secondary-dark',
@@ -130,8 +130,55 @@ function colorbook_sync_with_blocksy($colors) {
     return true;
 }
 
+// Sync colors with theme.json
+function colorbook_sync_with_theme_json($colors) {
+    // Update theme.json
+    $theme_json_path = get_stylesheet_directory() . '/theme.json';
+    
+    // Create theme.json if it doesn't exist
+    if (!file_exists($theme_json_path)) {
+        $theme_json = [
+            'version' => 2,
+            'settings' => [
+                'color' => [
+                    'palette' => []
+                ]
+            ]
+        ];
+    } else {
+        $theme_json = json_decode(file_get_contents($theme_json_path), true);
+    }
+    
+    // Update the palette
+    $theme_json['settings']['color']['palette'] = [];
+    
+    foreach ($colors as $color) {
+        $theme_json['settings']['color']['palette'][] = [
+            'slug' => $color['slug'],
+            'color' => $color['hex'],
+            'name' => $color['name']
+        ];
+    }
+    
+    // Save theme.json
+    file_put_contents($theme_json_path, json_encode($theme_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+    
+    return true;
+}
+
 // Get current colors from theme.json or defaults
 function colorbook_get_current_colors() {
+    // First try to load from ColorBook JSON file
+    $colorbook_json_path = get_stylesheet_directory() . '/miDocs/SITE DATA/colorbook.json';
+    
+    if (file_exists($colorbook_json_path)) {
+        $colorbook_data = json_decode(file_get_contents($colorbook_json_path), true);
+        if (isset($colorbook_data['colors']) && is_array($colorbook_data['colors'])) {
+            return $colorbook_data['colors'];
+        }
+    }
+    
+    // Fallback to theme.json
     $theme_json_path = get_stylesheet_directory() . '/theme.json';
     
     $default_colors = [
@@ -339,3 +386,122 @@ function colorbook_export_colors_handler() {
     
     wp_send_json_success($export_data);
 }
+
+// Output CSS variables for Villa colors
+function colorbook_output_css_variables() {
+    if (!cb_is_villa_integrated()) {
+        return;
+    }
+    
+    $villa_colors = cb_get_villa_colors();
+    
+    if (empty($villa_colors)) {
+        return;
+    }
+    
+    echo "<style id='villa-colorbook-css-vars'>\n";
+    echo ":root {\n";
+    
+    // Output Villa color CSS variables
+    foreach ($villa_colors as $slug => $hex) {
+        echo "  --color-{$slug}: {$hex};\n";
+    }
+    
+    // Output Blocksy palette variables for consistency
+    for ($i = 1; $i <= 16; $i++) {
+        $color = get_theme_mod('palette_color_' . $i);
+        if ($color) {
+            echo "  --theme-palette-color-{$i}: {$color};\n";
+        }
+    }
+    
+    echo "}\n";
+    echo "</style>\n";
+}
+
+// Hook CSS output to wp_head
+add_action('wp_head', 'colorbook_output_css_variables', 5);
+
+// Enqueue Blocksy integration notice for admin
+function colorbook_admin_notice() {
+    if (is_admin() && cb_is_villa_integrated()) {
+        $screen = get_current_screen();
+        if ($screen && $screen->id === 'appearance_page_colorbook') {
+            echo '<div class="notice notice-success"><p>';
+            echo '<strong>Villa ColorBook:</strong> Successfully integrated with Blocksy theme system. ';
+            echo 'Colors are now managed through Blocksy\'s customizer and available as CSS variables.';
+            echo '</p></div>';
+        }
+    }
+}
+add_action('admin_notices', 'colorbook_admin_notice');
+
+/**
+ * Helper function to get ColorBook data for use in blocks and templates
+ * 
+ * @param string $format 'array'|'css'|'json' - Format to return colors in
+ * @return array|string
+ */
+function get_colorbook_data($format = 'array') {
+    $colorbook_json_path = get_stylesheet_directory() . '/miDocs/SITE DATA/colorbook.json';
+    
+    if (!file_exists($colorbook_json_path)) {
+        return $format === 'array' ? [] : '';
+    }
+    
+    $colorbook_data = json_decode(file_get_contents($colorbook_json_path), true);
+    
+    switch ($format) {
+        case 'css':
+            // Return CSS custom properties
+            $css = ':root {' . PHP_EOL;
+            if (isset($colorbook_data['css_variables'])) {
+                foreach ($colorbook_data['css_variables'] as $property => $value) {
+                    $css .= "  {$property}: {$value};" . PHP_EOL;
+                }
+            }
+            $css .= '}';
+            return $css;
+            
+        case 'json':
+            return json_encode($colorbook_data, JSON_PRETTY_PRINT);
+            
+        case 'variables':
+            return isset($colorbook_data['css_variables']) ? $colorbook_data['css_variables'] : [];
+            
+        case 'colors':
+            return isset($colorbook_data['colors']) ? $colorbook_data['colors'] : [];
+            
+        default:
+            return $colorbook_data;
+    }
+}
+
+/**
+ * Get a specific color by slug
+ * 
+ * @param string $slug Color slug (e.g., 'primary', 'secondary-light')
+ * @param string $format 'hex'|'oklch'|'array' - Format to return color in
+ * @return string|array|null
+ */
+function get_colorbook_color($slug, $format = 'hex') {
+    $colors = get_colorbook_data('colors');
+    
+    foreach ($colors as $color) {
+        if ($color['slug'] === $slug) {
+            switch ($format) {
+                case 'hex':
+                    return $color['hex'];
+                case 'oklch':
+                    return isset($color['oklch']) ? $color['oklch'] : null;
+                case 'array':
+                default:
+                    return $color;
+            }
+        }
+    }
+    
+    return null;
+}
+
+// AJAX handler for exporting colors

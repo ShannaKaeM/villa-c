@@ -1,0 +1,17 @@
+{
+    "version": "1.0.0",
+    "last_updated": "2025-05-28 14:04:13",
+    "templates": {
+        "active_template": "home-hero",
+        "home_hero": {
+            "layout_type": "asymmetric-40-60",
+            "content_alignment": "left",
+            "right_layout": "product-grid",
+            "section_height": "viewport-80",
+            "background_style": "solid",
+            "show_avatar_group": true,
+            "show_cta_button": true,
+            "show_product_cards": true
+        }
+    }
+}

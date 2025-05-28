@@ -1,0 +1,201 @@
+{
+    "version": "1.0.0",
+    "updated": "2025-05-28 04:45:39",
+    "theme": "carbon-blocksy",
+    "colors": [
+        {
+            "slug": "primary-light",
+            "name": "Primary Light",
+            "hex": "#8dabac",
+            "oklch": [
+                70,
+                0.044999999999999998,
+                194
+            ]
+        },
+        {
+            "slug": "primary",
+            "name": "Primary",
+            "hex": "#5a7f80",
+            "oklch": [
+                56,
+                0.064000000000000001,
+                194
+            ]
+        },
+        {
+            "slug": "primary-dark",
+            "name": "Primary Dark",
+            "hex": "#425a5b",
+            "oklch": [
+                40,
+                0.074999999999999997,
+                194
+            ]
+        },
+        {
+            "slug": "secondary-light",
+            "name": "Secondary Light",
+            "hex": "#d4dfdb",
+            "oklch": [
+                86,
+                0.075999999999999998,
+                181
+            ]
+        },
+        {
+            "slug": "secondary",
+            "name": "Secondary",
+            "hex": "#bacdc8",
+            "oklch": [
+                78,
+                0.127,
+                185
+            ]
+        },
+        {
+            "slug": "secondary-dark",
+            "name": "Secondary Dark",
+            "hex": "#a2b6b2",
+            "oklch": [
+                69,
+                0.14099999999999999,
+                190
+            ]
+        },
+        {
+            "slug": "neutral-light",
+            "name": "Neutral Light",
+            "hex": "#e6e2d7",
+            "oklch": [
+                88,
+                0.108,
+                56
+            ]
+        },
+        {
+            "slug": "neutral",
+            "name": "Neutral",
+            "hex": "#cac2ae",
+            "oklch": [
+                75,
+                0.20300000000000001,
+                57
+            ]
+        },
+        {
+            "slug": "neutral-dark",
+            "name": "Neutral Dark",
+            "hex": "#b6ad9a",
+            "oklch": [
+                67,
+                0.20300000000000001,
+                55
+            ]
+        },
+        {
+            "slug": "base-white",
+            "name": "Base White",
+            "hex": "#ffffff",
+            "oklch": [
+                100,
+                0,
+                0
+            ]
+        },
+        {
+            "slug": "base-lightest",
+            "name": "Base Lightest",
+            "hex": "#e5e5e5",
+            "oklch": [
+                92,
+                0,
+                0
+            ]
+        },
+        {
+            "slug": "base-light",
+            "name": "Base Light",
+            "hex": "#bfbfbf",
+            "oklch": [
+                80,
+                0,
+                0
+            ]
+        },
+        {
+            "slug": "base",
+            "name": "Base",
+            "hex": "#9c9c9c",
+            "oklch": [
+                66,
+                0,
+                0
+            ]
+        },
+        {
+            "slug": "base-dark",
+            "name": "Base Dark",
+            "hex": "#737373",
+            "oklch": [
+                50,
+                0,
+                0
+            ]
+        },
+        {
+            "slug": "base-darkest",
+            "name": "Base Darkest",
+            "hex": "#4d4d4d",
+            "oklch": [
+                35,
+                0,
+                0
+            ]
+        },
+        {
+            "slug": "base-black",
+            "name": "Base Black",
+            "hex": "#000000",
+            "oklch": [
+                0,
+                0,
+                0
+            ]
+        }
+    ],
+    "css_variables": {
+        "--theme-palette-color-1": "#8dabac",
+        "--color-primary-light": "#8dabac",
+        "--theme-palette-color-2": "#5a7f80",
+        "--color-primary": "#5a7f80",
+        "--theme-palette-color-3": "#425a5b",
+        "--color-primary-dark": "#425a5b",
+        "--theme-palette-color-4": "#d4dfdb",
+        "--color-secondary-light": "#d4dfdb",
+        "--theme-palette-color-5": "#bacdc8",
+        "--color-secondary": "#bacdc8",
+        "--theme-palette-color-6": "#a2b6b2",
+        "--color-secondary-dark": "#a2b6b2",
+        "--theme-palette-color-7": "#e6e2d7",
+        "--color-neutral-light": "#e6e2d7",
+        "--theme-palette-color-8": "#cac2ae",
+        "--color-neutral": "#cac2ae",
+        "--theme-palette-color-9": "#b6ad9a",
+        "--color-neutral-dark": "#b6ad9a",
+        "--theme-palette-color-10": "#ffffff",
+        "--color-base-white": "#ffffff",
+        "--theme-palette-color-11": "#e5e5e5",
+        "--color-base-lightest": "#e5e5e5",
+        "--theme-palette-color-12": "#bfbfbf",
+        "--color-base-light": "#bfbfbf",
+        "--theme-palette-color-13": "#9c9c9c",
+        "--color-base": "#9c9c9c",
+        "--theme-palette-color-14": "#737373",
+        "--color-base-dark": "#737373",
+        "--theme-palette-color-15": "#4d4d4d",
+        "--color-base-darkest": "#4d4d4d",
+        "--theme-palette-color-16": "#000000",
+        "--color-base-black": "#000000"
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "version": "1.0.0",
+    "updated": "2025-05-28 02:49:38",
+    "theme": "carbon-blocksy",
+    "typography": {
+        "primary_font": "montserrat",
+        "body_font": "montserrat",
+        "h1_size": "x-large",
+        "h2_size": "x-large",
+        "h3_size": "large",
+        "h4_size": "medium",
+        "h5_size": "small",
+        "body_size": "medium",
+        "heading_weight": "600",
+        "body_weight": "400",
+        "heading_line_height": "1.2",
+        "body_line_height": "1.6"
+    },
+    "css_variables": {
+        "--theme-font-primary": "var(--wp--preset--font-family--montserrat)",
+        "--theme-font-body": "var(--wp--preset--font-family--montserrat)",
+        "--theme-h1-size": "var(--wp--preset--font-size--x-large)",
+        "--theme-h2-size": "var(--wp--preset--font-size--x-large)",
+        "--theme-h3-size": "var(--wp--preset--font-size--large)",
+        "--theme-h4-size": "var(--wp--preset--font-size--medium)",
+        "--theme-h5-size": "var(--wp--preset--font-size--small)",
+        "--theme-body-size": "var(--wp--preset--font-size--medium)"
+    }
+}
