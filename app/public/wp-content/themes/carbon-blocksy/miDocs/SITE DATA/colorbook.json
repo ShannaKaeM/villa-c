@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "updated": "2025-05-28 04:45:39",
+    "updated": "2025-05-28 21:08:02",
     "theme": "carbon-blocksy",
     "colors": [
         {
@@ -36,11 +36,11 @@
         {
             "slug": "secondary-light",
             "name": "Secondary Light",
-            "hex": "#d4dfdb",
+            "hex": "#7d93a2",
             "oklch": [
-                86,
-                0.075999999999999998,
-                181
+                57,
+                0.26300000000000001,
+                219
             ]
         },
         {
@@ -116,9 +116,9 @@
         {
             "slug": "base-light",
             "name": "Base Light",
-            "hex": "#bfbfbf",
+            "hex": "#c9c9c9",
             "oklch": [
-                80,
+                79,
                 0,
                 0
             ]
@@ -171,8 +171,8 @@
         "--color-primary": "#5a7f80",
         "--theme-palette-color-3": "#425a5b",
         "--color-primary-dark": "#425a5b",
-        "--theme-palette-color-4": "#d4dfdb",
-        "--color-secondary-light": "#d4dfdb",
+        "--theme-palette-color-4": "#7d93a2",
+        "--color-secondary-light": "#7d93a2",
         "--theme-palette-color-5": "#bacdc8",
         "--color-secondary": "#bacdc8",
         "--theme-palette-color-6": "#a2b6b2",
@@ -187,8 +187,8 @@
         "--color-base-white": "#ffffff",
         "--theme-palette-color-11": "#e5e5e5",
         "--color-base-lightest": "#e5e5e5",
-        "--theme-palette-color-12": "#bfbfbf",
-        "--color-base-light": "#bfbfbf",
+        "--theme-palette-color-12": "#c9c9c9",
+        "--color-base-light": "#c9c9c9",
         "--theme-palette-color-13": "#9c9c9c",
         "--color-base": "#9c9c9c",
         "--theme-palette-color-14": "#737373",

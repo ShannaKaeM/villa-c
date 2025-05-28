@@ -70,64 +70,10 @@ function colorbook_save_colors_handler() {
     // Update theme.json
     colorbook_sync_with_theme_json($colors);
     
-    // Sync to Blocksy
-    colorbook_sync_with_blocksy($colors);
-    
     wp_send_json_success([
-        'message' => 'Colors saved successfully to ColorBook, theme.json, and Blocksy',
+        'message' => 'Colors saved successfully to ColorBook and theme.json',
         'colorbook_path' => $colorbook_json_path
     ]);
-}
-
-// Sync colors with Blocksy
-function colorbook_sync_with_blocksy($colors) {
-    // Get current theme mods
-    $theme_mods = get_theme_mods();
-    
-    // Initialize colorPalette if it doesn't exist
-    if (!isset($theme_mods['colorPalette'])) {
-        $theme_mods['colorPalette'] = [];
-    }
-    
-    // Define the expected color order (from your original documentation)
-    $color_order = [
-        'primary-light', 'primary', 'primary-dark',
-        'secondary-light', 'secondary', 'secondary-dark',
-        'neutral-light', 'neutral', 'neutral-dark',
-        'base-white', 'base-lightest', 'base-light', 'base', 'base-dark', 'base-darkest', 'base-black'
-    ];
-    
-    // Map colors to Blocksy palette (1-16)
-    foreach ($color_order as $index => $slug) {
-        $color_data = array_filter($colors, function($c) use ($slug) {
-            return $c['slug'] === $slug;
-        });
-        $color_data = array_values($color_data);
-        
-        if (!empty($color_data)) {
-            $palette_key = 'color' . ($index + 1); // color1 through color16
-            $theme_mods['colorPalette'][$palette_key] = [
-                'color' => $color_data[0]['hex']
-            ];
-            
-            // Add titles for better organization
-            if ($index < 3) {
-                $theme_mods['colorPalette'][$palette_key]['title'] = ['Primary Light', 'Primary', 'Primary Dark'][$index];
-            } elseif ($index < 6) {
-                $theme_mods['colorPalette'][$palette_key]['title'] = ['Secondary Light', 'Secondary', 'Secondary Dark'][$index - 3];
-            } elseif ($index < 9) {
-                $theme_mods['colorPalette'][$palette_key]['title'] = ['Neutral Light', 'Neutral', 'Neutral Dark'][$index - 6];
-            } else {
-                $base_names = ['Base White', 'Base Lightest', 'Base Light', 'Base', 'Base Dark', 'Base Darkest', 'Base Black'];
-                $theme_mods['colorPalette'][$palette_key]['title'] = $base_names[$index - 9];
-            }
-        }
-    }
-    
-    // Save the updated theme mods
-    set_theme_mod('colorPalette', $theme_mods['colorPalette']);
-    
-    return true;
 }
 
 // Sync colors with theme.json
@@ -281,10 +227,6 @@ function colorbook_render_page() {
             <!-- Actions -->
             <div class="colorbook-actions">
                 <button class="button button-primary" id="save-colors">Save Colors</button>
-                <label>
-                    <input type="checkbox" id="sync-blocksy" checked>
-                    Sync to Blocksy Customizer
-                </label>
                 <button class="button" id="export-colors">Export Colors</button>
                 <button class="button" id="import-colors">Import Colors</button>
                 <input type="file" id="import-file" style="display: none;" accept=".json">
@@ -505,3 +447,56 @@ function get_colorbook_color($slug, $format = 'hex') {
 }
 
 // AJAX handler for exporting colors
+
+// Sync colors with Blocksy (DISABLED - no longer needed since we pass colors directly)
+/*
+function colorbook_sync_with_blocksy($colors) {
+    // Get current theme mods
+    $theme_mods = get_theme_mods();
+    
+    // Initialize colorPalette if it doesn't exist
+    if (!isset($theme_mods['colorPalette'])) {
+        $theme_mods['colorPalette'] = [];
+    }
+    
+    // Define the expected color order (from your original documentation)
+    $color_order = [
+        'primary-light', 'primary', 'primary-dark',
+        'secondary-light', 'secondary', 'secondary-dark',
+        'neutral-light', 'neutral', 'neutral-dark',
+        'base-white', 'base-lightest', 'base-light', 'base', 'base-dark', 'base-darkest', 'base-black'
+    ];
+    
+    // Map colors to Blocksy palette (1-16)
+    foreach ($color_order as $index => $slug) {
+        $color_data = array_filter($colors, function($c) use ($slug) {
+            return $c['slug'] === $slug;
+        });
+        $color_data = array_values($color_data);
+        
+        if (!empty($color_data)) {
+            $palette_key = 'color' . ($index + 1); // color1 through color16
+            $theme_mods['colorPalette'][$palette_key] = [
+                'color' => $color_data[0]['hex']
+            ];
+            
+            // Add titles for better organization
+            if ($index < 3) {
+                $theme_mods['colorPalette'][$palette_key]['title'] = ['Primary Light', 'Primary', 'Primary Dark'][$index];
+            } elseif ($index < 6) {
+                $theme_mods['colorPalette'][$palette_key]['title'] = ['Secondary Light', 'Secondary', 'Secondary Dark'][$index - 3];
+            } elseif ($index < 9) {
+                $theme_mods['colorPalette'][$palette_key]['title'] = ['Neutral Light', 'Neutral', 'Neutral Dark'][$index - 6];
+            } else {
+                $base_names = ['Base White', 'Base Lightest', 'Base Light', 'Base', 'Base Dark', 'Base Darkest', 'Base Black'];
+                $theme_mods['colorPalette'][$palette_key]['title'] = $base_names[$index - 9];
+            }
+        }
+    }
+    
+    // Save the updated theme mods
+    set_theme_mod('colorPalette', $theme_mods['colorPalette']);
+    
+    return true;
+}
+*/

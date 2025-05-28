@@ -432,659 +432,741 @@ function textbook_admin_page() {
         
         <!-- Tab Navigation -->
         <div class="textbook-tabs">
-            <button class="tab-button active" data-tab="foundation" onclick="switchTab('foundation')">🏗️ Foundation</button>
-            <button class="tab-button" data-tab="semantic" onclick="switchTab('semantic')">🎯 Semantic Elements</button>
-        </div>
-        
-        <!-- Foundation Tab -->
-        <div id="foundation-tab" class="tab-content active">
-            <form method="post" action="">
-                <?php wp_nonce_field('textbook_foundation_action', 'textbook_foundation_nonce'); ?>
-                
-                <div class="foundation-grid">
-                    <!-- Font Families Section -->
-                    <div class="foundation-section">
-                        <h2>🔤 Font Families</h2>
-                        <div class="font-families-grid">
-                            <?php 
-                            foreach ($font_families as $index => $family): 
-                            ?>
-                            <div class="font-family-item">
-                                <label>Family Name</label>
-                                <input type="text" name="font_families[<?php echo $index; ?>][name]" 
-                                       value="<?php echo esc_attr($family['name']); ?>" placeholder="Inter">
-                                
-                                <label>Font Stack</label>
-                                <input type="text" name="font_families[<?php echo $index; ?>][fontFamily]" 
-                                       value="<?php echo esc_attr($family['fontFamily']); ?>" 
-                                       placeholder="Inter, sans-serif">
-                                
-                                <label>Slug</label>
-                                <input type="text" name="font_families[<?php echo $index; ?>][slug]" 
-                                       value="<?php echo esc_attr($family['slug']); ?>" placeholder="inter">
-                                
-                                <div class="font-preview" style="font-family: <?php echo esc_attr($family['fontFamily']); ?>;">
-                                    Text
-                                </div>
-                            </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                    
-                    <!-- Font Sizes Section -->
-                    <div class="foundation-section">
-                        <h2>📏 Font Sizes</h2>
-                        <div class="font-sizes-grid">
-                            <?php 
-                            foreach ($font_sizes as $index => $size): 
-                            ?>
-                            <div class="font-size-item">
-                                <label>Size Name</label>
-                                <input type="text" name="font_sizes[<?php echo $index; ?>][name]" 
-                                       value="<?php echo esc_attr($size['name']); ?>" placeholder="Large">
-                                
-                                <label>Slug</label>
-                                <input type="text" name="font_sizes[<?php echo $index; ?>][slug]" 
-                                       value="<?php echo esc_attr($size['slug']); ?>" placeholder="large">
-                                
-                                <label>Size Value</label>
-                                <input type="text" name="font_sizes[<?php echo $index; ?>][size]" 
-                                       value="<?php echo esc_attr($size['size']); ?>" placeholder="1.25rem">
-                                
-                                <div class="size-preview" style="font-size: <?php echo esc_attr($size['size']); ?>; padding: 0.75rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px; line-height: 1.2;">
-                                    Text
-                                </div>
-                            </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                    
-                    <!-- Font Weights Section -->
-                    <div class="foundation-section">
-                        <h2>⚖️ Font Weights</h2>
-                        <div class="font-weights-grid">
-                            <?php 
-                            foreach ($font_weights as $index => $weight): 
-                            ?>
-                            <div class="font-weight-item">
-                                <label>Weight Name</label>
-                                <input type="text" name="font_weights[<?php echo $index; ?>][name]" 
-                                       value="<?php echo esc_attr($weight['name']); ?>" placeholder="Regular">
-                                
-                                <label>Slug</label>
-                                <input type="text" name="font_weights[<?php echo $index; ?>][slug]" 
-                                       value="<?php echo esc_attr($weight['slug']); ?>" placeholder="regular">
-                                
-                                <label>Weight Value</label>
-                                <input type="text" name="font_weights[<?php echo $index; ?>][weight]" 
-                                       value="<?php echo esc_attr($weight['weight']); ?>" placeholder="400">
-                            </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                    
-                    <!-- Line Heights Section -->
-                    <div class="foundation-section">
-                        <h2>📈 Line Heights</h2>
-                        <div class="line-heights-grid">
-                            <?php 
-                            foreach ($line_heights as $index => $line_height): 
-                            ?>
-                            <div class="line-height-item">
-                                <label>Line Height Name</label>
-                                <input type="text" name="line_heights[<?php echo $index; ?>][name]" 
-                                       value="<?php echo esc_attr($line_height['name']); ?>" placeholder="Normal">
-                                
-                                <label>Slug</label>
-                                <input type="text" name="line_heights[<?php echo $index; ?>][slug]" 
-                                       value="<?php echo esc_attr($line_height['slug']); ?>" placeholder="normal">
-                                
-                                <label>Line Height Value</label>
-                                <input type="text" name="line_heights[<?php echo $index; ?>][height]" 
-                                       value="<?php echo esc_attr($line_height['height']); ?>" placeholder="1.4">
-                            </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                    
-                    <!-- Letter Spacing Section -->
-                    <div class="foundation-section">
-                        <h2>📊 Letter Spacing</h2>
-                        <div class="letter-spacing-grid">
-                            <?php 
-                            foreach ($letter_spacing as $index => $spacing): 
-                            ?>
-                            <div class="letter-spacing-item">
-                                <label>Letter Spacing Name</label>
-                                <input type="text" name="letter_spacing[<?php echo $index; ?>][name]" 
-                                       value="<?php echo esc_attr($spacing['name']); ?>" placeholder="Normal">
-                                
-                                <label>Slug</label>
-                                <input type="text" name="letter_spacing[<?php echo $index; ?>][slug]" 
-                                       value="<?php echo esc_attr($spacing['slug']); ?>" placeholder="normal">
-                                
-                                <label>Letter Spacing Value</label>
-                                <input type="text" name="letter_spacing[<?php echo $index; ?>][spacing]" 
-                                       value="<?php echo esc_attr($spacing['spacing']); ?>" placeholder="0">
-                            </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
+            <nav class="nav-tab-wrapper textbook-nav-tabs">
+                <a href="#foundation" class="nav-tab nav-tab-active" data-tab="foundation">Foundation</a>
+                <a href="#semantic" class="nav-tab" data-tab="semantic">Semantic Elements</a>
+            </nav>
+            
+            <!-- Foundation Tab -->
+            <div id="foundation" class="tab-content active">
+                <div class="tab-header">
+                    <h2>🏗️ Typography Foundation</h2>
+                    <p>Define the core typography settings that power your semantic elements.</p>
                 </div>
                 
-                <div class="foundation-actions">
-                    <?php submit_button('Save Foundation Settings', 'primary', 'save_foundation', false); ?>
-                    <button type="button" class="button" onclick="resetFoundationDefaults()">Reset to Defaults</button>
-                </div>
-            </form>
-        </div>
-        
-        <!-- Semantic Elements Tab -->
-        <div id="semantic-tab" class="tab-content">
-            <form method="post" action="">
-                <?php wp_nonce_field('textbook_save', 'textbook_nonce'); ?>
-                
-                <div class="textbook-grid">
-                    <?php foreach ($semantic_elements as $element_key => $element): ?>
-                    <div class="semantic-element-card">
-                        <div class="element-header">
-                            <h3><?php echo $element['label']; ?></h3>
-                            <p><?php echo $element['description']; ?></p>
+                <form method="post" action="">
+                    <?php wp_nonce_field('textbook_foundation_action', 'textbook_foundation_nonce'); ?>
+                    
+                    <div class="foundation-sections">
+                        <!-- Font Families Section -->
+                        <div class="foundation-section">
+                            <h3>🔤 Font Families</h3>
+                            <p>Define the font families available in your design system.</p>
+                            
+                            <div class="font-families-grid">
+                                <?php foreach ($font_families as $index => $family): ?>
+                                <div class="font-family-item">
+                                    <div class="control-group">
+                                        <label>Font Family Name</label>
+                                        <input type="text" name="font_families[<?php echo $index; ?>][name]" 
+                                               value="<?php echo esc_attr($family['name']); ?>" placeholder="Inter">
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Slug</label>
+                                        <input type="text" name="font_families[<?php echo $index; ?>][slug]" 
+                                               value="<?php echo esc_attr($family['slug']); ?>" placeholder="inter">
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Font Stack</label>
+                                        <input type="text" name="font_families[<?php echo $index; ?>][fontFamily]" 
+                                               value="<?php echo esc_attr($family['fontFamily']); ?>" placeholder="Inter, sans-serif">
+                                    </div>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                         
-                        <div class="element-controls">
-                            <table class="form-table">
-                                <tr>
-                                    <th>HTML Tag</th>
-                                    <td>
-                                        <select name="semantic_elements[<?php echo $element_key; ?>][tag]">
-                                            <?php foreach ($options['tags'] as $tag): ?>
-                                                <option value="<?php echo $tag; ?>" <?php selected($element['tag'], $tag); ?>>
-                                                    &lt;<?php echo $tag; ?>&gt;
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Default Size</th>
-                                    <td>
-                                        <select name="semantic_elements[<?php echo $element_key; ?>][size]">
-                                            <?php foreach ($options['sizes'] as $size): ?>
-                                                <option value="<?php echo $size; ?>" <?php selected($element['size'], $size); ?>>
-                                                    <?php echo strtoupper($size); ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Font Weight</th>
-                                    <td>
-                                        <select name="semantic_elements[<?php echo $element_key; ?>][weight]">
-                                            <?php foreach ($options['weights'] as $weight): ?>
-                                                <option value="<?php echo $weight; ?>" <?php selected($element['weight'], $weight); ?>>
-                                                    <?php echo $weight; ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Color</th>
-                                    <td>
-                                        <select name="semantic_elements[<?php echo $element_key; ?>][color]">
-                                            <?php foreach ($options['colors'] as $color): ?>
-                                                <option value="<?php echo $color; ?>" <?php selected($element['color'], $color); ?>>
-                                                    <?php echo ucfirst($color); ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Text Transform</th>
-                                    <td>
-                                        <select name="semantic_elements[<?php echo $element_key; ?>][transform]">
-                                            <?php foreach ($options['transforms'] as $transform): ?>
-                                                <option value="<?php echo $transform; ?>" <?php selected($element['transform'], $transform); ?>>
-                                                    <?php echo ucfirst($transform); ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Font Family</th>
-                                    <td>
-                                        <select name="semantic_elements[<?php echo $element_key; ?>][font_family]">
-                                            <?php foreach ($options['font_families'] as $family): ?>
-                                                <option value="<?php echo $family; ?>" <?php selected($element['font_family'], $family); ?>>
-                                                    <?php echo ucfirst($family); ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Line Height</th>
-                                    <td>
-                                        <select name="semantic_elements[<?php echo $element_key; ?>][line_height]">
-                                            <?php foreach ($options['line_heights'] as $line_height): ?>
-                                                <option value="<?php echo $line_height; ?>" <?php selected($element['line_height'], $line_height); ?>>
-                                                    <?php echo ucfirst($line_height); ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Letter Spacing</th>
-                                    <td>
-                                        <select name="semantic_elements[<?php echo $element_key; ?>][letter_spacing]">
-                                            <?php foreach ($options['letter_spacing'] as $spacing): ?>
-                                                <option value="<?php echo $spacing; ?>" <?php selected($element['letter_spacing'], $spacing); ?>>
-                                                    <?php echo ucfirst($spacing); ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </td>
-                                </tr>
-                            </table>
+                        <!-- Font Sizes Section -->
+                        <div class="foundation-section">
+                            <h3>📏 Font Sizes</h3>
+                            <p>Define the font size scale used throughout your design system.</p>
+                            
+                            <div class="font-sizes-grid">
+                                <?php foreach ($font_sizes as $index => $size): ?>
+                                <div class="font-size-item">
+                                    <div class="control-group">
+                                        <label>Size Name</label>
+                                        <input type="text" name="font_sizes[<?php echo $index; ?>][name]" 
+                                               value="<?php echo esc_attr($size['name']); ?>" placeholder="Medium">
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Slug</label>
+                                        <input type="text" name="font_sizes[<?php echo $index; ?>][slug]" 
+                                               value="<?php echo esc_attr($size['slug']); ?>" placeholder="md">
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Size Value</label>
+                                        <input type="text" name="font_sizes[<?php echo $index; ?>][size]" 
+                                               value="<?php echo esc_attr($size['size']); ?>" placeholder="1rem">
+                                    </div>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                         
-                        <div class="element-preview">
-                            <<?php echo $element['tag']; ?> 
-                                class="text-<?php echo $element['size']; ?> font-<?php echo $element['weight']; ?> text-<?php echo $element['color']; ?> text-<?php echo $element['transform']; ?> letter-spacing-<?php echo $element['letter_spacing']; ?>"
-                                style="font-size: <?php echo textbook_get_font_size_value($element['size']); ?>; font-family: <?php echo textbook_get_font_family_value($element['font_family']); ?>; font-weight: <?php echo textbook_get_font_weight_value($element['weight']); ?>; text-transform: <?php echo $element['transform']; ?>; line-height: <?php echo textbook_get_line_height_value($element['line_height']); ?>; letter-spacing: <?php echo textbook_get_letter_spacing_value($element['letter_spacing']); ?>;">
-                                Text
-                            </<?php echo $element['tag']; ?>>
+                        <!-- Font Weights Section -->
+                        <div class="foundation-section">
+                            <h3>⚖️ Font Weights</h3>
+                            <p>Define the font weight scale for consistent typography hierarchy.</p>
+                            
+                            <div class="font-weights-grid">
+                                <?php foreach ($font_weights as $index => $weight): ?>
+                                <div class="font-weight-item">
+                                    <div class="control-group">
+                                        <label>Weight Name</label>
+                                        <input type="text" name="font_weights[<?php echo $index; ?>][name]" 
+                                               value="<?php echo esc_attr($weight['name']); ?>" placeholder="Medium">
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Slug</label>
+                                        <input type="text" name="font_weights[<?php echo $index; ?>][slug]" 
+                                               value="<?php echo esc_attr($weight['slug']); ?>" placeholder="medium">
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Weight Value</label>
+                                        <input type="text" name="font_weights[<?php echo $index; ?>][weight]" 
+                                               value="<?php echo esc_attr($weight['weight']); ?>" placeholder="500">
+                                    </div>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                        
+                        <!-- Line Heights Section -->
+                        <div class="foundation-section">
+                            <h3>📐 Line Heights</h3>
+                            <p>Define line height values for optimal readability.</p>
+                            
+                            <div class="line-heights-grid">
+                                <?php foreach ($line_heights as $index => $height): ?>
+                                <div class="line-height-item">
+                                    <div class="control-group">
+                                        <label>Height Name</label>
+                                        <input type="text" name="line_heights[<?php echo $index; ?>][name]" 
+                                               value="<?php echo esc_attr($height['name']); ?>" placeholder="Normal">
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Slug</label>
+                                        <input type="text" name="line_heights[<?php echo $index; ?>][slug]" 
+                                               value="<?php echo esc_attr($height['slug']); ?>" placeholder="normal">
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Height Value</label>
+                                        <input type="text" name="line_heights[<?php echo $index; ?>][height]" 
+                                               value="<?php echo esc_attr($height['height']); ?>" placeholder="1.4">
+                                    </div>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                        
+                        <!-- Letter Spacing Section -->
+                        <div class="foundation-section">
+                            <h3>🔤 Letter Spacing</h3>
+                            <p>Define letter spacing values for typography fine-tuning.</p>
+                            
+                            <div class="letter-spacing-grid">
+                                <?php foreach ($letter_spacing as $index => $spacing): ?>
+                                <div class="letter-spacing-item">
+                                    <div class="control-group">
+                                        <label>Spacing Name</label>
+                                        <input type="text" name="letter_spacing[<?php echo $index; ?>][name]" 
+                                               value="<?php echo esc_attr($spacing['name']); ?>" placeholder="Normal">
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Slug</label>
+                                        <input type="text" name="letter_spacing[<?php echo $index; ?>][slug]" 
+                                               value="<?php echo esc_attr($spacing['slug']); ?>" placeholder="normal">
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Spacing Value</label>
+                                        <input type="text" name="letter_spacing[<?php echo $index; ?>][spacing]" 
+                                               value="<?php echo esc_attr($spacing['spacing']); ?>" placeholder="0">
+                                    </div>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                     </div>
-                    <?php endforeach; ?>
-                </div>
-                
-                <div class="textbook-actions">
-                    <?php submit_button('Save Semantic Elements', 'primary', 'submit', false); ?>
-                    <button type="button" class="button" onclick="resetToDefaults()">Reset to Defaults</button>
-                    <button type="button" class="button" onclick="generateCSS()">Generate CSS</button>
-                </div>
-            </form>
-        </div>
-        
-        <div class="textbook-usage">
-            <h2>📖 Usage in Components</h2>
-            <p>In your Twig components, use semantic elements with optional size overrides:</p>
-            <pre><code>
-{# Use default settings #}
-&lt;{{ textbook.pretitle.tag }} class="semantic-pretitle"&gt;{{ pretitle }}&lt;/{{ textbook.pretitle.tag }}&gt;
-&lt;{{ textbook.title.tag }} class="semantic-title"&gt;{{ title }}&lt;/{{ textbook.title.tag }}&gt;
 
-{# Override size only #}
-&lt;{{ textbook.title.tag }} class="semantic-title text-xxl"&gt;{{ hero_title }}&lt;/{{ textbook.title.tag }}&gt;
-&lt;{{ textbook.description.tag }} class="semantic-description text-lg"&gt;{{ large_description }}&lt;/{{ textbook.description.tag }}&gt;
-            </code></pre>
+                    <p class="submit">
+                        <input type="submit" name="save_foundation" class="button-primary" value="Save Foundation Settings" />
+                        <button type="button" class="button" onclick="location.reload()">Reset</button>
+                    </p>
+                </form>
+            </div>
+
+            <!-- Semantic Elements Tab -->
+            <div id="semantic" class="tab-content">
+                <div class="tab-header">
+                    <h2>🎯 Semantic Elements</h2>
+                    <p>Define semantic text elements with smart defaults for consistent typography.</p>
+                </div>
+
+                <form id="textbook-semantic-form" method="post" action="">
+                    <?php wp_nonce_field('textbook_save', 'textbook_nonce'); ?>
+                    
+                    <div class="semantic-elements">
+                        <?php
+                        $semantic_elements = textbook_get_semantic_elements();
+                        $current_settings = textbook_get_current_semantic_settings();
+                        $options = textbook_get_options();
+                        
+                        foreach ($semantic_elements as $key => $element):
+                            $current = $current_settings[$key] ?? $element;
+                        ?>
+                            <div class="semantic-element-item">
+                                <div class="element-header">
+                                    <h3><?php echo $element['label']; ?></h3>
+                                    <p><?php echo $element['description']; ?></p>
+                                </div>
+                                
+                                <div class="element-controls">
+                                    <div class="control-group">
+                                        <label>HTML Tag</label>
+                                        <select name="semantic_elements[<?php echo $key; ?>][tag]">
+                                            <?php foreach ($options['tags'] as $tag): ?>
+                                                <option value="<?php echo $tag; ?>" <?php selected($current['tag'], $tag); ?>><?php echo $tag; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Size</label>
+                                        <select name="semantic_elements[<?php echo $key; ?>][size]">
+                                            <?php foreach ($options['sizes'] as $size): ?>
+                                                <option value="<?php echo $size; ?>" <?php selected($current['size'], $size); ?>><?php echo strtoupper($size); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Weight</label>
+                                        <select name="semantic_elements[<?php echo $key; ?>][weight]">
+                                            <?php foreach ($options['weights'] as $weight): ?>
+                                                <option value="<?php echo $weight; ?>" <?php selected($current['weight'], $weight); ?>><?php echo $weight; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Color</label>
+                                        <select name="semantic_elements[<?php echo $key; ?>][color]">
+                                            <?php foreach ($options['colors'] as $color): ?>
+                                                <option value="<?php echo $color; ?>" <?php selected($current['color'], $color); ?>><?php echo ucfirst($color); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Transform</label>
+                                        <select name="semantic_elements[<?php echo $key; ?>][transform]">
+                                            <?php foreach ($options['transforms'] as $transform): ?>
+                                                <option value="<?php echo $transform; ?>" <?php selected($current['transform'], $transform); ?>><?php echo ucfirst($transform); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Font Family</label>
+                                        <select name="semantic_elements[<?php echo $key; ?>][font_family]">
+                                            <?php foreach ($options['font_families'] as $family): ?>
+                                                <option value="<?php echo $family; ?>" <?php selected($current['font_family'], $family); ?>><?php echo ucfirst($family); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Line Height</label>
+                                        <select name="semantic_elements[<?php echo $key; ?>][line_height]">
+                                            <?php foreach ($options['line_heights'] as $height): ?>
+                                                <option value="<?php echo $height; ?>" <?php selected($current['line_height'], $height); ?>><?php echo ucfirst($height); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>Letter Spacing</label>
+                                        <select name="semantic_elements[<?php echo $key; ?>][letter_spacing]">
+                                            <?php foreach ($options['letter_spacing'] as $spacing): ?>
+                                                <option value="<?php echo $spacing; ?>" <?php selected($current['letter_spacing'], $spacing); ?>><?php echo ucfirst($spacing); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="element-preview">
+                                    <div class="preview-label">Preview:</div>
+                                    <?php
+                                    // Get current values with fallbacks
+                                    $preview_font_family = textbook_get_font_family_value($current['font_family'] ?? 'primary');
+                                    $preview_font_size = textbook_get_font_size_value($current['size'] ?? 'md');
+                                    $preview_font_weight = textbook_get_font_weight_value($current['weight'] ?? '400');
+                                    $preview_line_height = textbook_get_line_height_value($current['line_height'] ?? 'normal');
+                                    $preview_letter_spacing = textbook_get_letter_spacing_value($current['letter_spacing'] ?? 'normal');
+                                    $preview_transform = $current['transform'] ?? 'none';
+                                    $preview_color = $current['color'] ?? 'base';
+                                    
+                                    // Get actual color value (prefer OKLCH)
+                                    $preview_color_value = 'oklch(66% 0 0)'; // default fallback
+                                    if (function_exists('colorbook_get_current_colors')) {
+                                        $colorbook_colors = colorbook_get_current_colors();
+                                        foreach ($colorbook_colors as $color) {
+                                            if ($color['slug'] === $preview_color) {
+                                                // Use OKLCH if available, otherwise hex
+                                                if (isset($color['oklch']) && is_array($color['oklch'])) {
+                                                    $oklch = $color['oklch'];
+                                                    $preview_color_value = "oklch({$oklch[0]}% {$oklch[1]} {$oklch[2]})";
+                                                } else {
+                                                    $preview_color_value = $color['hex'] ?? 'oklch(66% 0 0)';
+                                                }
+                                                break;
+                                            }
+                                        }
+                                    } else {
+                                        // Fallback color mapping with OKLCH
+                                        $fallback_colors = [
+                                            'primary' => 'oklch(56% 0.064 194)',
+                                            'secondary' => 'oklch(60% 0.089 64)', 
+                                            'base-darkest' => 'oklch(35% 0 0)',
+                                            'base-dark' => 'oklch(50% 0 0)',
+                                            'base' => 'oklch(66% 0 0)',
+                                            'base-light' => 'oklch(80% 0 0)',
+                                            'base-white' => 'oklch(100% 0 0)'
+                                        ];
+                                        $preview_color_value = $fallback_colors[$preview_color] ?? 'oklch(66% 0 0)';
+                                    }
+                                    ?>
+                                    <div class="text-preview semantic-<?php echo $key; ?>" 
+                                         data-element="<?php echo $key; ?>"
+                                         style="
+                                            font-family: <?php echo $preview_font_family; ?>;
+                                            font-size: <?php echo $preview_font_size; ?>;
+                                            font-weight: <?php echo $preview_font_weight; ?>;
+                                            line-height: <?php echo $preview_line_height; ?>;
+                                            letter-spacing: <?php echo $preview_letter_spacing; ?>;
+                                            text-transform: <?php echo $preview_transform; ?>;
+                                            color: <?php echo $preview_color_value; ?>;
+                                         ">
+                                        <?php echo $element['label']; ?> Sample Text
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <p class="submit">
+                        <input type="submit" name="submit" class="button-primary" value="Save Semantic Elements" />
+                        <button type="button" class="button" onclick="textbook_reset_semantic()">Reset to Defaults</button>
+                        <button type="button" class="button" onclick="textbook_generate_css()">Generate CSS</button>
+                    </p>
+                </form>
+            </div>
         </div>
     </div>
 
     <style>
-    .textbook-tabs {
-        display: flex;
-        justify-content: space-between;
-        margin: 1rem 0;
-    }
-    
-    .tab-button {
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 4px;
-        background: #f9f9f9;
-        cursor: pointer;
-    }
-    
-    .tab-button.active {
-        background: #fff;
-        border-bottom: 2px solid #2271b1;
-    }
-    
-    .tab-content {
-        display: none;
-        padding: 1rem;
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-    }
-    
-    .tab-content.active {
-        display: block;
-    }
-    
-    .foundation-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        gap: 2rem;
-        margin: 2rem 0;
-    }
-    
-    .foundation-section {
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 1.5rem;
-    }
-    
-    .font-families-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-    }
-    
-    .font-family-item {
-        background: #f9f9f9;
-        padding: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-    }
-    
-    .font-preview {
-        padding: 0.5rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        margin: 0.5rem 0;
-    }
-    
-    .font-sizes-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-    }
-    
-    .font-size-item {
-        background: #f9f9f9;
-        padding: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-    }
-    
-    .size-preview {
-        padding: 0.5rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        margin: 0.5rem 0;
-    }
-    
-    .font-weights-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-    }
-    
-    .font-weight-item {
-        background: #f9f9f9;
-        padding: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-    }
-    
-    .line-heights-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-    }
-    
-    .line-height-item {
-        background: #f9f9f9;
-        padding: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-    }
-    
-    .letter-spacing-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-    }
-    
-    .letter-spacing-item {
-        background: #f9f9f9;
-        padding: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-    }
-    
-    .textbook-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        gap: 2rem;
-        margin: 2rem 0;
-    }
-    
-    .semantic-element-card {
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 1.5rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    
-    .element-header h3 {
-        margin: 0 0 0.5rem 0;
-        color: #2271b1;
-    }
-    
-    .element-header p {
-        margin: 0 0 1rem 0;
-        color: #666;
-        font-size: 0.9rem;
-    }
-    
-    .element-controls .form-table {
-        margin: 0;
-    }
-    
-    .element-controls th {
-        width: 120px;
-        font-size: 0.9rem;
-        padding: 0.5rem 0;
-    }
-    
-    .element-controls td {
-        padding: 0.5rem 0;
-    }
-    
-    .element-controls select {
-        width: 100%;
-        max-width: 200px;
-    }
-    
-    .element-preview {
-        margin-top: 1rem;
-        padding: 1rem;
-        background: #f9f9f9;
-        border-radius: 4px;
-        border-left: 4px solid #2271b1;
-    }
-    
-    .textbook-actions {
-        margin: 2rem 0;
-        padding: 1rem;
-        background: #f9f9f9;
-        border-radius: 4px;
-    }
-    
-    .textbook-usage {
-        margin-top: 3rem;
-        padding: 2rem;
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-    }
-    
-    .textbook-usage pre {
-        background: #f4f4f4;
-        padding: 1rem;
-        border-radius: 4px;
-        overflow-x: auto;
-    }
+        .textbook-admin .textbook-tabs {
+            margin-top: 20px;
+        }
+        
+        .textbook-nav-tabs {
+            border-bottom: 1px solid #ccd0d4;
+            margin-bottom: 0;
+        }
+        
+        .textbook-nav-tabs .nav-tab {
+            position: relative;
+            display: inline-block;
+            padding: 12px 20px;
+            margin: 0 5px -1px 0;
+            background: #f1f1f1;
+            border: 1px solid #ccd0d4;
+            border-bottom: none;
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 6px 6px 0 0;
+            transition: all 0.2s ease;
+        }
+        
+        .textbook-nav-tabs .nav-tab:hover {
+            background: #e8e8e8;
+            color: #333;
+        }
+        
+        .textbook-nav-tabs .nav-tab.nav-tab-active {
+            background: white;
+            border-bottom: 1px solid white;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+            background: white;
+            border: 1px solid #ccd0d4;
+            border-top: none;
+            padding: 30px;
+            border-radius: 0 0 6px 6px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tab-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .tab-header h2 {
+            margin: 0 0 10px 0;
+            color: #1e293b;
+        }
+        
+        .tab-header p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+        
+        .foundation-sections {
+            display: grid;
+            gap: 40px;
+        }
+        
+        .foundation-section {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .foundation-section h3 {
+            margin: 0 0 10px 0;
+            color: #1e293b;
+            font-size: 18px;
+        }
+        
+        .foundation-section > p {
+            margin: 0 0 20px 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+        
+        .font-families-grid,
+        .font-sizes-grid,
+        .font-weights-grid,
+        .line-heights-grid,
+        .letter-spacing-grid {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .font-family-item,
+        .font-size-item,
+        .font-weight-item,
+        .line-height-item,
+        .letter-spacing-item {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #374151;
+            font-size: 13px;
+        }
+        
+        .control-group input,
+        .control-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .semantic-elements {
+            display: grid;
+            gap: 30px;
+        }
+        
+        .semantic-element-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .element-header {
+            padding: 20px 25px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .element-header h3 {
+            margin: 0 0 5px 0;
+            color: #1e293b;
+            font-size: 16px;
+        }
+        
+        .element-header p {
+            margin: 0;
+            color: #64748b;
+            font-size: 13px;
+        }
+        
+        .element-controls {
+            padding: 20px 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+        
+        .element-preview {
+            padding: 20px 25px;
+            background: #f1f5f9;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .preview-label {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .text-preview {
+            background: white;
+            border: 2px dashed #cbd5e1;
+            border-radius: 6px;
+            padding: 15px;
+            font-size: 16px;
+            color: #1e293b;
+        }
     </style>
 
     <script>
-    function switchTab(tab) {
-        // Remove active class from all tab buttons
-        var tabs = document.querySelectorAll('.tab-button');
-        tabs.forEach(function(tabButton) {
-            tabButton.classList.remove('active');
-        });
-        
-        // Remove active class from all tab contents
-        var tabContents = document.querySelectorAll('.tab-content');
-        tabContents.forEach(function(tabContent) {
-            tabContent.classList.remove('active');
-        });
-        
-        // Add active class to clicked tab button
-        document.querySelector('.tab-button[data-tab="' + tab + '"]').classList.add('active');
-        
-        // Add active class to corresponding tab content
-        document.querySelector('#' + tab + '-tab').classList.add('active');
-    }
-    
-    function resetToDefaults() {
-        if (confirm('Reset all semantic elements to default settings?')) {
-            location.href = '<?php echo admin_url('admin.php?page=textbook&reset=1'); ?>';
-        }
-    }
-    
-    function generateCSS() {
-        // Trigger CSS generation
-        jQuery.post(ajaxurl, {
-            action: 'textbook_generate_css',
-            nonce: '<?php echo wp_create_nonce('textbook_nonce'); ?>'
-        }, function(response) {
-            alert('CSS generated successfully!');
-        });
-    }
-    
-    // Live preview updates
-    jQuery(document).ready(function($) {
-        // Update preview when any select changes
-        $('.element-controls select').on('change', function() {
-            console.log('Select changed');
-            var card = $(this).closest('.semantic-element-card');
-            var elementKey = getElementKeyFromCard(card);
-            updatePreview(card, elementKey);
-        });
-        
-        function getElementKeyFromCard(card) {
-            // Extract element key from the select name attribute
-            var selectName = card.find('select').first().attr('name');
-            var match = selectName.match(/semantic_elements\[([^\]]+)\]/);
-            return match ? match[1] : '';
-        }
-        
-        function updatePreview(card, elementKey) {
-            console.log('Updating preview for element:', elementKey);
-            var preview = card.find('.element-preview');
-            var previewElement = preview.find('h1, h2, h3, h4, h5, h6, p, span, div, label').first();
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabs = document.querySelectorAll('.textbook-nav-tabs .nav-tab');
+            const contents = document.querySelectorAll('.tab-content');
             
-            // Get current values from dropdowns
-            var tag = card.find('select[name*="[tag]"]').val();
-            var size = card.find('select[name*="[size]"]').val();
-            var weight = card.find('select[name*="[weight]"]').val();
-            var color = card.find('select[name*="[color]"]').val();
-            var transform = card.find('select[name*="[transform]"]').val();
-            var fontFamily = card.find('select[name*="[font_family]"]').val();
-            var line_height = card.find('select[name*="[line_height]"]').val();
-            var letterSpacing = card.find('select[name*="[letter_spacing]"]').val();
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('nav-tab-active'));
+                    contents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('nav-tab-active');
+                    
+                    // Show corresponding content
+                    const targetId = this.getAttribute('data-tab');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
             
-            // Get element label for preview text
-            var elementLabel = card.find('.element-header h3').text();
+            // Live preview updates
+            const controls = document.querySelectorAll('.element-controls select, .element-controls input');
             
-            // Create new element with updated attributes
-            var newElement = $('<' + tag + '>').addClass('text-' + size + ' font-' + weight + ' text-' + color + ' text-' + transform + ' letter-spacing-' + letterSpacing);
-            newElement.text('Text');
+            // Font size mapping
+            const fontSizes = {
+                'xs': '0.75rem',
+                'sm': '0.875rem', 
+                'md': '1rem',
+                'lg': '1.125rem',
+                'xl': '1.25rem',
+                'xxl': '1.5rem',
+                'xxxl': '2rem'
+            };
             
-            // Apply inline styles for immediate preview (since CSS variables might not be loaded)
-            var styles = getPreviewStyles(size, weight, color, transform, fontFamily, line_height, letterSpacing);
-            newElement.attr('style', styles);
+            // Font weight mapping
+            const fontWeights = {
+                '300': '300',
+                '400': '400',
+                '500': '500',
+                '600': '600',
+                '700': '700',
+                '800': '800',
+                '900': '900'
+            };
             
-            // Replace the preview element
-            preview.html(newElement);
-        }
-        
-        function getPreviewStyles(size, weight, color, transform, fontFamily, line_height, letterSpacing) {
-            var styles = [];
+            // Line height mapping
+            const lineHeights = {
+                'tight': '1.2',
+                'normal': '1.4',
+                'relaxed': '1.6',
+                'loose': '1.8'
+            };
             
-            // Font sizes from foundation settings
-            var sizeMap = {};
-            <?php 
-            $font_sizes = textbook_get_font_sizes();
-            foreach ($font_sizes as $size): 
-            ?>
-                sizeMap['<?php echo $size['slug']; ?>'] = '<?php echo $size['size']; ?>';
-            <?php endforeach; ?>
+            // Letter spacing mapping
+            const letterSpacing = {
+                'tight': '-0.025em',
+                'normal': '0',
+                'wide': '0.025em',
+                'wider': '0.05em',
+                'widest': '0.1em'
+            };
             
-            // Line heights from foundation settings
-            var lineHeightMap = {};
-            <?php 
-            $line_heights = textbook_get_line_heights();
-            foreach ($line_heights as $line_height): 
-            ?>
-                lineHeightMap['<?php echo $line_height['slug']; ?>'] = '<?php echo $line_height['height']; ?>';
-            <?php endforeach; ?>
+            // Font family mapping
+            const fontFamilies = {
+                'primary': 'Montserrat, sans-serif',
+                'secondary': 'Georgia, serif',
+                'mono': 'Monaco, monospace'
+            };
             
-            // Letter spacing from foundation settings
-            var letterSpacingMap = {};
-            <?php 
-            $letter_spacing = textbook_get_letter_spacing();
-            foreach ($letter_spacing as $spacing): 
-            ?>
-                letterSpacingMap['<?php echo $spacing['slug']; ?>'] = '<?php echo $spacing['spacing']; ?>';
-            <?php endforeach; ?>
+            // Color mapping - get actual color values from ColorBook
+            const colorValues = {
+                <?php
+                $colors = [];
+                if (function_exists('colorbook_get_current_colors')) {
+                    $colorbook_colors = colorbook_get_current_colors();
+                    foreach ($colorbook_colors as $color) {
+                        // Use OKLCH if available, otherwise hex
+                        if (isset($color['oklch']) && is_array($color['oklch'])) {
+                            $oklch = $color['oklch'];
+                            $color_value = "oklch({$oklch[0]}% {$oklch[1]} {$oklch[2]})";
+                        } else {
+                            $color_value = $color['hex'] ?? 'oklch(66% 0 0)';
+                        }
+                        $colors[] = "'{$color['slug']}': '{$color_value}'";
+                    }
+                } else {
+                    // Fallback colors with OKLCH values
+                    $colors = [
+                        "'primary': 'oklch(56% 0.064 194)'",
+                        "'secondary': 'oklch(60% 0.089 64)'", 
+                        "'base-darkest': 'oklch(35% 0 0)'",
+                        "'base-dark': 'oklch(50% 0 0)'",
+                        "'base': 'oklch(66% 0 0)'",
+                        "'base-light': 'oklch(80% 0 0)'",
+                        "'base-white': 'oklch(100% 0 0)'"
+                    ];
+                }
+                echo implode(",\n                ", $colors);
+                ?>
+            };
             
-            // Color values (actual ColorBook colors)
-            var colorMap = {};
-            <?php if (function_exists('colorbook_get_current_colors')): ?>
-                <?php $colors = colorbook_get_current_colors(); ?>
-                <?php foreach ($colors as $color): ?>
-                    colorMap['<?php echo $color['slug']; ?>'] = '<?php echo $color['hex']; ?>';
-                <?php endforeach; ?>
-            <?php endif; ?>
+            controls.forEach(control => {
+                control.addEventListener('change', function() {
+                    const element = this.closest('.semantic-element-item');
+                    const preview = element.querySelector('.text-preview');
+                    
+                    if (!preview) return;
+                    
+                    // Update preview styles based on control type
+                    if (this.name.includes('font_family')) {
+                        preview.style.fontFamily = fontFamilies[this.value] || fontFamilies['primary'];
+                    } else if (this.name.includes('size')) {
+                        preview.style.fontSize = fontSizes[this.value] || fontSizes['md'];
+                    } else if (this.name.includes('weight')) {
+                        preview.style.fontWeight = fontWeights[this.value] || fontWeights['400'];
+                    } else if (this.name.includes('line_height')) {
+                        preview.style.lineHeight = lineHeights[this.value] || lineHeights['normal'];
+                    } else if (this.name.includes('letter_spacing')) {
+                        preview.style.letterSpacing = letterSpacing[this.value] || letterSpacing['normal'];
+                    } else if (this.name.includes('transform')) {
+                        preview.style.textTransform = this.value;
+                    } else if (this.name.includes('color')) {
+                        preview.style.color = colorValues[this.value];
+                    }
+                    
+                    // Auto-save changes after a short delay
+                    clearTimeout(window.textbookSaveTimeout);
+                    window.textbookSaveTimeout = setTimeout(function() {
+                        autoSaveTextbookSettings();
+                    }, 1000); // 1 second delay
+                });
+            });
             
-            // Fallback colors if ColorBook not available
-            if (Object.keys(colorMap).length === 0) {
-                colorMap = {
-                    'primary': '#5a7f80',
-                    'secondary': '#a36b57',
-                    'base-darkest': '#4d4d4d',
-                    'base-dark': '#737373',
-                    'base': '#a3a3a3',
-                    'base-light': '#d4d4d4',
-                    'base-white': '#ffffff'
-                };
+            // Auto-save function
+            function autoSaveTextbookSettings() {
+                const formData = new FormData(document.getElementById('textbook-semantic-form'));
+                formData.append('action', 'textbook_auto_save');
+                formData.append('nonce', '<?php echo wp_create_nonce('textbook_nonce'); ?>');
+                
+                fetch(ajaxurl, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Show brief success indicator
+                        showSaveIndicator('Auto-saved');
+                    }
+                })
+                .catch(error => {
+                    console.log('Auto-save failed:', error);
+                });
             }
             
-            // Font family values from foundation settings
-            var fontFamilyMap = {};
-            <?php 
-            $font_families = textbook_get_font_families();
-            foreach ($font_families as $family): 
-            ?>
-                fontFamilyMap['<?php echo $family['slug']; ?>'] = '<?php echo $family['fontFamily']; ?>';
-            <?php endforeach; ?>
-            
-            styles.push('font-size: ' + (sizeMap[size] || '1rem'));
-            styles.push('font-weight: ' + weight);
-            styles.push('color: ' + (colorMap[color] || '#1f2937'));
-            styles.push('text-transform: ' + transform);
-            styles.push('font-family: ' + (fontFamilyMap[fontFamily] || 'Inter, sans-serif'));
-            styles.push('line-height: ' + (lineHeightMap[line_height] || '1.4'));
-            styles.push('margin: 0');
-            styles.push('letter-spacing: ' + (letterSpacingMap[letterSpacing] || '0'));
-            
-            return styles.join('; ');
+            // Show save indicator
+            function showSaveIndicator(message) {
+                let indicator = document.getElementById('textbook-save-indicator');
+                if (!indicator) {
+                    indicator = document.createElement('div');
+                    indicator.id = 'textbook-save-indicator';
+                    indicator.style.cssText = 'position: fixed; top: 32px; right: 20px; background: #00a32a; color: white; padding: 8px 12px; border-radius: 4px; font-size: 12px; z-index: 9999; opacity: 0; transition: opacity 0.3s;';
+                    document.body.appendChild(indicator);
+                }
+                
+                indicator.textContent = message;
+                indicator.style.opacity = '1';
+                
+                setTimeout(() => {
+                    indicator.style.opacity = '0';
+                }, 2000);
+            }
+        });
+        
+        function textbook_reset_semantic() {
+            if (confirm('Reset all semantic elements to defaults?')) {
+                location.reload();
+            }
         }
-    });
+        
+        function textbook_generate_css() {
+            const data = new FormData();
+            data.append('action', 'textbook_generate_css');
+            data.append('nonce', '<?php echo wp_create_nonce('textbook_nonce'); ?>');
+            
+            fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
+                method: 'POST',
+                body: data
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('CSS generated successfully!');
+                } else {
+                    alert('Error generating CSS');
+                }
+            });
+        }
     </script>
     <?php
 }
@@ -1183,12 +1265,29 @@ function textbook_generate_semantic_css() {
     $semantic_elements = textbook_get_current_semantic_settings();
     $css = "/* TextBook Semantic Elements CSS */\n\n";
     
+    // Get colors from ColorBook for direct OKLCH usage
+    $colorbook_colors = [];
+    if (function_exists('colorbook_get_current_colors')) {
+        $colors = colorbook_get_current_colors();
+        foreach ($colors as $color) {
+            $colorbook_colors[$color['slug']] = $color['oklch'];
+        }
+    }
+    
     foreach ($semantic_elements as $element_key => $element) {
         $css .= ".semantic-{$element_key} {\n";
         $css .= "    font-size: var(--text-{$element['size']}-size);\n";
         $css .= "    line-height: var(--text-{$element['size']}-line-height);\n";
         $css .= "    font-weight: var(--font-weight-{$element['weight']});\n";
-        $css .= "    color: var(--wp--custom--color--{$element['color']});\n";
+        
+        // Use OKLCH color directly from ColorBook
+        if (isset($colorbook_colors[$element['color']])) {
+            $css .= "    color: {$colorbook_colors[$element['color']]};\n";
+        } else {
+            // Fallback to CSS custom property
+            $css .= "    color: var(--wp--custom--color--{$element['color']});\n";
+        }
+        
         $css .= "    text-transform: {$element['transform']};\n";
         $css .= "    font-family: var(--wp--custom--typography--font-family--{$element['font_family']});\n";
         $css .= "    letter-spacing: var(--letter-spacing-{$element['letter_spacing']});\n";
@@ -1250,6 +1349,17 @@ function textbook_ajax_generate_css() {
     
     textbook_generate_semantic_css();
     wp_send_json_success('CSS generated successfully');
+}
+
+// AJAX handler for auto-save
+add_action('wp_ajax_textbook_auto_save', 'textbook_ajax_auto_save');
+function textbook_ajax_auto_save() {
+    if (!wp_verify_nonce($_POST['nonce'], 'textbook_nonce')) {
+        wp_die('Security check failed');
+    }
+    
+    textbook_save_semantic_settings();
+    wp_send_json_success('Settings auto-saved');
 }
 
 // Helper functions for backward compatibility

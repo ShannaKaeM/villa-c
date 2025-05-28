@@ -91,6 +91,31 @@ function design_system_dashboard() {
                             ?>
                         </div>
                     </a>
+                    
+                    <a href="<?php echo admin_url('admin.php?page=compbook'); ?>" class="book-card compbook">
+                        <div class="book-icon">🧩</div>
+                        <h3>CompBook</h3>
+                        <p>Component configuration and management</p>
+                        <div class="book-status">
+                            <?php 
+                            if (function_exists('compbook_get_categories')) {
+                                try {
+                                    $categories = compbook_get_categories();
+                                    $component_count = 0;
+                                    foreach ($categories as $category) {
+                                        $component_count += count($category['components']);
+                                    }
+                                    $component_text = $component_count === 1 ? 'component' : 'components';
+                                    echo $component_count . ' ' . $component_text . ' available';
+                                } catch (Exception $e) {
+                                    echo 'Error: ' . $e->getMessage();
+                                }
+                            } else {
+                                echo 'Ready to configure';
+                            }
+                            ?>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -252,6 +277,11 @@ function design_system_dashboard() {
             background: #dcfce7;
             color: #166534;
         }
+        
+        .book-card.compbook .book-status {
+            background: #f7d2c4;
+            color: #7a3e58;
+        }
     </style>
 
     <script>
@@ -286,6 +316,7 @@ function update_books_as_submenus() {
     remove_menu_page('colorbook');
     remove_menu_page('textbook');
     remove_menu_page('layoutbook');
+    remove_menu_page('compbook');
     
     // Add Foundation Books as submenus
     add_submenu_page(
@@ -294,7 +325,7 @@ function update_books_as_submenus() {
         '🎨 ColorBook',
         'manage_options',
         'colorbook',
-        'colorbook_admin_page'
+        'colorbook_render_page'
     );
     
     add_submenu_page(
@@ -313,5 +344,14 @@ function update_books_as_submenus() {
         'manage_options',
         'layoutbook',
         'layoutbook_admin_page'
+    );
+    
+    add_submenu_page(
+        'design-system',
+        'CompBook',
+        '🧩 CompBook',
+        'manage_options',
+        'compbook',
+        'compbook_admin_page'
     );
 }
