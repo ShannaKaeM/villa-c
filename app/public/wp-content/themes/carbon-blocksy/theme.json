@@ -162,6 +162,102 @@
                     "slug": "xxxl",
                     "size": "4rem"
                 }
+            ],
+            "fontWeights": [
+                {
+                    "name": "Extra Light",
+                    "slug": "extra-light",
+                    "weight": "200"
+                },
+                {
+                    "name": "Light",
+                    "slug": "light",
+                    "weight": "300"
+                },
+                {
+                    "name": "Regular",
+                    "slug": "regular",
+                    "weight": "400"
+                },
+                {
+                    "name": "Medium",
+                    "slug": "medium",
+                    "weight": "500"
+                },
+                {
+                    "name": "Semi Bold",
+                    "slug": "semi-bold",
+                    "weight": "600"
+                },
+                {
+                    "name": "Bold",
+                    "slug": "bold",
+                    "weight": "700"
+                },
+                {
+                    "name": "Extra Bold",
+                    "slug": "extra-bold",
+                    "weight": "800"
+                },
+                {
+                    "name": "Black",
+                    "slug": "black",
+                    "weight": "900"
+                }
+            ],
+            "lineHeights": [
+                {
+                    "name": "Tight",
+                    "slug": "tight",
+                    "height": "1.1"
+                },
+                {
+                    "name": "Snug",
+                    "slug": "snug",
+                    "height": "1.2"
+                },
+                {
+                    "name": "Normal",
+                    "slug": "normal",
+                    "height": "1.4"
+                },
+                {
+                    "name": "Relaxed",
+                    "slug": "relaxed",
+                    "height": "1.6"
+                },
+                {
+                    "name": "Loose",
+                    "slug": "loose",
+                    "height": "1.8"
+                }
+            ],
+            "letterSpacing": [
+                {
+                    "name": "Tight",
+                    "slug": "tight",
+                    "spacing": "-0.05em"
+                },
+                {
+                    "name": "Normal",
+                    "slug": "normal",
+                    "spacing": "0"
+                },
+                {
+                    "name": "Wide",
+                    "slug": "wide",
+                    "spacing": "0.1em"
+                },
+                {
+                    "name": "Wider",
+                    "slug": "wider",
+                    "spacing": "0.175em"
+                },
+                {
+                    "name": "Widest",
+                    "slug": "widest",
+                    "spacing": "0.2em"
+                }
             ]
         },
         "spacing": {
@@ -238,27 +334,6 @@
                     "medium": 1.3999999999999999,
                     "normal": 1.6000000000000001
                 }
-            },
-            "ui": {
-                "--ui-card-padding-x": "2rem",
-                "--ui-card-padding-y": "1.5rem",
-                "--ui-card-radius": "12px",
-                "--ui-card-shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-                "--ui-card-spacing": "0.75rem",
-                "--ui-button-width": "auto",
-                "--ui-button-padding-x": "1rem",
-                "--ui-button-padding-y": "0.5rem",
-                "--ui-button-radius": "6px",
-                "--ui-tag-style1-radius": "20px",
-                "--ui-tag-style1-padding-x": "0.75rem",
-                "--ui-tag-style1-padding-y": "0.25rem",
-                "--ui-tag-style2-radius": "6px",
-                "--ui-tag-style2-padding-x": "0.5rem",
-                "--ui-tag-style2-padding-y": "0.25rem",
-                "--ui-tag-spacing": "0.5rem",
-                "--ui-grid-gap": "1.5rem",
-                "--ui-content-spacing": "1rem",
-                "--ui-section-padding": "4rem"
             }
         }
     },

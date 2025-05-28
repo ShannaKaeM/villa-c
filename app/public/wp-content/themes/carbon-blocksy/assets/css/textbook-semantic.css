@@ -3,11 +3,11 @@
 .semantic-pretitle {
     font-size: var(--text-sm-size);
     line-height: var(--text-sm-line-height);
-    font-weight: var(--font-weight-500);
-    color: var(--wp--custom--color--primary-dark);
+    font-weight: var(--font-weight-600);
+    color: var(--wp--custom--color--primary);
     text-transform: uppercase;
-    font-family: var(--wp--custom--typography--font-family--primary);
-    letter-spacing: var(--letter-spacing-wide);
+    font-family: var(--wp--custom--typography--font-family--inter);
+    letter-spacing: var(--letter-spacing-wider);
 }
 
 .semantic-pretitle.text-xs {
@@ -51,7 +51,7 @@
     font-weight: var(--font-weight-600);
     color: var(--wp--custom--color--base-darkest);
     text-transform: capitalize;
-    font-family: var(--wp--custom--typography--font-family--primary);
+    font-family: var(--wp--custom--typography--font-family--inter);
     letter-spacing: var(--letter-spacing-wide);
 }
 
@@ -96,7 +96,7 @@
     font-weight: var(--font-weight-500);
     color: var(--wp--custom--color--base-dark);
     text-transform: none;
-    font-family: var(--wp--custom--typography--font-family--primary);
+    font-family: var(--wp--custom--typography--font-family--inter);
     letter-spacing: var(--letter-spacing-normal);
 }
 
@@ -141,7 +141,7 @@
     font-weight: var(--font-weight-400);
     color: var(--wp--custom--color--base-dark);
     text-transform: none;
-    font-family: var(--wp--custom--typography--font-family--primary);
+    font-family: var(--wp--custom--typography--font-family--inter);
     letter-spacing: var(--letter-spacing-normal);
 }
 
@@ -184,9 +184,9 @@
     font-size: var(--text-md-size);
     line-height: var(--text-md-line-height);
     font-weight: var(--font-weight-400);
-    color: var(--wp--custom--color--primary-light);
+    color: var(--wp--custom--color--base-dark);
     text-transform: none;
-    font-family: var(--wp--custom--typography--font-family--primary);
+    font-family: var(--wp--custom--typography--font-family--inter);
     letter-spacing: var(--letter-spacing-normal);
 }
 
@@ -230,9 +230,9 @@
     line-height: var(--text-sm-line-height);
     font-weight: var(--font-weight-600);
     color: var(--wp--custom--color--primary-light);
-    text-transform: lowercase;
-    font-family: var(--wp--custom--typography--font-family--primary);
-    letter-spacing: var(--letter-spacing-normal);
+    text-transform: uppercase;
+    font-family: var(--wp--custom--typography--font-family--inter);
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 .semantic-button.text-xs {
@@ -274,9 +274,9 @@
     font-size: var(--text-xs-size);
     line-height: var(--text-xs-line-height);
     font-weight: var(--font-weight-400);
-    color: var(--wp--custom--color--primary-light);
+    color: var(--wp--custom--color--base-dark);
     text-transform: none;
-    font-family: var(--wp--custom--typography--font-family--primary);
+    font-family: var(--wp--custom--typography--font-family--inter);
     letter-spacing: var(--letter-spacing-normal);
 }
 
@@ -319,9 +319,9 @@
     font-size: var(--text-sm-size);
     line-height: var(--text-sm-line-height);
     font-weight: var(--font-weight-500);
-    color: var(--wp--custom--color--primary-light);
+    color: var(--wp--custom--color--base-dark);
     text-transform: none;
-    font-family: var(--wp--custom--typography--font-family--primary);
+    font-family: var(--wp--custom--typography--font-family--inter);
     letter-spacing: var(--letter-spacing-normal);
 }
 

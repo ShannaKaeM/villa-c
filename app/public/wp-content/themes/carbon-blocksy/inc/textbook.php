@@ -140,13 +140,35 @@ function textbook_get_options() {
         $family_slugs[] = $family['slug'];
     }
     
+    // Get font weights from foundation settings
+    $font_weights = textbook_get_font_weights();
+    $weight_values = [];
+    foreach ($font_weights as $weight) {
+        $weight_values[] = $weight['weight'];
+    }
+    
+    // Get line heights from foundation settings
+    $line_heights = textbook_get_line_heights();
+    $line_height_slugs = [];
+    foreach ($line_heights as $line_height) {
+        $line_height_slugs[] = $line_height['slug'];
+    }
+    
+    // Get letter spacing from foundation settings
+    $letter_spacing = textbook_get_letter_spacing();
+    $letter_spacing_slugs = [];
+    foreach ($letter_spacing as $spacing) {
+        $letter_spacing_slugs[] = $spacing['slug'];
+    }
+    
     return [
         'sizes' => $size_slugs,
-        'weights' => [300, 400, 500, 600, 700, 800, 900],
+        'weights' => $weight_values,
         'transforms' => ['none', 'uppercase', 'lowercase', 'capitalize'],
         'tags' => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'div', 'label'],
         'font_families' => $family_slugs,
-        'letter_spacing' => ['normal', 'wide', 'tight'],
+        'line_heights' => $line_height_slugs,
+        'letter_spacing' => $letter_spacing_slugs,
         'colors' => $colors
     ];
 }
@@ -217,6 +239,117 @@ function textbook_get_font_sizes() {
     return $font_sizes;
 }
 
+// Get font weights
+function textbook_get_font_weights() {
+    $font_weights = get_option('textbook_font_weights', [
+        [
+            'name' => 'Extra Light',
+            'slug' => 'extra-light',
+            'weight' => '200'
+        ],
+        [
+            'name' => 'Light',
+            'slug' => 'light',
+            'weight' => '300'
+        ],
+        [
+            'name' => 'Regular',
+            'slug' => 'regular',
+            'weight' => '400'
+        ],
+        [
+            'name' => 'Medium',
+            'slug' => 'medium',
+            'weight' => '500'
+        ],
+        [
+            'name' => 'Semi Bold',
+            'slug' => 'semi-bold',
+            'weight' => '600'
+        ],
+        [
+            'name' => 'Bold',
+            'slug' => 'bold',
+            'weight' => '700'
+        ],
+        [
+            'name' => 'Extra Bold',
+            'slug' => 'extra-bold',
+            'weight' => '800'
+        ],
+        [
+            'name' => 'Black',
+            'slug' => 'black',
+            'weight' => '900'
+        ]
+    ]);
+    return $font_weights;
+}
+
+// Get line heights
+function textbook_get_line_heights() {
+    $line_heights = get_option('textbook_line_heights', [
+        [
+            'name' => 'Tight',
+            'slug' => 'tight',
+            'height' => '1.1'
+        ],
+        [
+            'name' => 'Snug',
+            'slug' => 'snug',
+            'height' => '1.2'
+        ],
+        [
+            'name' => 'Normal',
+            'slug' => 'normal',
+            'height' => '1.4'
+        ],
+        [
+            'name' => 'Relaxed',
+            'slug' => 'relaxed',
+            'height' => '1.6'
+        ],
+        [
+            'name' => 'Loose',
+            'slug' => 'loose',
+            'height' => '1.8'
+        ]
+    ]);
+    return $line_heights;
+}
+
+// Get letter spacing
+function textbook_get_letter_spacing() {
+    $letter_spacing = get_option('textbook_letter_spacing', [
+        [
+            'name' => 'Tight',
+            'slug' => 'tight',
+            'spacing' => '-0.05em'
+        ],
+        [
+            'name' => 'Normal',
+            'slug' => 'normal',
+            'spacing' => '0'
+        ],
+        [
+            'name' => 'Wide',
+            'slug' => 'wide',
+            'spacing' => '0.05em'
+        ],
+        [
+            'name' => 'Wider',
+            'slug' => 'wider',
+            'spacing' => '0.1em'
+        ],
+        [
+            'name' => 'Widest',
+            'slug' => 'widest',
+            'spacing' => '0.15em'
+        ]
+    ]);
+    return $letter_spacing;
+}
+
 // Get font size value by slug
 function textbook_get_font_size_value($slug) {
     $font_sizes = textbook_get_font_sizes();
@@ -239,6 +372,39 @@ function textbook_get_font_family_value($slug) {
     return 'Inter, sans-serif'; // fallback
 }
 
+// Get font weight value by slug
+function textbook_get_font_weight_value($slug) {
+    $font_weights = textbook_get_font_weights();
+    foreach ($font_weights as $weight) {
+        if ($weight['slug'] === $slug) {
+            return $weight['weight'];
+        }
+    }
+    return '400'; // fallback
+}
+
+// Get line height value by slug
+function textbook_get_line_height_value($slug) {
+    $line_heights = textbook_get_line_heights();
+    foreach ($line_heights as $line_height) {
+        if ($line_height['slug'] === $slug) {
+            return $line_height['height'];
+        }
+    }
+    return '1.4'; // fallback
+}
+
+// Get letter spacing value by slug
+function textbook_get_letter_spacing_value($slug) {
+    $letter_spacing = textbook_get_letter_spacing();
+    foreach ($letter_spacing as $spacing) {
+        if ($spacing['slug'] === $slug) {
+            return $spacing['spacing'];
+        }
+    }
+    return '0'; // fallback
+}
+
 // TextBook admin page
 function textbook_admin_page() {
     // Handle form submission
@@ -256,6 +422,9 @@ function textbook_admin_page() {
     $options = textbook_get_options();
     $font_families = textbook_get_font_families();
     $font_sizes = textbook_get_font_sizes();
+    $font_weights = textbook_get_font_weights();
+    $line_heights = textbook_get_line_heights();
+    $letter_spacing = textbook_get_letter_spacing();
     ?>
     <div class="wrap textbook-admin">
         <h1>📖 TextBook - Typography System</h1>
@@ -325,6 +494,78 @@ function textbook_admin_page() {
                                 <div class="size-preview" style="font-size: <?php echo esc_attr($size['size']); ?>; padding: 0.75rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px; line-height: 1.2;">
                                     Text
                                 </div>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    
+                    <!-- Font Weights Section -->
+                    <div class="foundation-section">
+                        <h2>⚖️ Font Weights</h2>
+                        <div class="font-weights-grid">
+                            <?php 
+                            foreach ($font_weights as $index => $weight): 
+                            ?>
+                            <div class="font-weight-item">
+                                <label>Weight Name</label>
+                                <input type="text" name="font_weights[<?php echo $index; ?>][name]" 
+                                       value="<?php echo esc_attr($weight['name']); ?>" placeholder="Regular">
+                                
+                                <label>Slug</label>
+                                <input type="text" name="font_weights[<?php echo $index; ?>][slug]" 
+                                       value="<?php echo esc_attr($weight['slug']); ?>" placeholder="regular">
+                                
+                                <label>Weight Value</label>
+                                <input type="text" name="font_weights[<?php echo $index; ?>][weight]" 
+                                       value="<?php echo esc_attr($weight['weight']); ?>" placeholder="400">
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    
+                    <!-- Line Heights Section -->
+                    <div class="foundation-section">
+                        <h2>📈 Line Heights</h2>
+                        <div class="line-heights-grid">
+                            <?php 
+                            foreach ($line_heights as $index => $line_height): 
+                            ?>
+                            <div class="line-height-item">
+                                <label>Line Height Name</label>
+                                <input type="text" name="line_heights[<?php echo $index; ?>][name]" 
+                                       value="<?php echo esc_attr($line_height['name']); ?>" placeholder="Normal">
+                                
+                                <label>Slug</label>
+                                <input type="text" name="line_heights[<?php echo $index; ?>][slug]" 
+                                       value="<?php echo esc_attr($line_height['slug']); ?>" placeholder="normal">
+                                
+                                <label>Line Height Value</label>
+                                <input type="text" name="line_heights[<?php echo $index; ?>][height]" 
+                                       value="<?php echo esc_attr($line_height['height']); ?>" placeholder="1.4">
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    
+                    <!-- Letter Spacing Section -->
+                    <div class="foundation-section">
+                        <h2>📊 Letter Spacing</h2>
+                        <div class="letter-spacing-grid">
+                            <?php 
+                            foreach ($letter_spacing as $index => $spacing): 
+                            ?>
+                            <div class="letter-spacing-item">
+                                <label>Letter Spacing Name</label>
+                                <input type="text" name="letter_spacing[<?php echo $index; ?>][name]" 
+                                       value="<?php echo esc_attr($spacing['name']); ?>" placeholder="Normal">
+                                
+                                <label>Slug</label>
+                                <input type="text" name="letter_spacing[<?php echo $index; ?>][slug]" 
+                                       value="<?php echo esc_attr($spacing['slug']); ?>" placeholder="normal">
+                                
+                                <label>Letter Spacing Value</label>
+                                <input type="text" name="letter_spacing[<?php echo $index; ?>][spacing]" 
+                                       value="<?php echo esc_attr($spacing['spacing']); ?>" placeholder="0">
                             </div>
                             <?php endforeach; ?>
                         </div>
@@ -426,6 +667,18 @@ function textbook_admin_page() {
                                     </td>
                                 </tr>
                                 <tr>
+                                    <th>Line Height</th>
+                                    <td>
+                                        <select name="semantic_elements[<?php echo $element_key; ?>][line_height]">
+                                            <?php foreach ($options['line_heights'] as $line_height): ?>
+                                                <option value="<?php echo $line_height; ?>" <?php selected($element['line_height'], $line_height); ?>>
+                                                    <?php echo ucfirst($line_height); ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <th>Letter Spacing</th>
                                     <td>
                                         <select name="semantic_elements[<?php echo $element_key; ?>][letter_spacing]">
@@ -443,7 +696,7 @@ function textbook_admin_page() {
                         <div class="element-preview">
                             <<?php echo $element['tag']; ?> 
                                 class="text-<?php echo $element['size']; ?> font-<?php echo $element['weight']; ?> text-<?php echo $element['color']; ?> text-<?php echo $element['transform']; ?> letter-spacing-<?php echo $element['letter_spacing']; ?>"
-                                style="font-size: <?php echo textbook_get_font_size_value($element['size']); ?>; font-family: <?php echo textbook_get_font_family_value($element['font_family']); ?>; font-weight: <?php echo $element['weight']; ?>; text-transform: <?php echo $element['transform']; ?>;">
+                                style="font-size: <?php echo textbook_get_font_size_value($element['size']); ?>; font-family: <?php echo textbook_get_font_family_value($element['font_family']); ?>; font-weight: <?php echo textbook_get_font_weight_value($element['weight']); ?>; text-transform: <?php echo $element['transform']; ?>; line-height: <?php echo textbook_get_line_height_value($element['line_height']); ?>; letter-spacing: <?php echo textbook_get_letter_spacing_value($element['letter_spacing']); ?>;">
                                 Text
                             </<?php echo $element['tag']; ?>>
                         </div>
@@ -558,6 +811,45 @@ function textbook_admin_page() {
         border: 1px solid #ddd;
         border-radius: 4px;
         margin: 0.5rem 0;
+    }
+    
+    .font-weights-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+    
+    .font-weight-item {
+        background: #f9f9f9;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    
+    .line-heights-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+    
+    .line-height-item {
+        background: #f9f9f9;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    
+    .letter-spacing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+    
+    .letter-spacing-item {
+        background: #f9f9f9;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
     }
     
     .textbook-grid {
@@ -702,6 +994,7 @@ function textbook_admin_page() {
             var color = card.find('select[name*="[color]"]').val();
             var transform = card.find('select[name*="[transform]"]').val();
             var fontFamily = card.find('select[name*="[font_family]"]').val();
+            var line_height = card.find('select[name*="[line_height]"]').val();
             var letterSpacing = card.find('select[name*="[letter_spacing]"]').val();
             
             // Get element label for preview text
@@ -712,26 +1005,42 @@ function textbook_admin_page() {
             newElement.text('Text');
             
             // Apply inline styles for immediate preview (since CSS variables might not be loaded)
-            var styles = getPreviewStyles(size, weight, color, transform, fontFamily, letterSpacing);
+            var styles = getPreviewStyles(size, weight, color, transform, fontFamily, line_height, letterSpacing);
             newElement.attr('style', styles);
             
             // Replace the preview element
             preview.html(newElement);
         }
         
-        function getPreviewStyles(size, weight, color, transform, fontFamily, letterSpacing) {
+        function getPreviewStyles(size, weight, color, transform, fontFamily, line_height, letterSpacing) {
             var styles = [];
             
-            // Font sizes (approximate values for preview)
-            var sizeMap = {
-                'xs': '0.75rem',
-                'sm': '0.875rem', 
-                'md': '1rem',
-                'lg': '1.125rem',
-                'xl': '1.25rem',
-                'xxl': '1.5rem',
-                'xxxl': '2rem'
-            };
+            // Font sizes from foundation settings
+            var sizeMap = {};
+            <?php 
+            $font_sizes = textbook_get_font_sizes();
+            foreach ($font_sizes as $size): 
+            ?>
+                sizeMap['<?php echo $size['slug']; ?>'] = '<?php echo $size['size']; ?>';
+            <?php endforeach; ?>
+            
+            // Line heights from foundation settings
+            var lineHeightMap = {};
+            <?php 
+            $line_heights = textbook_get_line_heights();
+            foreach ($line_heights as $line_height): 
+            ?>
+                lineHeightMap['<?php echo $line_height['slug']; ?>'] = '<?php echo $line_height['height']; ?>';
+            <?php endforeach; ?>
+            
+            // Letter spacing from foundation settings
+            var letterSpacingMap = {};
+            <?php 
+            $letter_spacing = textbook_get_letter_spacing();
+            foreach ($letter_spacing as $spacing): 
+            ?>
+                letterSpacingMap['<?php echo $spacing['slug']; ?>'] = '<?php echo $spacing['spacing']; ?>';
+            <?php endforeach; ?>
             
             // Color values (actual ColorBook colors)
             var colorMap = {};
@@ -749,29 +1058,29 @@ function textbook_admin_page() {
                     'secondary': '#a36b57',
                     'base-darkest': '#4d4d4d',
                     'base-dark': '#737373',
-                    'base': '#9c9c9c',
-                    'base-light': '#bfbfbf',
+                    'base': '#a3a3a3',
+                    'base-light': '#d4d4d4',
                     'base-white': '#ffffff'
                 };
             }
             
-            // Letter spacing values
-            var letterSpacingMap = {
-                'normal': '0',
-                'wide': '0.05em',
-                'tight': '-0.05em'
-            };
+            // Font family values from foundation settings
+            var fontFamilyMap = {};
+            <?php 
+            $font_families = textbook_get_font_families();
+            foreach ($font_families as $family): 
+            ?>
+                fontFamilyMap['<?php echo $family['slug']; ?>'] = '<?php echo $family['fontFamily']; ?>';
+            <?php endforeach; ?>
             
-            styles.push('font-size: ' + textbook_get_font_size_value(size));
+            styles.push('font-size: ' + (sizeMap[size] || '1rem'));
             styles.push('font-weight: ' + weight);
             styles.push('color: ' + (colorMap[color] || '#1f2937'));
             styles.push('text-transform: ' + transform);
-            styles.push('font-family: ' + textbook_get_font_family_value(fontFamily));
-            styles.push('line-height: 1.4');
+            styles.push('font-family: ' + (fontFamilyMap[fontFamily] || 'Inter, sans-serif'));
+            styles.push('line-height: ' + (lineHeightMap[line_height] || '1.4'));
             styles.push('margin: 0');
             styles.push('letter-spacing: ' + (letterSpacingMap[letterSpacing] || '0'));
-            
-            console.log('Preview styles:', styles.join('; '));
             
             return styles.join('; ');
         }
@@ -795,23 +1104,29 @@ function textbook_save_semantic_settings() {
 
 // Save foundation settings
 function textbook_save_foundation_settings() {
-    if (!isset($_POST['font_families']) || !isset($_POST['font_sizes'])) {
+    if (!isset($_POST['font_families']) || !isset($_POST['font_sizes']) || !isset($_POST['font_weights']) || !isset($_POST['line_heights']) || !isset($_POST['letter_spacing'])) {
         return;
     }
     
     $font_families = $_POST['font_families'];
     $font_sizes = $_POST['font_sizes'];
+    $font_weights = $_POST['font_weights'];
+    $line_heights = $_POST['line_heights'];
+    $letter_spacing = $_POST['letter_spacing'];
     
     // Save to WordPress options
     update_option('textbook_font_families', $font_families);
     update_option('textbook_font_sizes', $font_sizes);
+    update_option('textbook_font_weights', $font_weights);
+    update_option('textbook_line_heights', $line_heights);
+    update_option('textbook_letter_spacing', $letter_spacing);
     
     // Save to theme.json
-    textbook_update_theme_json($font_families, $font_sizes);
+    textbook_update_theme_json($font_families, $font_sizes, $font_weights, $line_heights, $letter_spacing);
 }
 
 // Update theme.json with foundation settings
-function textbook_update_theme_json($font_families, $font_sizes) {
+function textbook_update_theme_json($font_families, $font_sizes, $font_weights, $line_heights, $letter_spacing) {
     $theme_json_path = get_stylesheet_directory() . '/theme.json';
     
     // Read existing theme.json
@@ -834,6 +1149,15 @@ function textbook_update_theme_json($font_families, $font_sizes) {
     
     // Update font sizes
     $theme_json['settings']['typography']['fontSizes'] = $font_sizes;
+    
+    // Update font weights
+    $theme_json['settings']['typography']['fontWeights'] = $font_weights;
+    
+    // Update line heights
+    $theme_json['settings']['typography']['lineHeights'] = $line_heights;
+    
+    // Update letter spacing
+    $theme_json['settings']['typography']['letterSpacing'] = $letter_spacing;
     
     // Save theme.json
     file_put_contents($theme_json_path, json_encode($theme_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
