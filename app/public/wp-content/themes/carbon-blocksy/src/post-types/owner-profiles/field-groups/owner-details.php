@@ -19,6 +19,10 @@ carbon_create_post_meta_with_tabs($post_type_slug, 'Owner Profile Details', [
     'basic_info' => [
         'label' => 'Basic Information',
         'fields' => [
+            Field::make('image', 'profile_avatar', 'Profile Avatar')
+                ->set_width(100)
+                ->set_help_text('Upload a profile photo or avatar image')
+                ->set_value_type('url'),
             Field::make('text', 'first_name', 'First Name')
                 ->set_width(50)
                 ->set_required(true),

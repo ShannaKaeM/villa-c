@@ -62,6 +62,13 @@ function carbon_render_portal_dashboard() {
                 <div class="stat-card">
                     <h3>My Profile</h3>
                     <?php if ($owner_profile): ?>
+                        <?php 
+                        $avatar_url = carbon_get_post_meta($owner_profile->ID, 'profile_avatar');
+                        if ($avatar_url): ?>
+                            <div class="profile-avatar" style="margin-bottom: 15px;">
+                                <img src="<?php echo esc_url($avatar_url); ?>" alt="Profile Avatar" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #ddd;">
+                            </div>
+                        <?php endif; ?>
                         <p><strong>Status:</strong> <?php echo esc_html(carbon_get_post_meta($owner_profile->ID, 'owner_status')); ?></p>
                         <p><strong>Owned Villas:</strong> <?php echo count(carbon_get_post_meta($owner_profile->ID, 'owned_villas')); ?></p>
                         <a href="<?php echo admin_url('post.php?post=' . $owner_profile->ID . '&action=edit'); ?>" class="button">Edit Profile</a>

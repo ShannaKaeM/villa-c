@@ -83,6 +83,10 @@ function carbon_generate_sample_portal_data() {
                     // Link user to profile
                     carbon_set_post_meta($profile_id, 'linked_user', [$user_id]);
                     
+                    // Profile avatar - use the secondary avatar as default
+                    $avatar_url = get_stylesheet_directory_uri() . '/miDocs/SITE DATA/Images/Branding/Avatars/avatar-secondary.png';
+                    carbon_set_post_meta($profile_id, 'profile_avatar', $avatar_url);
+                    
                     // Basic info
                     carbon_set_post_meta($profile_id, 'first_name', $first_name);
                     carbon_set_post_meta($profile_id, 'last_name', $last_name);
