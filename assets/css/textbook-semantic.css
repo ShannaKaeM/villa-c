@@ -1,0 +1,362 @@
+/* TextBook Semantic Elements CSS */
+
+.semantic-pretitle {
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-line-height);
+    font-weight: var(--font-weight-500);
+    color: oklch(56% 0.064 194);
+    text-transform: uppercase;
+    font-family: var(--wp--custom--typography--font-family--montserrat);
+    letter-spacing: var(--letter-spacing-wider);
+}
+
+.semantic-pretitle.text-xs {
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-line-height);
+}
+
+.semantic-pretitle.text-sm {
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-line-height);
+}
+
+.semantic-pretitle.text-md {
+    font-size: var(--text-md-size);
+    line-height: var(--text-md-line-height);
+}
+
+.semantic-pretitle.text-lg {
+    font-size: var(--text-lg-size);
+    line-height: var(--text-lg-line-height);
+}
+
+.semantic-pretitle.text-xl {
+    font-size: var(--text-xl-size);
+    line-height: var(--text-xl-line-height);
+}
+
+.semantic-pretitle.text-xxl {
+    font-size: var(--text-xxl-size);
+    line-height: var(--text-xxl-line-height);
+}
+
+.semantic-pretitle.text-xxxl {
+    font-size: var(--text-xxxl-size);
+    line-height: var(--text-xxxl-line-height);
+}
+
+.semantic-title {
+    font-size: var(--text-xl-size);
+    line-height: var(--text-xl-line-height);
+    font-weight: var(--font-weight-500);
+    color: oklch(75% 0.203 57);
+    text-transform: capitalize;
+    font-family: var(--wp--custom--typography--font-family--montserrat);
+    letter-spacing: var(--letter-spacing-wide);
+}
+
+.semantic-title.text-xs {
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-line-height);
+}
+
+.semantic-title.text-sm {
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-line-height);
+}
+
+.semantic-title.text-md {
+    font-size: var(--text-md-size);
+    line-height: var(--text-md-line-height);
+}
+
+.semantic-title.text-lg {
+    font-size: var(--text-lg-size);
+    line-height: var(--text-lg-line-height);
+}
+
+.semantic-title.text-xl {
+    font-size: var(--text-xl-size);
+    line-height: var(--text-xl-line-height);
+}
+
+.semantic-title.text-xxl {
+    font-size: var(--text-xxl-size);
+    line-height: var(--text-xxl-line-height);
+}
+
+.semantic-title.text-xxxl {
+    font-size: var(--text-xxxl-size);
+    line-height: var(--text-xxxl-line-height);
+}
+
+.semantic-subtitle {
+    font-size: var(--text-lg-size);
+    line-height: var(--text-lg-line-height);
+    font-weight: var(--font-weight-500);
+    color: oklch(78% 0.127 185);
+    text-transform: none;
+    font-family: var(--wp--custom--typography--font-family--montserrat);
+    letter-spacing: var(--letter-spacing-normal);
+}
+
+.semantic-subtitle.text-xs {
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-line-height);
+}
+
+.semantic-subtitle.text-sm {
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-line-height);
+}
+
+.semantic-subtitle.text-md {
+    font-size: var(--text-md-size);
+    line-height: var(--text-md-line-height);
+}
+
+.semantic-subtitle.text-lg {
+    font-size: var(--text-lg-size);
+    line-height: var(--text-lg-line-height);
+}
+
+.semantic-subtitle.text-xl {
+    font-size: var(--text-xl-size);
+    line-height: var(--text-xl-line-height);
+}
+
+.semantic-subtitle.text-xxl {
+    font-size: var(--text-xxl-size);
+    line-height: var(--text-xxl-line-height);
+}
+
+.semantic-subtitle.text-xxxl {
+    font-size: var(--text-xxxl-size);
+    line-height: var(--text-xxxl-line-height);
+}
+
+.semantic-description {
+    font-size: var(--text-md-size);
+    line-height: var(--text-md-line-height);
+    font-weight: var(--font-weight-400);
+    color: oklch(66% 0 0);
+    text-transform: none;
+    font-family: var(--wp--custom--typography--font-family--montserrat);
+    letter-spacing: var(--letter-spacing-normal);
+}
+
+.semantic-description.text-xs {
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-line-height);
+}
+
+.semantic-description.text-sm {
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-line-height);
+}
+
+.semantic-description.text-md {
+    font-size: var(--text-md-size);
+    line-height: var(--text-md-line-height);
+}
+
+.semantic-description.text-lg {
+    font-size: var(--text-lg-size);
+    line-height: var(--text-lg-line-height);
+}
+
+.semantic-description.text-xl {
+    font-size: var(--text-xl-size);
+    line-height: var(--text-xl-line-height);
+}
+
+.semantic-description.text-xxl {
+    font-size: var(--text-xxl-size);
+    line-height: var(--text-xxl-line-height);
+}
+
+.semantic-description.text-xxxl {
+    font-size: var(--text-xxxl-size);
+    line-height: var(--text-xxxl-line-height);
+}
+
+.semantic-body {
+    font-size: var(--text-md-size);
+    line-height: var(--text-md-line-height);
+    font-weight: var(--font-weight-400);
+    color: oklch(66% 0 0);
+    text-transform: none;
+    font-family: var(--wp--custom--typography--font-family--montserrat);
+    letter-spacing: var(--letter-spacing-normal);
+}
+
+.semantic-body.text-xs {
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-line-height);
+}
+
+.semantic-body.text-sm {
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-line-height);
+}
+
+.semantic-body.text-md {
+    font-size: var(--text-md-size);
+    line-height: var(--text-md-line-height);
+}
+
+.semantic-body.text-lg {
+    font-size: var(--text-lg-size);
+    line-height: var(--text-lg-line-height);
+}
+
+.semantic-body.text-xl {
+    font-size: var(--text-xl-size);
+    line-height: var(--text-xl-line-height);
+}
+
+.semantic-body.text-xxl {
+    font-size: var(--text-xxl-size);
+    line-height: var(--text-xxl-line-height);
+}
+
+.semantic-body.text-xxxl {
+    font-size: var(--text-xxxl-size);
+    line-height: var(--text-xxxl-line-height);
+}
+
+.semantic-button {
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-line-height);
+    font-weight: var(--font-weight-600);
+    color: oklch(100% 0 0);
+    text-transform: uppercase;
+    font-family: var(--wp--custom--typography--font-family--montserrat);
+    letter-spacing: var(--letter-spacing-wide);
+}
+
+.semantic-button.text-xs {
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-line-height);
+}
+
+.semantic-button.text-sm {
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-line-height);
+}
+
+.semantic-button.text-md {
+    font-size: var(--text-md-size);
+    line-height: var(--text-md-line-height);
+}
+
+.semantic-button.text-lg {
+    font-size: var(--text-lg-size);
+    line-height: var(--text-lg-line-height);
+}
+
+.semantic-button.text-xl {
+    font-size: var(--text-xl-size);
+    line-height: var(--text-xl-line-height);
+}
+
+.semantic-button.text-xxl {
+    font-size: var(--text-xxl-size);
+    line-height: var(--text-xxl-line-height);
+}
+
+.semantic-button.text-xxxl {
+    font-size: var(--text-xxxl-size);
+    line-height: var(--text-xxxl-line-height);
+}
+
+.semantic-caption {
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-line-height);
+    font-weight: var(--font-weight-400);
+    color: oklch(50% 0 0);
+    text-transform: none;
+    font-family: var(--wp--custom--typography--font-family--montserrat);
+    letter-spacing: var(--letter-spacing-normal);
+}
+
+.semantic-caption.text-xs {
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-line-height);
+}
+
+.semantic-caption.text-sm {
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-line-height);
+}
+
+.semantic-caption.text-md {
+    font-size: var(--text-md-size);
+    line-height: var(--text-md-line-height);
+}
+
+.semantic-caption.text-lg {
+    font-size: var(--text-lg-size);
+    line-height: var(--text-lg-line-height);
+}
+
+.semantic-caption.text-xl {
+    font-size: var(--text-xl-size);
+    line-height: var(--text-xl-line-height);
+}
+
+.semantic-caption.text-xxl {
+    font-size: var(--text-xxl-size);
+    line-height: var(--text-xxl-line-height);
+}
+
+.semantic-caption.text-xxxl {
+    font-size: var(--text-xxxl-size);
+    line-height: var(--text-xxxl-line-height);
+}
+
+.semantic-label {
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-line-height);
+    font-weight: var(--font-weight-500);
+    color: oklch(50% 0 0);
+    text-transform: none;
+    font-family: var(--wp--custom--typography--font-family--montserrat);
+    letter-spacing: var(--letter-spacing-normal);
+}
+
+.semantic-label.text-xs {
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-line-height);
+}
+
+.semantic-label.text-sm {
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-line-height);
+}
+
+.semantic-label.text-md {
+    font-size: var(--text-md-size);
+    line-height: var(--text-md-line-height);
+}
+
+.semantic-label.text-lg {
+    font-size: var(--text-lg-size);
+    line-height: var(--text-lg-line-height);
+}
+
+.semantic-label.text-xl {
+    font-size: var(--text-xl-size);
+    line-height: var(--text-xl-line-height);
+}
+
+.semantic-label.text-xxl {
+    font-size: var(--text-xxl-size);
+    line-height: var(--text-xxl-line-height);
+}
+
+.semantic-label.text-xxxl {
+    font-size: var(--text-xxxl-size);
+    line-height: var(--text-xxxl-line-height);
+}
+

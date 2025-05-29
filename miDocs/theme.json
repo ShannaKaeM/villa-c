@@ -1,0 +1,52 @@
+{
+    "settings": {
+        "custom": {
+            "layout": {
+                "grid_min_width": "300px",
+                "grid_max_width": "400px",
+                "container_max_width": "1280px",
+                "grid_presets": {
+                    "cards": {
+                        "min": "280px",
+                        "max": "350px",
+                        "gap_x": "2rem",
+                        "gap_y": "2rem"
+                    },
+                    "features": {
+                        "min": "250px",
+                        "max": "300px",
+                        "gap_x": "1.5rem",
+                        "gap_y": "2rem"
+                    },
+                    "gallery": {
+                        "min": "200px",
+                        "max": "250px",
+                        "gap_x": "1rem",
+                        "gap_y": "1rem"
+                    },
+                    "hero": {
+                        "min": "400px",
+                        "max": "none",
+                        "gap_x": "3rem",
+                        "gap_y": "3rem"
+                    }
+                },
+                "spacing": {
+                    "xs": "0.5rem",
+                    "sm": "1rem",
+                    "md": "1.5rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "xxl": "4rem"
+                },
+                "breakpoints": {
+                    "sm": "640px",
+                    "md": "768px",
+                    "lg": "1024px",
+                    "xl": "1280px",
+                    "xxl": "1536px"
+                }
+            }
+        }
+    }
+}

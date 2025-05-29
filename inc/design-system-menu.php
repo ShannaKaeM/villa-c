@@ -31,7 +31,16 @@ function design_system_main_menu() {
         'design-system',
         'design_system_dashboard'
     );
-}
+    
+    // Add ColorBook submenu
+    add_submenu_page(
+        'design-system',
+        'ColorBook',
+        '🎨 ColorBook',
+        'manage_options',
+        'colorbook',
+        'cb_admin_page'
+    );}
 
 // Design System Dashboard
 function design_system_dashboard() {
@@ -45,141 +54,51 @@ function design_system_dashboard() {
         <div class="dashboard-grid">
             <!-- Foundation Books -->
             <div class="book-category">
-                <h2>🎨 Foundation Books</h2>
-                <div class="book-cards">
+                <div class="book-cards">                <h2>🎨 Foundation Books</h2>
                     <a href="<?php echo admin_url('admin.php?page=colorbook'); ?>" class="book-card colorbook">
-                        <div class="book-icon">🎨</div>
-                        <h3>ColorBook</h3>
-                        <p>Manage color palette, OKLCH values, and CSS variables</p>
+                    
+                    <a href="<?php echo admin_url('admin.php?page=textbook'); ?>" class="book-card textbook">
+                        <div class="book-icon">📝</div>
+                        <h3>TextBook</h3>
+                        <p>Typography system with size variants (xs-xxxl)</p>
                         <div class="book-status">
                             <?php 
-                            $colors = colorbook_get_current_colors();
+                            $typography_data = tb_get_typography_data();
+                            $saved_settings = get_option('textbook_typography_settings', array());
+                            echo !empty($saved_settings) ? 'Typography configured' : 'Ready to configure';
+                            ?>
+                        </div>
+                    </a>                        <div class="book-icon">🎨</div>
+                        <h3>ColorBook</h3>
+                        <p>OKLCH color palette and design tokens</p>
+                        <div class="book-status">
+                            <?php 
+                            $colors = cb_get_all_colors();
                             echo count($colors) . ' colors defined';
                             ?>
                         </div>
                     </a>
                     
-                    <a href="<?php echo admin_url('admin.php?page=textbook'); ?>" class="book-card textbook">
-                        <div class="book-icon">📝</div>
-                        <h3>TextBook</h3>
-                        <p>Typography settings, fonts, and text styling</p>
-                        <div class="book-status">
-                            <?php 
-                            $typography = get_option('textbook_settings', array());
-                            echo !empty($typography) ? 'Configured' : 'Default settings';
-                            ?>
-                        </div>
-                    </a>
                     
-                    <a href="<?php echo admin_url('admin.php?page=layoutbook'); ?>" class="book-card layoutbook">
-                        <div class="book-icon">📐</div>
-                        <h3>LayoutBook</h3>
-                        <p>Grid systems, spacing, and layout presets</p>
-                        <div class="book-status">
-                            <?php 
-                            $layouts = get_option('layoutbook_settings', array());
-                            echo !empty($layouts) ? 'Configured' : 'Default settings';
-                            ?>
-                        </div>
-                    </a>
-                    
-                    <a href="<?php echo admin_url('admin.php?page=uibook'); ?>" class="book-card uibook">
-                        <div class="book-icon">🎛️</div>
-                        <h3>UiBook</h3>
-                        <p>Component styling, padding, borders, shadows</p>
-                        <div class="book-status">
-                            <?php 
-                            $ui = get_option('uibook_settings', array());
-                            echo !empty($ui) ? 'Configured' : 'Default settings';
-                            ?>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Element Books -->
-            <div class="book-category">
-                <h2>🧩 Element Books</h2>
-                <div class="book-cards">
-                    <div class="book-card coming-soon">
-                        <div class="book-icon">🔘</div>
-                        <h3>ButtonBook</h3>
-                        <p>Button styles, states, and variations</p>
-                        <div class="book-status">Coming Soon</div>
-                    </div>
-                    
-                    <div class="book-card coming-soon">
-                        <div class="book-icon">🎯</div>
-                        <h3>IconBook</h3>
-                        <p>Icon library and styling</p>
-                        <div class="book-status">Coming Soon</div>
-                    </div>
-                    
-                    <div class="book-card coming-soon">
-                        <div class="book-icon">📝</div>
-                        <h3>InputBook</h3>
-                        <p>Form inputs and field styling</p>
-                        <div class="book-status">Coming Soon</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Component Books -->
-            <div class="book-category">
-                <h2>📦 Component Books</h2>
-                <div class="book-cards">
-                    <div class="book-card coming-soon">
-                        <div class="book-icon">🃏</div>
-                        <h3>CardBook</h3>
-                        <p>Card components and layouts</p>
-                        <div class="book-status">Coming Soon</div>
-                    </div>
-                    
-                    <div class="book-card coming-soon">
-                        <div class="book-icon">📋</div>
-                        <h3>FormBook</h3>
-                        <p>Form layouts and validation</p>
-                        <div class="book-status">Coming Soon</div>
-                    </div>
-                    
-                    <div class="book-card coming-soon">
-                        <div class="book-icon">🧭</div>
-                        <h3>NavigationBook</h3>
-                        <p>Navigation patterns and menus</p>
-                        <div class="book-status">Coming Soon</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section Books -->
-            <div class="book-category">
-                <h2>🏗️ Section Books</h2>
-                <div class="book-cards">
-                    <a href="<?php echo admin_url('admin.php?page=herobook'); ?>" class="book-card herobook">
+                    <a href="<?php echo admin_url('admin.php?page=sectionbook-clean'); ?>" class="book-card sectionbook">
                         <div class="book-icon">🏗️</div>
-                        <h3>HeroBook</h3>
-                        <p>Hero section templates and layouts</p>
+                        <h3>SectionBook</h3>
+                        <p>Complete section management and assembly</p>
                         <div class="book-status">
                             <?php 
-                            $heroes = herobook_get_current_templates();
-                            echo isset($heroes['active_template']) ? 'Active: ' . ucfirst(str_replace('-', ' ', $heroes['active_template'])) : 'Not configured';
+                            if (function_exists('sectionbook_clean_get_hero_settings')) {
+                                try {
+                                    $hero_settings = sectionbook_clean_get_hero_settings();
+                                    echo !empty($hero_settings['variant']) ? 'Hero configured' : 'Ready to configure';
+                                } catch (Exception $e) {
+                                    echo 'Ready to configure';
+                                }
+                            } else {
+                                echo 'Ready to configure';
+                            }
                             ?>
                         </div>
                     </a>
-                    
-                    <div class="book-card coming-soon">
-                        <div class="book-icon">📞</div>
-                        <h3>ContactBook</h3>
-                        <p>Contact section layouts</p>
-                        <div class="book-status">Coming Soon</div>
-                    </div>
-                    
-                    <div class="book-card coming-soon">
-                        <div class="book-icon">📋</div>
-                        <h3>ListingBook</h3>
-                        <p>Property listing layouts</p>
-                        <div class="book-status">Coming Soon</div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -328,28 +247,18 @@ function design_system_dashboard() {
         
         /* Book-specific styling */
         .book-card.colorbook .book-status {
-            background: #fef3c7;
-            color: #92400e;
-        }
         
         .book-card.textbook .book-status {
             background: #dbeafe;
             color: #1e40af;
+        }            background: #fef3c7;
+            color: #92400e;
         }
         
-        .book-card.layoutbook .book-status {
-            background: #dcfce7;
-            color: #166534;
-        }
         
-        .book-card.uibook .book-status {
-            background: #fce7f3;
-            color: #be185d;
-        }
-        
-        .book-card.herobook .book-status {
-            background: #e0e7ff;
-            color: #3730a3;
+        .book-card.sectionbook .book-status {
+            background: #f7d2c4;
+            color: #7a3e58;
         }
     </style>
 
@@ -381,46 +290,19 @@ function design_system_dashboard() {
 // Update existing Books to be submenus
 add_action('admin_menu', 'update_books_as_submenus', 15);
 function update_books_as_submenus() {
-    // Remove existing main menu items and add as submenus
+    // Remove existing main menu items (if they exist from old systems)
     remove_menu_page('colorbook');
     remove_menu_page('textbook');
     remove_menu_page('layoutbook');
-    remove_menu_page('uibook');
+    remove_menu_page('sectionbook');
     
-    // Add Foundation Books as submenus
+    // Only add the SectionBook Clean as submenu
     add_submenu_page(
         'design-system',
-        'ColorBook',
-        '🎨 ColorBook',
+        'SectionBook',
+        '🏗️ SectionBook',
         'manage_options',
-        'colorbook',
-        'colorbook_admin_page'
-    );
-    
-    add_submenu_page(
-        'design-system',
-        'TextBook',
-        '📝 TextBook',
-        'manage_options',
-        'textbook',
-        'textbook_admin_page'
-    );
-    
-    add_submenu_page(
-        'design-system',
-        'LayoutBook',
-        '📐 LayoutBook',
-        'manage_options',
-        'layoutbook',
-        'layoutbook_admin_page'
-    );
-    
-    add_submenu_page(
-        'design-system',
-        'UiBook',
-        '🎛️ UiBook',
-        'manage_options',
-        'uibook',
-        'uibook_admin_page'
+        'sectionbook-clean',
+        'sectionbook_clean_admin_page'
     );
 }

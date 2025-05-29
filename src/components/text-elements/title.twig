@@ -1,0 +1,18 @@
+{#
+/**
+ * Title Component
+ * Generic title element for use across the site
+ * 
+ * @param {string} text - Title text content
+ * @param {string} size - Font size (32px, 36px, 42px, 48px, 56px, 64px, 72px)
+ * @param {string} color - Text color (default: '#000')
+ * @param {string} tag - HTML tag (h1, h2, h3, h4, h5, h6) (default: 'h1')
+ * @param {string} class - Additional CSS classes
+ */
+#}
+
+{% if text %}
+<{{ tag|default('h1') }} class="title {{ class|default('') }}" style="font-size: {{ size|default('48px') }}; color: {{ color|default('#000') }}; margin: 0; line-height: 1.2; font-weight: 700;">
+    {{ text }}
+</{{ tag|default('h1') }}>
+{% endif %}

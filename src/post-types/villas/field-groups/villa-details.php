@@ -12,64 +12,92 @@ carbon_create_post_meta_with_tabs($post_type_slug, 'Villa Details', [
     'basic_info' => [
         'title' => 'Basic Information',
         'fields' => [
-            Field::make('text', 'villa_name', 'Villa Name'),
-            Field::make('text', 'villa_price', 'Price per Night')
-                ->set_help_text('Enter price in USD'),
-            Field::make('select', 'villa_type', 'Villa Type')
+            Field::make('text', 'villa_name', 'Villa Name')
+                ->set_help_text('Display name for the property'),
+            Field::make('text', 'unit_number', 'Unit Number')
+                ->set_help_text('Unit identifier (e.g., 209A, 301B)'),
+            Field::make('text', 'nightly_rate', 'Nightly Rate')
+                ->set_help_text('Price per night in USD')
+                ->set_attribute('type', 'number')
+                ->set_attribute('min', 0),
+            Field::make('text', 'bedrooms', 'Bedrooms')
+                ->set_attribute('type', 'number')
+                ->set_attribute('min', 1),
+            Field::make('text', 'bathrooms', 'Bathrooms')
+                ->set_attribute('type', 'number')
+                ->set_attribute('min', 1),
+            Field::make('text', 'max_guests', 'Max Guests')
+                ->set_attribute('type', 'number')
+                ->set_attribute('min', 1),
+            Field::make('checkbox', 'is_featured', 'Featured Property')
+                ->set_help_text('Mark as featured property'),
+            Field::make('select', 'status', 'Property Status')
                 ->set_options([
-                    'luxury' => 'Luxury Villa',
-                    'beachfront' => 'Beachfront Villa',
-                    'mountain' => 'Mountain Villa',
-                    'city' => 'City Villa',
-                    'countryside' => 'Countryside Villa'
-                ]),
-            Field::make('text', 'villa_size', 'Size (sq ft)'),
-            Field::make('text', 'villa_bedrooms', 'Bedrooms')
-                ->set_attribute('type', 'number')
-                ->set_attribute('min', 1),
-            Field::make('text', 'villa_bathrooms', 'Bathrooms')
-                ->set_attribute('type', 'number')
-                ->set_attribute('min', 1),
-            Field::make('text', 'villa_guests', 'Max Guests')
-                ->set_attribute('type', 'number')
-                ->set_attribute('min', 1)
+                    'draft' => 'Draft',
+                    'active' => 'Active',
+                    'inactive' => 'Inactive',
+                    'maintenance' => 'Under Maintenance'
+                ])
+                ->set_default_value('draft')
         ]
     ],
     'location' => [
         'title' => 'Location & Address',
         'fields' => [
-            Field::make('text', 'villa_address', 'Street Address'),
-            Field::make('text', 'villa_city', 'City'),
-            Field::make('text', 'villa_state', 'State/Province'),
-            Field::make('text', 'villa_country', 'Country'),
-            Field::make('text', 'villa_zip', 'Postal Code'),
-            Field::make('text', 'villa_latitude', 'Latitude'),
-            Field::make('text', 'villa_longitude', 'Longitude'),
-            Field::make('textarea', 'villa_directions', 'Directions')
+            Field::make('text', 'address', 'Street Address'),
+            Field::make('text', 'city', 'City')
+                ->set_default_value('North Topsail Beach'),
+            Field::make('text', 'state', 'State')
+                ->set_default_value('NC'),
+            Field::make('text', 'zip_code', 'ZIP Code'),
+            Field::make('text', 'latitude', 'Latitude')
+                ->set_help_text('GPS coordinate for mapping'),
+            Field::make('text', 'longitude', 'Longitude')
+                ->set_help_text('GPS coordinate for mapping')
+        ]
+    ],
+    'booking' => [
+        'title' => 'Booking & Availability',
+        'fields' => [
+            Field::make('text', 'booking_url', 'Booking URL')
+                ->set_help_text('Direct booking link'),
+            Field::make('text', 'ical_url', 'iCal URL')
+                ->set_help_text('Calendar sync URL'),
+            Field::make('checkbox', 'has_direct_booking', 'Direct Booking Available')
+                ->set_help_text('Property accepts direct bookings'),
+            Field::make('textarea', 'booking_notes', 'Booking Notes')
+                ->set_help_text('Special instructions or requirements')
         ]
     ],
     'amenities' => [
         'title' => 'Amenities & Features',
         'fields' => [
-            Field::make('checkbox', 'villa_pool', 'Private Pool'),
-            Field::make('checkbox', 'villa_spa', 'Spa/Hot Tub'),
-            Field::make('checkbox', 'villa_gym', 'Fitness Center'),
-            Field::make('checkbox', 'villa_wifi', 'Free WiFi'),
-            Field::make('checkbox', 'villa_parking', 'Parking Available'),
-            Field::make('checkbox', 'villa_ac', 'Air Conditioning'),
-            Field::make('checkbox', 'villa_kitchen', 'Full Kitchen'),
-            Field::make('checkbox', 'villa_garden', 'Private Garden'),
-            Field::make('checkbox', 'villa_beach_access', 'Beach Access'),
-            Field::make('set', 'villa_additional_amenities', 'Additional Amenities')
+            Field::make('checkbox', 'pool', 'Pool')
+                ->set_help_text('🏊 Swimming pool access'),
+            Field::make('checkbox', 'ocean_view', 'Ocean View')
+                ->set_help_text('🌊 Ocean views from property'),
+            Field::make('checkbox', 'pet_friendly', 'Pet Friendly')
+                ->set_help_text('🐶 Pets allowed'),
+            Field::make('checkbox', 'hot_tub', 'Hot Tub')
+                ->set_help_text('🛁 Hot tub/spa available'),
+            Field::make('checkbox', 'wifi', 'WiFi')
+                ->set_help_text('📶 Wireless internet'),
+            Field::make('checkbox', 'parking', 'Parking')
+                ->set_help_text('🚗 Parking available'),
+            Field::make('checkbox', 'kitchen', 'Full Kitchen')
+                ->set_help_text('🍳 Complete kitchen facilities'),
+            Field::make('checkbox', 'beach_access', 'Beach Access')
+                ->set_help_text('🏖️ Direct beach access'),
+            Field::make('set', 'additional_amenities', 'Additional Amenities')
                 ->set_options([
                     'concierge' => 'Concierge Service',
-                    'chef' => 'Private Chef Available',
-                    'cleaning' => 'Daily Housekeeping',
+                    'cleaning' => 'Housekeeping',
                     'laundry' => 'Laundry Service',
                     'security' => '24/7 Security',
                     'transport' => 'Airport Transfer',
-                    'pets' => 'Pet Friendly',
-                    'smoking' => 'Smoking Allowed'
+                    'balcony' => 'Private Balcony',
+                    'bbq' => 'BBQ/Grill',
+                    'fireplace' => 'Fireplace'
                 ])
         ]
     ]

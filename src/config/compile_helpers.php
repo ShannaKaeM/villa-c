@@ -112,6 +112,11 @@ function carbon_blocks_create_context($block_name, $fields = [], $additional_con
         'fields' => $fields,
     ];
 
+    // Add UiBook context if helper exists
+    if (function_exists('ub_get_context')) {
+        $context['ui'] = ub_get_context();
+    }
+
     return array_merge($context, $additional_context);
 }
 

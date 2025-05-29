@@ -1,605 +1,407 @@
 # HeroBook System Documentation
-**Villa Community Design System - Section Management**
-
-*Created: May 28, 2025*  
-*Version: 1.0.0*
-
----
-
-## Table of Contents
-
-1. [Overview](#overview)
-2. [System Architecture](#system-architecture)
-3. [File Structure](#file-structure)
-4. [Admin Interface](#admin-interface)
-5. [Helper Functions](#helper-functions)
-6. [Block Implementation](#block-implementation)
-7. [Usage Examples](#usage-examples)
-8. [Customization Guide](#customization-guide)
-9. [Integration with Design System](#integration-with-design-system)
-10. [Troubleshooting](#troubleshooting)
-
----
+*Villa Community Design System - Section Level Management*
 
 ## Overview
 
-The HeroBook system is a comprehensive section management tool within the Villa Community design system. It provides centralized control over hero section layouts, styling, and component visibility across the entire website.
+The HeroBook system is a comprehensive hero section management tool for the Villa Community design system. It provides centralized control over hero layouts, styling, and components while integrating seamlessly with the Carbon Blocks Framework.
 
-### Key Features
-
-- **Centralized Layout Management**: Control hero section layouts from a single admin interface
-- **Component Integration**: Manage avatar groups, CTA buttons, and product showcases
-- **Responsive Design**: Mobile-first approach with automatic grid adaptations
-- **Design System Integration**: Seamlessly uses ColorBook, TextBook, UiBook, and LayoutBook values
-- **Live Preview**: Real-time preview of changes in the admin interface
-- **Security**: Built-in nonce verification for all form submissions
-- **Flexibility**: Block-level overrides when needed
-
-### Benefits
-
-1. **Consistency**: Ensures uniform hero section styling across the site
-2. **Efficiency**: Update multiple hero sections from one location
-3. **Maintainability**: Centralized configuration reduces code duplication
-4. **User Experience**: Intuitive admin interface for non-technical users
-5. **Performance**: Optimized CSS generation and caching
-
----
+**Key Features:**
+- Centralized hero template management
+- Responsive layout system with multiple options
+- Component-based architecture
+- Design system integration (ColorBook, TextBook, LayoutBook)
+- Live preview functionality
+- Security with nonce verification
+- **UiBook-independent styling** (as of latest update)
 
 ## System Architecture
 
-The HeroBook system follows the established Villa Community design system pattern:
-
+### File Structure
 ```
-HeroBook System
-├── Admin Interface (inc/herobook.php)
-├── Helper Functions (src/helpers/herobook-helper.php)
-├── Design System Menu (inc/design-system-menu.php)
-└── Block Implementation (src/blocks/Sections/home-hero/)
-```
+inc/
+├── herobook.php                    # Admin interface & core functionality
+├── design-system-menu.php          # Hierarchical menu structure
+└── [other design system files]
 
-### Core Components
+src/
+├── helpers/
+│   └── herobook-helper.php         # Template helper functions
+└── blocks/
+    └── Sections/
+        └── home-hero/
+            ├── block.php            # Block registration & context
+            ├── block.twig           # Template with inline styling
+            └── block.css            # Base component styles
 
-1. **Admin Interface**: WordPress admin page for configuration
-2. **Helper Functions**: PHP functions for accessing settings
-3. **Block System**: Carbon Blocks integration
-4. **CSS Framework**: Responsive styling system
-
----
-
-## File Structure
-
-```
-carbon-blocksy/
-├── inc/
-│   ├── design-system-menu.php      # Main design system menu
-│   └── herobook.php                # HeroBook admin interface
-├── src/
-│   ├── helpers/
-│   │   └── herobook-helper.php     # Helper functions
-│   └── blocks/
-│       └── Sections/
-│           └── home-hero/
-│               ├── block.php       # Block configuration
-│               ├── block.twig      # Template file
-│               └── block.css       # Styling
-└── functions.php                   # Integration point
+miDocs/
+└── HeroBook-System-Documentation.md # This documentation
 ```
 
-### File Descriptions
+### Design System Integration
 
-| File | Purpose | Dependencies |
-|------|---------|--------------|
-| `inc/herobook.php` | Admin interface and settings management | WordPress admin functions |
-| `src/helpers/herobook-helper.php` | Helper functions for accessing settings | HeroBook admin functions |
-| `inc/design-system-menu.php` | Hierarchical admin menu structure | WordPress menu functions |
-| `src/blocks/Sections/home-hero/block.php` | Block configuration and context | Carbon Fields, HeroBook helpers |
-| `src/blocks/Sections/home-hero/block.twig` | Template rendering | Timber, Design system values |
-| `src/blocks/Sections/home-hero/block.css` | Responsive styling | CSS Grid, Design system variables |
+The HeroBook integrates with three core design systems:
 
----
+1. **ColorBook** - Color palette and branding
+2. **TextBook** - Typography and text styling  
+3. **LayoutBook** - Grid systems and spacing
+4. **~~UiBook~~** - *(Removed)* Previously handled UI components, now uses direct CSS values
 
 ## Admin Interface
 
-### Navigation Path
-**WordPress Admin → Design System → Sections → HeroBook**
+### Menu Structure
+```
+WordPress Admin → Design System → Sections → HeroBook
+```
 
-### Configuration Options
+The HeroBook admin page provides:
 
-#### Layout Settings
-- **Layout Type**: 
-  - Asymmetric 40/60 (default)
-  - Asymmetric 50/50
-  - Centered
-- **Content Alignment**: Left, Center, Right
-- **Section Height**: Viewport 80%, Viewport 100%, Auto
+- **Layout Management**: Choose from asymmetric 40/60, 50/50 split, or centered layouts
+- **Content Alignment**: Left, center, or right alignment options
+- **Right Side Layouts**: Grid configurations for product showcases
+- **Section Heights**: Viewport-based height controls
+- **Background Styles**: Color and styling options
+- **Component Toggles**: Enable/disable specific components
+- **Live Preview**: Real-time preview of changes
 
-#### Right Side Layout
-- **Product Grid**: 2-column product showcase
-- **Feature Cards**: Feature highlight cards
-- **Single Image**: Large hero image
-- **Gallery**: Image gallery grid
+### Settings Available
 
-#### Background Styles
-- **Solid**: Plain background color
-- **Gradient**: Linear gradient background
-- **Pattern**: Dotted pattern overlay
+#### Layout Types
+- `asymmetric_40_60`: 40% content, 60% showcase
+- `split_50_50`: Equal split layout
+- `centered`: Centered content layout
 
-#### Component Integration
-- **Show Avatar Group**: Toggle avatar group display
-- **Show CTA Button**: Toggle call-to-action button
-- **Show Product Cards**: Toggle product showcase
+#### Content Alignment
+- `left`: Left-aligned content (default)
+- `center`: Centered content
+- `right`: Right-aligned content
 
-#### Security Features
-- **Nonce Verification**: All form submissions are secured
-- **Capability Checks**: Requires `manage_options` capability
-- **Data Sanitization**: All inputs are sanitized before saving
+#### Right Side Layouts
+- `product_grid_2x2`: 2x2 product grid
+- `product_grid_1x3`: 1x3 vertical grid
+- `featured_large`: Large featured product
 
-### Live Preview
-The admin interface includes a live preview section that updates in real-time as settings are changed, showing:
-- Layout structure
-- Component visibility
-- Background styles
-- Content alignment
+#### Section Heights
+- `viewport_full`: 100vh height
+- `viewport_75`: 75vh height
+- `content_fit`: Auto-fit to content
 
----
+#### Component Toggles
+- Avatar Groups
+- CTA Buttons
+- Product Cards
+- Promo Cards
 
 ## Helper Functions
 
 ### Core Functions
 
-#### `hb_get_template_setting($template, $setting, $format = 'value')`
+#### `hb_get_template_setting($setting, $template = 'default')`
 Retrieves specific hero template settings.
 
-**Parameters:**
-- `$template` (string): Template name (e.g., 'home-hero')
-- `$setting` (string): Setting key
-- `$format` (string): Return format ('value', 'css-var', 'class')
-
-**Example:**
 ```php
-$layout = hb_get_template_setting('home-hero', 'layout_type');
-$css_var = hb_get_template_setting('home-hero', 'layout_type', 'css-var');
+$layout = hb_get_template_setting('layout_type');
+$alignment = hb_get_template_setting('content_alignment');
 ```
 
-#### `hb_get_layout_classes($template = null)`
-Generates CSS classes for hero layouts.
+#### `hb_get_layout_classes($template = 'default')`
+Generates CSS classes for the hero layout.
 
-**Returns:** String of CSS classes
-**Example:**
 ```php
-$classes = hb_get_layout_classes('home-hero');
-// Returns: "hero-template--home-hero hero-layout--asymmetric-40-60 hero-content--left"
+$classes = hb_get_layout_classes(); 
+// Returns: "hero-asymmetric-40-60 hero-content-left hero-right-product-grid-2x2"
 ```
 
-#### `hb_get_css_properties($template = null)`
-Gets CSS custom properties for styling.
+#### `hb_get_css_properties($template = 'default')`
+Returns CSS custom properties for styling.
 
-**Returns:** Array of CSS properties
-**Example:**
 ```php
-$properties = hb_get_css_properties('home-hero');
-// Returns: ['--hero-left-width' => '40%', '--hero-right-width' => '60%']
+$css_props = hb_get_css_properties();
+// Returns array of CSS variables for heights, spacing, etc.
 ```
 
-#### `hb_show_component($component, $template = null)`
+#### `hb_show_component($component, $template = 'default')`
 Checks if a component should be displayed.
 
-**Parameters:**
-- `$component` (string): Component name ('avatar_group', 'cta_button', 'product_cards')
-- `$template` (string): Template name
-
-**Example:**
 ```php
-if (hb_show_component('avatar_group', 'home-hero')) {
-    // Render avatar group
+if (hb_show_component('avatar_group')) {
+    // Show avatar group
 }
 ```
 
-#### `hb_get_context($template = null)`
-Gets complete context for Timber templates.
+#### `hb_get_context($template = 'default')`
+Returns complete context array for Timber templates.
 
-**Returns:** Array with template data, settings, classes, and component visibility
-
-### Utility Functions
-
-#### `hb_get_template_options()`
-Returns available template options for select fields.
-
-#### `hb_get_layout_options()`
-Returns layout type options.
-
-#### `hb_get_right_layout_options()`
-Returns right side layout options.
-
-#### `hb_generate_grid_css($template = null)`
-Generates dynamic CSS for grid layouts.
-
----
+```php
+$context = hb_get_context();
+// Includes layout, styling, and component data
+```
 
 ## Block Implementation
 
-### Home Hero Block Structure
+### Block Registration (`block.php`)
 
-The Home Hero block (`src/blocks/Sections/home-hero/`) demonstrates the complete implementation pattern:
+The home-hero block uses the Carbon Blocks auto-discovery system:
 
-#### Block Configuration (block.php)
 ```php
-// Carbon Fields configuration
-Container::make('post_meta', 'Home Hero Settings')
-    ->where('post_template', '=', 'page-templates/home.php')
-    ->add_fields(array(
-        // Content fields
-        Field::make('text', 'hero_title', 'Hero Title'),
-        Field::make('textarea', 'hero_description', 'Hero Description'),
-        // Component fields
-        Field::make('checkbox', 'show_avatar_group', 'Show Avatar Group'),
-        // Layout override fields
-        Field::make('checkbox', 'use_custom_layout', 'Use Custom Layout')
-    ));
+// Auto-detected block name: home-hero
+// Auto-detected category: Sections
+// Template: block.twig
+// Styles: block.css
 ```
 
-#### Template Integration (block.twig)
+Key features:
+- **Design System Integration**: Loads ColorBook, TextBook, and LayoutBook contexts
+- **HeroBook Integration**: Uses helper functions for layout and styling
+- **Component Management**: Handles avatar groups, CTA buttons, and product cards
+- **Security**: Includes nonce verification for admin settings
+
+### Template Structure (`block.twig`)
+
+The template uses **inline styling** with design system values instead of UiBook dependencies:
+
 ```twig
+{# Direct CSS values instead of UiBook #}
+<a href="{{ content.cta_url }}" 
+   style="
+       background: {{ colors.primary }};
+       color: {{ colors.white }};
+       padding: 0.75rem 1.5rem;        {# Direct value #}
+       border-radius: 8px;             {# Direct value #}
+       font-family: {{ typography.body_font }};
+   ">
+```
+
+**Key Template Features:**
+- **Responsive Design**: Mobile-first approach with CSS Grid
+- **Component Integration**: Avatar groups, CTA buttons, product cards
+- **Hover Effects**: Interactive elements with CSS transitions
+- **Image Handling**: Timber image processing with fallbacks
+- **Design System Values**: Uses ColorBook and TextBook variables
+
+### Styling Approach
+
+**Updated Styling Strategy (Post-UiBook Removal):**
+
+1. **Direct CSS Values**: Common UI elements use hardcoded, consistent values
+   - Button padding: `0.75rem 1.5rem`
+   - Border radius: `8px` (buttons), `12px` (cards), `6px` (tags)
+   - Box shadows: `0 4px 6px rgba(0, 0, 0, 0.1)`
+
+2. **Design System Integration**: Dynamic values from other Books
+   - Colors: `{{ colors.primary }}`, `{{ colors.white }}`
+   - Typography: `{{ typography.body_font }}`, `{{ typography.h1_size }}`
+   - Layout: `{{ layout.container_max_width }}`
+
+3. **Responsive Behavior**: CSS Grid with automatic breakpoint handling
+   - Mobile: Single column, stacked layout
+   - Tablet: Adjusted grid with sidebar
+   - Desktop: Full grid with product showcase
+
+## Layout System
+
+### Asymmetric 40/60 Layout
+- **Left**: 40% width for content
+- **Right**: 60% width for product showcase
+- **Best for**: Product-focused hero sections
+
+### Split 50/50 Layout  
+- **Left**: 50% width for content
+- **Right**: 50% width for showcase
+- **Best for**: Balanced content and visuals
+
+### Centered Layout
+- **Full width**: Centered content
+- **No sidebar**: Focus on main message
+- **Best for**: Simple, message-focused heroes
+
+## Component System
+
+### Avatar Groups
+Displays user avatars with accompanying text.
+
+```twig
+{% if avatar_group.show %}
+<div class="carbon-block--home-hero__avatar-group">
+    <div class="carbon-block--home-hero__avatars">
+        <div class="carbon-block--home-hero__avatar">👤</div>
+        <!-- More avatars -->
+    </div>
+    <span>{{ avatar_group.text }}</span>
+</div>
+{% endif %}
+```
+
+### CTA Buttons
+Primary call-to-action buttons with hover effects.
+
+```twig
+<a href="{{ content.cta_url }}" 
+   class="carbon-block--home-hero__cta-button"
+   style="background: {{ colors.primary }}; padding: 0.75rem 1.5rem;">
+    {{ content.cta_text }}
+</a>
+```
+
+### Product Cards
+Showcase product cards with images, pricing, and links.
+
+```twig
+<div class="carbon-block--home-hero__product-card">
+    <img src="{{ Image(card.product_image).src }}" alt="{{ card.product_name }}">
+    <div class="carbon-block--home-hero__price-tag">
+        {{ card.product_name }}<br>
+        <strong>{{ card.product_price }}</strong>
+    </div>
+</div>
+```
+
+### Promo Cards
+Special promotional cards with dark backgrounds.
+
+```twig
+<div class="carbon-block--home-hero__promo-card"
+     style="background: {{ colors.text_dark }}; color: {{ colors.white }};">
+    <h3>{{ promo_card.title }}</h3>
+    <p>{{ promo_card.description }}</p>
+    <a href="{{ promo_card.button_url }}">{{ promo_card.button_text }}</a>
+</div>
+```
+
+## Usage Examples
+
+### Basic Hero Implementation
+
+```php
+// In your block or template
+require_once get_stylesheet_directory() . '/src/helpers/herobook-helper.php';
+
+// Get hero context
+$hero_context = hb_get_context('default');
+
+// Add to Timber context
+$context['hero'] = $hero_context;
+$context['content'] = array(
+    'title' => 'Welcome to Villa Community',
+    'description' => 'Discover your perfect vacation rental',
+    'cta_text' => 'Browse Villas',
+    'cta_url' => '/villas'
+);
+```
+
+### Custom Template Usage
+
+```twig
+{# In your Twig template #}
 <section class="carbon-block--home-hero {{ hero.classes }}" {{ hero.style_attribute|raw }}>
     <div class="carbon-block--home-hero__container">
-        <div class="carbon-block--home-hero__content hero-left">
-            <!-- Content area -->
-        </div>
-        <div class="carbon-block--home-hero__showcase hero-right">
-            <!-- Product showcase -->
+        <div class="carbon-block--home-hero__content">
+            <h1 style="color: {{ colors.text_dark }};">{{ content.title }}</h1>
+            <p style="color: {{ colors.text_medium }};">{{ content.description }}</p>
+            
+            {% if hero.components.cta_button %}
+            <a href="{{ content.cta_url }}" 
+               style="background: {{ colors.primary }}; padding: 0.75rem 1.5rem; border-radius: 8px;">
+                {{ content.cta_text }}
+            </a>
+            {% endif %}
         </div>
     </div>
 </section>
 ```
 
-#### Responsive Styling (block.css)
-```css
-.carbon-block--home-hero__container {
-    display: grid;
-    gap: 2rem;
-    align-items: center;
-}
+## Security Features
 
-.hero-layout--asymmetric-40-60 .carbon-block--home-hero__container {
-    grid-template-columns: 40% 60%;
-}
+- **Nonce Verification**: All form submissions include WordPress nonces
+- **Capability Checks**: Requires `manage_options` capability
+- **Data Sanitization**: All inputs are sanitized before storage
+- **Escaping**: All outputs are properly escaped
 
-@media (max-width: 768px) {
-    .carbon-block--home-hero__container {
-        grid-template-columns: 1fr !important;
-    }
-}
-```
+## Recent Updates
 
-### Context Function
-The block includes a context function that:
-1. Retrieves HeroBook settings
-2. Applies custom overrides if specified
-3. Integrates with other design system components
-4. Provides complete context to the Twig template
+### Version 2.0 - UiBook Independence
+*Updated: May 28, 2025*
 
----
+**Major Changes:**
+- **Removed UiBook Dependencies**: All UI styling now uses direct CSS values
+- **Enhanced Template System**: Improved inline styling approach
+- **Simplified Maintenance**: Reduced complexity by eliminating UiBook references
+- **Consistent Styling**: Standardized button, card, and component styles
 
-## Usage Examples
+**Migration Notes:**
+- Existing hero sections automatically use new direct CSS values
+- No breaking changes to existing implementations
+- Improved performance with fewer design system dependencies
 
-### Basic Implementation
+### Benefits of UiBook Removal:
+1. **Simplified Codebase**: Fewer dependencies to manage
+2. **Consistent Styling**: Hardcoded values ensure consistency
+3. **Better Performance**: Reduced system calls and processing
+4. **Easier Maintenance**: Direct CSS is easier to debug and modify
+5. **Future-Proof**: Less dependent on external systems
 
-#### 1. Using Default HeroBook Settings
-```php
-// In your template or block
-$hero_context = hb_get_context('home-hero');
-echo '<div class="' . $hero_context['classes'] . '">';
-```
+## Best Practices
 
-#### 2. Custom Layout Override
-```php
-// Check for custom layout
-if ($fields['use_custom_layout']) {
-    $layout_classes = 'hero-layout--' . $fields['custom_layout_type'];
-} else {
-    $layout_classes = hb_get_layout_classes('home-hero');
-}
-```
+### Template Development
+1. **Use Helper Functions**: Always use HeroBook helpers for consistency
+2. **Design System Integration**: Leverage ColorBook and TextBook values
+3. **Responsive Design**: Test layouts across all breakpoints
+4. **Component Modularity**: Keep components reusable and independent
+5. **Direct Styling**: Use inline styles with design system variables for UI elements
 
-#### 3. Component Visibility
-```php
-// Show avatar group only if enabled in HeroBook
-if (hb_show_component('avatar_group', 'home-hero')) {
-    // Render avatar group component
-    include get_template_directory() . '/components/avatar-group.php';
-}
-```
+### Performance Optimization
+1. **Lazy Loading**: Implement for product images
+2. **CSS Optimization**: Minimize inline styles where possible
+3. **Image Optimization**: Use appropriate image sizes
+4. **Caching**: Leverage WordPress caching for settings
 
-### Advanced Implementation
-
-#### 1. Dynamic CSS Generation
-```php
-// Generate CSS based on HeroBook settings
-$css = hb_generate_grid_css('home-hero');
-wp_add_inline_style('theme-style', $css);
-```
-
-#### 2. Multiple Template Support
-```php
-// Support different hero templates
-$templates = ['home-hero', 'page-hero', 'product-hero'];
-foreach ($templates as $template) {
-    $context = hb_get_context($template);
-    // Process each template
-}
-```
-
-#### 3. Custom Component Integration
-```php
-// Add custom components to HeroBook
-function custom_hero_components($components, $template) {
-    $components['custom_banner'] = hb_get_template_setting($template, 'show_custom_banner');
-    return $components;
-}
-add_filter('herobook_components', 'custom_hero_components', 10, 2);
-```
-
----
-
-## Customization Guide
-
-### Adding New Templates
-
-#### 1. Update Admin Interface
-```php
-// In inc/herobook.php, add new template option
-$templates = array(
-    'home_hero' => 'Home Hero',
-    'page_hero' => 'Page Hero',
-    'custom_hero' => 'Custom Hero' // New template
-);
-```
-
-#### 2. Create Helper Functions
-```php
-// Add helper function for new template
-function hb_get_custom_hero($setting = null, $format = 'value') {
-    return hb_get_template_setting('custom_hero', $setting, $format);
-}
-```
-
-#### 3. Implement Block
-Create new block directory: `src/blocks/Sections/custom-hero/`
-
-### Adding New Components
-
-#### 1. Update Admin Interface
-```php
-// Add new component checkbox
-Field::make('checkbox', 'show_testimonial', 'Show Testimonial')
-    ->set_default_value(false)
-```
-
-#### 2. Update Helper Functions
-```php
-// Add component check
-function hb_show_testimonial($template = null) {
-    return hb_show_component('testimonial', $template);
-}
-```
-
-#### 3. Update Templates
-```twig
-{% if hero.components.testimonial %}
-    <!-- Testimonial component -->
-{% endif %}
-```
-
-### Custom Styling
-
-#### 1. Override CSS Variables
-```css
-:root {
-    --hero-custom-spacing: 3rem;
-    --hero-custom-radius: 12px;
-}
-```
-
-#### 2. Add Custom Layout Types
-```php
-// In helper functions
-function hb_get_custom_layout_options() {
-    return array(
-        'asymmetric-30-70' => 'Asymmetric 30/70',
-        'triple-column' => 'Triple Column'
-    );
-}
-```
-
----
-
-## Integration with Design System
-
-### ColorBook Integration
-```twig
-<h1 style="color: {{ colors.text_dark }};">{{ content.title }}</h1>
-<p style="color: {{ colors.text_medium }};">{{ content.description }}</p>
-```
-
-### TextBook Integration
-```twig
-<h1 style="
-    font-family: {{ typography.heading_font }};
-    font-size: {{ typography.h1_size }};
-    font-weight: {{ typography.heading_weight }};
-">{{ content.title }}</h1>
-```
-
-### UiBook Integration
-```twig
-<a href="#" style="
-    padding: {{ ui.button_padding_y }} {{ ui.button_padding_x }};
-    border-radius: {{ ui.button_radius }};
-">{{ content.cta_text }}</a>
-```
-
-### LayoutBook Integration
-```css
-.carbon-block--home-hero__container {
-    max-width: var(--layout-max-width, 1200px);
-    margin: 0 auto;
-}
-```
-
----
+### Accessibility
+1. **Semantic HTML**: Use proper heading hierarchy
+2. **Alt Text**: Include descriptive alt text for images
+3. **Keyboard Navigation**: Ensure all interactive elements are accessible
+4. **Color Contrast**: Verify sufficient contrast ratios
 
 ## Troubleshooting
 
 ### Common Issues
 
-#### 1. Settings Not Saving
-**Problem**: HeroBook settings don't persist after saving.
-**Solution**: 
-- Check nonce verification
-- Verify user capabilities
-- Ensure proper sanitization
+**Hero not displaying correctly:**
+- Check if HeroBook settings are saved
+- Verify design system integration
+- Ensure helper functions are loaded
 
-```php
-// Debug settings save
-if (isset($_POST['herobook_nonce']) && wp_verify_nonce($_POST['herobook_nonce'], 'herobook_save')) {
-    error_log('Nonce verified successfully');
-} else {
-    error_log('Nonce verification failed');
-}
-```
+**Styling issues:**
+- Confirm ColorBook and TextBook are active
+- Check for CSS conflicts
+- Verify direct CSS values are properly applied
 
-#### 2. Styles Not Applying
-**Problem**: HeroBook CSS classes not working.
-**Solution**:
-- Check CSS file enqueuing
-- Verify class generation
-- Inspect CSS specificity
-
-```php
-// Debug class generation
-$classes = hb_get_layout_classes('home-hero');
-error_log('Generated classes: ' . $classes);
-```
-
-#### 3. Helper Functions Not Found
-**Problem**: `hb_` functions not available.
-**Solution**:
-- Ensure helper file is included in functions.php
-- Check file path
-- Verify function names
-
-```php
-// Check if helper functions are loaded
-if (function_exists('hb_get_context')) {
-    error_log('HeroBook helpers loaded successfully');
-} else {
-    error_log('HeroBook helpers not loaded');
-}
-```
-
-#### 4. Block Not Rendering
-**Problem**: Home Hero block doesn't display correctly.
-**Solution**:
-- Check block registration
-- Verify template path
-- Inspect context data
-
-```php
-// Debug block context
-function debug_hero_context($context, $block, $fields) {
-    error_log('Hero context: ' . print_r($context, true));
-    return $context;
-}
-add_filter('carbon_blocks_context_home-hero', 'debug_hero_context', 10, 3);
-```
-
-### Performance Optimization
-
-#### 1. CSS Caching
-```php
-// Cache generated CSS
-function cache_hero_css($template) {
-    $cache_key = 'hero_css_' . $template;
-    $css = wp_cache_get($cache_key);
-    
-    if (false === $css) {
-        $css = hb_generate_grid_css($template);
-        wp_cache_set($cache_key, $css, '', 3600); // Cache for 1 hour
-    }
-    
-    return $css;
-}
-```
-
-#### 2. Settings Optimization
-```php
-// Optimize settings retrieval
-function get_cached_hero_settings() {
-    static $settings = null;
-    
-    if (null === $settings) {
-        $settings = get_option('herobook_settings', array());
-    }
-    
-    return $settings;
-}
-```
+**Component not showing:**
+- Check component toggle settings in HeroBook admin
+- Verify component data is provided
+- Ensure template conditions are met
 
 ### Debug Mode
-
-Enable debug mode for troubleshooting:
+Enable WordPress debug mode to see detailed error messages:
 
 ```php
-// Add to wp-config.php
-define('HEROBOOK_DEBUG', true);
-
-// Use in helper functions
-if (defined('HEROBOOK_DEBUG') && HEROBOOK_DEBUG) {
-    error_log('HeroBook Debug: ' . $message);
-}
+define('WP_DEBUG', true);
+define('WP_DEBUG_LOG', true);
 ```
-
----
 
 ## Future Enhancements
 
 ### Planned Features
+- **Animation System**: CSS and JavaScript animations
+- **A/B Testing**: Built-in testing capabilities
+- **Advanced Layouts**: Additional layout options
+- **Component Library**: Expanded component system
+- **Performance Metrics**: Built-in performance monitoring
 
-1. **Template Library**: Pre-built hero templates
-2. **A/B Testing**: Built-in testing capabilities
-3. **Animation Controls**: CSS animation management
-4. **Advanced Layouts**: More complex grid systems
-5. **Component Library**: Expanded component options
-6. **Export/Import**: Settings backup and restore
-7. **Multi-site Support**: Network-wide settings
-8. **Performance Analytics**: Usage tracking and optimization
-
-### Extension Points
-
-The HeroBook system includes several hooks for extensions:
-
-```php
-// Filter hero settings before save
-apply_filters('herobook_settings_before_save', $settings);
-
-// Filter hero context before rendering
-apply_filters('herobook_context', $context, $template);
-
-// Action after settings save
-do_action('herobook_settings_saved', $settings);
-
-// Filter available templates
-apply_filters('herobook_available_templates', $templates);
-```
+### Integration Opportunities
+- **WooCommerce**: Product integration
+- **Custom Post Types**: Villa listings integration
+- **SEO Optimization**: Schema markup
+- **Analytics**: Conversion tracking
 
 ---
 
-## Conclusion
-
-The HeroBook system provides a robust, scalable solution for managing hero sections within the Villa Community design system. Its integration with the existing ColorBook, TextBook, UiBook, and LayoutBook systems ensures consistency and maintainability across the entire website.
-
-For additional support or questions, refer to the main Carbon Blocks Framework documentation or contact the development team.
-
----
-
-*This documentation is part of the Villa Community Design System. Last updated: May 28, 2025*
+*This documentation is maintained as part of the Villa Community design system. For questions or contributions, please refer to the project repository.*

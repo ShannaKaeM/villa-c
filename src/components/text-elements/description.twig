@@ -1,0 +1,18 @@
+{#
+/**
+ * Description Component
+ * Generic description element for use across the site
+ * 
+ * @param {string} text - Description text content
+ * @param {string} size - Font size (14px, 16px, 18px, 20px, 22px, 24px)
+ * @param {string} color - Text color (default: '#666')
+ * @param {string} tag - HTML tag (p, div, span) (default: 'p')
+ * @param {string} class - Additional CSS classes
+ */
+#}
+
+{% if text %}
+<{{ tag|default('p') }} class="description {{ class|default('') }}" style="font-size: {{ size|default('18px') }}; color: {{ color|default('#666') }}; margin: 0; line-height: 1.5;">
+    {{ text }}
+</{{ tag|default('p') }}>
+{% endif %}

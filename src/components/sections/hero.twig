@@ -1,0 +1,100 @@
+{#
+/**
+ * Hero Section Component
+ * 
+ * @param {string} variant - Hero variant: 'page' | 'home' (default: 'page')
+ * @param {string} title_text - Hero title text
+ * @param {string} title_size - Title font size (32px, 36px, 42px, 48px, 56px, 64px, 72px)
+ * @param {string} title_color - Title color
+ * @param {string} description_text - Hero description text
+ * @param {string} description_size - Description font size (16px, 18px, 20px, 22px, 24px)
+ * @param {string} description_color - Description color
+ * @param {string} background_image - Background image URL
+ * @param {string} background_color - Background color
+ * @param {string} overlay_color - Overlay color
+ * @param {string} overlay_opacity - Overlay opacity (0.0 to 1.0)
+ * @param {string} height - Hero height (50vh, 60vh, 70vh, 80vh, 90vh, 100vh)
+ * @param {string} content_max_width - Content max width (400px, 500px, 600px, 700px, 800px)
+ * @param {string} border_radius - Border radius (0, 10px, 15px, 20px, 25px, 30px)
+ */
+#}
+
+{# Set variant defaults #}
+{% set hero_variant = variant|default('page') %}
+
+{# Variant-specific settings #}
+{% if hero_variant == 'page' %}
+    {% set default_height = '60vh' %}
+    {% set default_title_size = '48px' %}
+    {% set default_content_width = '600px' %}
+    {% set default_border_radius = '8px' %}
+{% elseif hero_variant == 'home' %}
+    {% set default_height = '80vh' %}
+    {% set default_title_size = '56px' %}
+    {% set default_content_width = '700px' %}
+    {% set default_border_radius = '0' %}
+{% endif %}
+
+{% embed 'components/layouts/flexible-container.twig' with {
+    width: '100%',
+    height: height|default(default_height),
+    max_width: 'none',
+    margin_top: '0',
+    margin_bottom: '0',
+    padding_top: '60px',
+    padding_bottom: '60px',
+    padding_left: '40px',
+    padding_right: '40px',
+    flex_direction: 'column',
+    justify_content: 'center',
+    align_items: 'center',
+    gap: '20px',
+    background_color: background_color|default(''),
+    background_image: background_image|default(''),
+    overlay_color: overlay_color|default(''),
+    overlay_opacity: overlay_opacity|default(0.5),
+    border_radius: border_radius|default(default_border_radius),
+    class: 'hero hero--' ~ hero_variant,
+    id: 'hero-section'
+} %}
+    {% block content %}
+        
+        {# Content container with variant-specific width #}
+        {% embed 'components/layouts/flexible-container.twig' with {
+            width: '100%',
+            max_width: content_max_width|default(default_content_width),
+            flex_direction: 'column',
+            justify_content: 'center',
+            align_items: 'center',
+            gap: '15px',
+            class: 'hero__content'
+        } %}
+            {% block content %}
+                
+                {# Title #}
+                {% if title_text %}
+                    {% include 'components/text-elements/title.twig' with {
+                        text: title_text,
+                        size: title_size|default(default_title_size),
+                        color: title_color|default('#fff'),
+                        tag: 'h1',
+                        class: 'hero__title'
+                    } %}
+                {% endif %}
+                
+                {# Description #}
+                {% if description_text %}
+                    {% include 'components/text-elements/description.twig' with {
+                        text: description_text,
+                        size: description_size|default('18px'),
+                        color: description_color|default('#fff'),
+                        tag: 'p',
+                        class: 'hero__description'
+                    } %}
+                {% endif %}
+                
+            {% endblock %}
+        {% endembed %}
+        
+    {% endblock %}
+{% endembed %}

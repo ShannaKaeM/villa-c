@@ -3,7 +3,7 @@
         'name' => 'danielsnell/carbon-blocks',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '2c7bf9a5aae2ca00fd1ea81452823ace4a6ed03f',
+        'reference' => '6bd0a069c87d0eb5fae138789e6a29496131d288',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'danielsnell/carbon-blocks' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '2c7bf9a5aae2ca00fd1ea81452823ace4a6ed03f',
+            'reference' => '6bd0a069c87d0eb5fae138789e6a29496131d288',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
