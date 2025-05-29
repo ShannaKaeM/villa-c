@@ -38,6 +38,12 @@ function carbon_render_portal_dashboard() {
     $current_user = wp_get_current_user();
     $user_roles = $current_user->roles;
     
+    // Check for test role override
+    $test_role = carbon_get_current_test_role();
+    if ($test_role && current_user_can('administrator')) {
+        $user_roles = [$test_role];
+    }
+    
     // Check if user has portal access
     $portal_roles = ['villa_owner', 'bod_member', 'committee_member', 'staff_member', 'dvo_member'];
     $has_portal_access = array_intersect($user_roles, $portal_roles);
@@ -46,12 +52,26 @@ function carbon_render_portal_dashboard() {
         return '<div class="notice notice-error"><p>You do not have access to the Owner Portal.</p></div>';
     }
     
-    // Get user's owner profile
-    $owner_profile = carbon_get_user_owner_profile($current_user->ID);
+    // Get user's owner profile (with test override)
+    $owner_profile = null;
+    $test_profile_id = carbon_get_current_test_profile();
+    if ($test_profile_id && current_user_can('administrator')) {
+        $owner_profile = get_post($test_profile_id);
+    } else {
+        $owner_profile = carbon_get_user_owner_profile($current_user->ID);
+    }
     
     ob_start();
     ?>
     <div class="owner-portal-dashboard">
+        <?php if ($test_role && current_user_can('administrator')): ?>
+            <div class="test-mode-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
+                <h3 style="margin: 0; color: white;">🎭 TEST MODE ACTIVE</h3>
+                <p style="margin: 5px 0 0 0; opacity: 0.9;">You are viewing the portal as: <strong><?php echo ucwords(str_replace('_', ' ', $test_role)); ?></strong></p>
+                <small style="opacity: 0.8;">Use the role switcher in the admin bar to change roles or return to administrator view.</small>
+            </div>
+        <?php endif; ?>
+        
         <div class="portal-header">
             <h2>Welcome to Villa Capriani Owner Portal</h2>
             <p>Hello, <?php echo esc_html($current_user->display_name); ?>!</p>
