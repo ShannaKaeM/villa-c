@@ -1,25 +1,25 @@
 <?php
 /**
- * ColorBook - Admin page for managing the 16-color system
- * Adapted from Villa Stylebook for Carbon Blocksy theme
+ * ColorBook System - OKLCH Color Management
+ * Advanced color management with live preview and CSS variable generation.
  */
 
-// Add admin menu
-add_action('admin_menu', function() {
-    add_menu_page(
-        'ColorBook',
-        'ColorBook',
-        'manage_options',
-        'colorbook',
-        'colorbook_render_page',
-        'dashicons-art',
-        5
+// Add ColorBook as submenu under DesignBook
+add_action('admin_menu', 'colorbook_admin_submenu');
+function colorbook_admin_submenu() {
+    add_submenu_page(
+        'designbook',           // Parent slug
+        'ColorBook',            // Page title
+        'ColorBook',            // Menu title
+        'manage_options',       // Capability
+        'colorbook',            // Menu slug
+        'colorbook_admin_page'  // Function
     );
-});
+}
 
 // Enqueue admin styles and scripts
 add_action('admin_enqueue_scripts', function($hook) {
-    if ($hook !== 'toplevel_page_colorbook') return;
+    if ($hook !== 'designbook_page_colorbook') return;
     
     wp_enqueue_style('colorbook-admin', get_stylesheet_directory_uri() . '/assets/css/colorbook-admin.css');
     wp_enqueue_script('colorbook-admin', get_stylesheet_directory_uri() . '/assets/js/colorbook-admin.js', ['jquery'], '1.0.0', true);
@@ -40,6 +40,44 @@ function colorbook_save_colors_handler() {
     
     $colors = json_decode(stripslashes($_POST['colors']), true);
     
+    // Save to dedicated ColorBook JSON file
+    $colorbook_json_path = get_stylesheet_directory() . '/miDocs/SITE DATA/colorbook.json';
+    
+    // Ensure directory exists
+    $colorbook_dir = dirname($colorbook_json_path);
+    if (!file_exists($colorbook_dir)) {
+        wp_mkdir_p($colorbook_dir);
+    }
+    
+    // Create ColorBook JSON structure
+    $colorbook_data = [
+        'version' => '1.0.0',
+        'updated' => current_time('mysql'),
+        'theme' => 'carbon-blocksy',
+        'colors' => $colors,
+        'css_variables' => []
+    ];
+    
+    // Generate CSS variables for easy access
+    foreach ($colors as $index => $color) {
+        $colorbook_data['css_variables']['--theme-palette-color-' . ($index + 1)] = $color['hex'];
+        $colorbook_data['css_variables']['--color-' . $color['slug']] = $color['hex'];
+    }
+    
+    // Save ColorBook JSON
+    file_put_contents($colorbook_json_path, json_encode($colorbook_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+    
+    // Update theme.json
+    colorbook_sync_with_theme_json($colors);
+    
+    wp_send_json_success([
+        'message' => 'Colors saved successfully to ColorBook and theme.json',
+        'colorbook_path' => $colorbook_json_path
+    ]);
+}
+
+// Sync colors with theme.json
+function colorbook_sync_with_theme_json($colors) {
     // Update theme.json
     $theme_json_path = get_stylesheet_directory() . '/theme.json';
     
@@ -71,67 +109,22 @@ function colorbook_save_colors_handler() {
     // Save theme.json
     file_put_contents($theme_json_path, json_encode($theme_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     
-    // Sync to Blocksy if requested
-    if (!empty($_POST['sync_blocksy'])) {
-        colorbook_sync_with_blocksy($colors);
-    }
-    
-    wp_send_json_success(['message' => 'Colors saved successfully']);
-}
-
-// Sync colors with Blocksy
-function colorbook_sync_with_blocksy($colors) {
-    // Get current theme mods
-    $theme_mods = get_theme_mods();
-    
-    // Initialize colorPalette if it doesn't exist
-    if (!isset($theme_mods['colorPalette'])) {
-        $theme_mods['colorPalette'] = [];
-    }
-    
-    // Define the expected color order
-    $color_order = [
-        'primary-light', 'primary', 'primary-dark',
-        'secondary-light', 'secondary', 'secondary-dark',
-        'neutral-light', 'neutral', 'neutral-dark',
-        'base-white', 'base-lightest', 'base-light', 'base', 'base-dark', 'base-darkest', 'base-black'
-    ];
-    
-    // Map colors to Blocksy palette (1-16)
-    foreach ($color_order as $index => $slug) {
-        $color_data = array_filter($colors, function($c) use ($slug) {
-            return $c['slug'] === $slug;
-        });
-        $color_data = array_values($color_data);
-        
-        if (!empty($color_data)) {
-            $palette_key = 'color' . ($index + 1); // color1 through color16
-            $theme_mods['colorPalette'][$palette_key] = [
-                'color' => $color_data[0]['hex']
-            ];
-            
-            // Add titles for better organization
-            if ($index < 3) {
-                $theme_mods['colorPalette'][$palette_key]['title'] = ['Primary Light', 'Primary', 'Primary Dark'][$index];
-            } elseif ($index < 6) {
-                $theme_mods['colorPalette'][$palette_key]['title'] = ['Secondary Light', 'Secondary', 'Secondary Dark'][$index - 3];
-            } elseif ($index < 9) {
-                $theme_mods['colorPalette'][$palette_key]['title'] = ['Neutral Light', 'Neutral', 'Neutral Dark'][$index - 6];
-            } else {
-                $base_names = ['Base White', 'Base Lightest', 'Base Light', 'Base', 'Base Dark', 'Base Darkest', 'Base Black'];
-                $theme_mods['colorPalette'][$palette_key]['title'] = $base_names[$index - 9];
-            }
-        }
-    }
-    
-    // Save the updated theme mods
-    set_theme_mod('colorPalette', $theme_mods['colorPalette']);
-    
     return true;
 }
 
 // Get current colors from theme.json or defaults
 function colorbook_get_current_colors() {
+    // First try to load from ColorBook JSON file
+    $colorbook_json_path = get_stylesheet_directory() . '/miDocs/SITE DATA/colorbook.json';
+    
+    if (file_exists($colorbook_json_path)) {
+        $colorbook_data = json_decode(file_get_contents($colorbook_json_path), true);
+        if (isset($colorbook_data['colors']) && is_array($colorbook_data['colors'])) {
+            return $colorbook_data['colors'];
+        }
+    }
+    
+    // Fallback to theme.json
     $theme_json_path = get_stylesheet_directory() . '/theme.json';
     
     $default_colors = [
@@ -172,11 +165,11 @@ function colorbook_get_current_colors() {
 }
 
 // Render the admin page
-function colorbook_render_page() {
+function colorbook_admin_page() {
     $colors = colorbook_get_current_colors();
     ?>
     <div class="wrap colorbook">
-        <h1>ColorBook</h1>
+        <h1>🎨 ColorBook</h1>
         <p>Manage your 16-color system with live OKLCH editing for Carbon Blocksy theme</p>
         
         <div class="colorbook-container">
@@ -234,10 +227,6 @@ function colorbook_render_page() {
             <!-- Actions -->
             <div class="colorbook-actions">
                 <button class="button button-primary" id="save-colors">Save Colors</button>
-                <label>
-                    <input type="checkbox" id="sync-blocksy" checked>
-                    Sync to Blocksy Customizer
-                </label>
                 <button class="button" id="export-colors">Export Colors</button>
                 <button class="button" id="import-colors">Import Colors</button>
                 <input type="file" id="import-file" style="display: none;" accept=".json">
@@ -276,6 +265,155 @@ function colorbook_render_page() {
                 </div>
             </div>
         </div>
+        
+        <style>
+        .colorbook-container {
+            max-width: 1200px;
+            margin: 20px 0;
+        }
+        
+        .color-groups {
+            display: grid;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .color-group h2 {
+            margin: 0 0 15px 0;
+            color: #1d2327;
+            font-size: 18px;
+        }
+        
+        .color-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .color-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .color-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .color-swatch {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .color-info {
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .color-info code {
+            background: #f0f0f1;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .colorbook-actions {
+            padding: 20px 0;
+            border-top: 1px solid #ddd;
+        }
+        
+        .colorbook-actions .button {
+            margin-right: 10px;
+        }
+        
+        .color-editor-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 100000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 500px;
+            max-width: 90vw;
+        }
+        
+        .color-preview {
+            width: 100%;
+            height: 100px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+        
+        .oklch-controls {
+            margin: 20px 0;
+        }
+        
+        .slider-group {
+            margin-bottom: 15px;
+        }
+        
+        .slider-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .slider-group input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #ddd;
+            outline: none;
+        }
+        
+        .color-values {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+        
+        .color-values div {
+            margin-bottom: 8px;
+        }
+        
+        .color-values code {
+            background: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+        
+        .modal-actions {
+            text-align: right;
+            margin-top: 20px;
+        }
+        
+        .modal-actions .button {
+            margin-left: 10px;
+        }
+        </style>
     </div>
     <?php
 }
@@ -310,32 +448,40 @@ function colorbook_export_colors_handler() {
     // Create Blocksy-compatible export format
     $export_data = [
         'template' => 'carbon-blocksy',
-        'mods' => [
-            'colorPalette' => []
-        ]
+        'version' => '1.0.0',
+        'exported' => current_time('mysql'),
+        'colors' => $colors
     ];
     
-    $color_order = [
-        'primary-light', 'primary', 'primary-dark',
-        'secondary-light', 'secondary', 'secondary-dark',
-        'neutral-light', 'neutral', 'neutral-dark',
-        'base-white', 'base-lightest', 'base-light', 'base', 'base-dark', 'base-darkest', 'base-black'
-    ];
+    wp_send_json_success($export_data);
+}
+
+// Helper function to get ColorBook color by slug
+function get_colorbook_color($slug, $format = 'hex') {
+    $colors = colorbook_get_current_colors();
     
-    foreach ($color_order as $index => $slug) {
-        $color_data = array_filter($colors, function($c) use ($slug) {
-            return $c['slug'] === $slug;
-        });
-        $color_data = array_values($color_data);
-        
-        if (!empty($color_data)) {
-            $palette_key = 'color' . ($index + 1);
-            $export_data['mods']['colorPalette'][$palette_key] = [
-                'color' => $color_data[0]['hex'],
-                'title' => $color_data[0]['name']
-            ];
+    foreach ($colors as $color) {
+        if ($color['slug'] === $slug) {
+            switch ($format) {
+                case 'oklch':
+                    return 'oklch(' . $color['oklch'][0] . '% ' . $color['oklch'][1] . ' ' . $color['oklch'][2] . ')';
+                case 'hex':
+                default:
+                    return $color['hex'];
+            }
         }
     }
     
-    wp_send_json_success($export_data);
+    return null;
+}
+
+// Helper function to get all ColorBook data
+function get_colorbook_data() {
+    $colorbook_json_path = get_stylesheet_directory() . '/miDocs/SITE DATA/colorbook.json';
+    
+    if (file_exists($colorbook_json_path)) {
+        return json_decode(file_get_contents($colorbook_json_path), true);
+    }
+    
+    return null;
 }

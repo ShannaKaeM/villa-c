@@ -15,11 +15,20 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Auto-discover and register admin pages
+ * Register all admin pages
  */
 function carbon_admin_pages_register_all() {
+    // Standard admin pages directory (auto-discovery for Carbon Blocks Framework)
     $admin_pages_dir = get_stylesheet_directory() . '/src/admin-pages/';
+    carbon_admin_pages_scan_directory($admin_pages_dir);
     
+    // Note: DesignBook admin pages are registered separately to avoid auto-discovery conflicts
+}
+
+/**
+ * Helper function to scan directory for admin pages
+ */
+function carbon_admin_pages_scan_directory($admin_pages_dir) {
     if (!is_dir($admin_pages_dir)) {
         return;
     }
@@ -37,14 +46,14 @@ function carbon_admin_pages_register_all() {
         }
         
         // Check for nested sub-pages
-        carbon_admin_pages_register_subpages($page_dir, $page_slug);
+        carbon_admin_pages_scan_subdirectory($page_dir, $page_slug);
     }
 }
 
 /**
- * Register nested sub-pages
+ * Helper function to scan subdirectory for admin pages
  */
-function carbon_admin_pages_register_subpages($parent_dir, $parent_slug) {
+function carbon_admin_pages_scan_subdirectory($parent_dir, $parent_slug) {
     $subdirs = glob($parent_dir . '/*', GLOB_ONLYDIR);
     
     foreach ($subdirs as $subdir) {
@@ -57,7 +66,7 @@ function carbon_admin_pages_register_subpages($parent_dir, $parent_slug) {
         }
         
         // Recursively check for more nested pages
-        carbon_admin_pages_register_subpages($subdir, $parent_slug . '/' . $sub_slug);
+        carbon_admin_pages_scan_subdirectory($subdir, $parent_slug . '/' . $sub_slug);
     }
 }
 

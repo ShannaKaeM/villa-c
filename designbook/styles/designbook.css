@@ -1,0 +1,350 @@
+/**
+ * DesignBook CSS Variables
+ * 
+ * This file contains the core design system variables that are dynamically
+ * generated from the WordPress admin DesignBook system.
+ * 
+ * Variables are organized by:
+ * - Colors (OKLCH with hex fallbacks)
+ * - Typography (responsive font sizes)
+ * - Spacing (consistent scale)
+ * - Border radius (design tokens)
+ */
+
+:root {
+    /* ===== COLOR SYSTEM ===== */
+    /* Primary Colors */
+    --db-color-primary: oklch(0.6 0.2 240);
+    --db-color-primary-light: oklch(0.75 0.15 240);
+    --db-color-primary-dark: oklch(0.45 0.25 240);
+    
+    /* Secondary Colors */
+    --db-color-secondary: oklch(0.65 0.18 180);
+    --db-color-secondary-light: oklch(0.8 0.12 180);
+    --db-color-secondary-dark: oklch(0.5 0.22 180);
+    
+    /* Neutral Scale */
+    --db-color-neutral-100: oklch(0.98 0.005 240);
+    --db-color-neutral-200: oklch(0.95 0.01 240);
+    --db-color-neutral-300: oklch(0.9 0.015 240);
+    --db-color-neutral-400: oklch(0.8 0.02 240);
+    --db-color-neutral-500: oklch(0.65 0.025 240);
+    --db-color-neutral-600: oklch(0.5 0.03 240);
+    --db-color-neutral-700: oklch(0.35 0.035 240);
+    --db-color-neutral-800: oklch(0.2 0.04 240);
+    --db-color-neutral-900: oklch(0.1 0.045 240);
+    
+    /* Semantic Colors */
+    --db-color-success: oklch(0.65 0.15 140);
+    --db-color-warning: oklch(0.75 0.15 60);
+    --db-color-error: oklch(0.6 0.2 20);
+    --db-color-info: oklch(0.65 0.15 220);
+    
+    /* Base Colors */
+    --db-color-white: oklch(1 0 0);
+    --db-color-black: oklch(0 0 0);
+    
+    /* ===== TYPOGRAPHY SYSTEM ===== */
+    /* Font Families */
+    --db-font-primary-sans: system-ui, -apple-system, sans-serif;
+    --db-font-primary-serif: Georgia, serif;
+    --db-font-monospace: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    --db-font-system: system-ui, -apple-system, sans-serif;
+    
+    /* Responsive Font Sizes */
+    --db-font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+    --db-font-size-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+    --db-font-size-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+    --db-font-size-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+    --db-font-size-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+    --db-font-size-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+    --db-font-size-3xl: clamp(1.875rem, 1.6rem + 1.375vw, 2.5rem);
+    --db-font-size-4xl: clamp(2.25rem, 1.9rem + 1.75vw, 3rem);
+    --db-font-size-5xl: clamp(3rem, 2.5rem + 2.5vw, 4rem);
+    --db-font-size-6xl: clamp(3.75rem, 3rem + 3.75vw, 5rem);
+    
+    /* Line Heights */
+    --db-line-height-tight: 1.25;
+    --db-line-height-snug: 1.375;
+    --db-line-height-normal: 1.5;
+    --db-line-height-relaxed: 1.625;
+    --db-line-height-loose: 2;
+    
+    /* Letter Spacing */
+    --db-letter-spacing-tight: -0.025em;
+    --db-letter-spacing-normal: 0;
+    --db-letter-spacing-wide: 0.025em;
+    --db-letter-spacing-wider: 0.05em;
+    --db-letter-spacing-widest: 0.1em;
+    
+    /* ===== SPACING SYSTEM ===== */
+    --db-spacing-xs: clamp(0.25rem, 0.2rem + 0.25vw, 0.375rem);
+    --db-spacing-sm: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
+    --db-spacing-md: clamp(0.75rem, 0.6rem + 0.75vw, 1.125rem);
+    --db-spacing-lg: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+    --db-spacing-xl: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+    --db-spacing-2xl: clamp(2rem, 1.6rem + 2vw, 3rem);
+    --db-spacing-3xl: clamp(3rem, 2.4rem + 3vw, 4.5rem);
+    --db-spacing-4xl: clamp(4rem, 3.2rem + 4vw, 6rem);
+    
+    /* ===== BORDER RADIUS SYSTEM ===== */
+    --db-border-radius-none: 0;
+    --db-border-radius-sm: 0.125rem;
+    --db-border-radius-md: 0.375rem;
+    --db-border-radius-lg: 0.5rem;
+    --db-border-radius-xl: 0.75rem;
+    --db-border-radius-2xl: 1rem;
+    --db-border-radius-full: 9999px;
+    
+    /* ===== SHADOW SYSTEM ===== */
+    --db-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --db-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --db-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --db-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --db-shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    
+    /* ===== TRANSITION SYSTEM ===== */
+    --db-transition-fast: 150ms ease-in-out;
+    --db-transition-normal: 250ms ease-in-out;
+    --db-transition-slow: 350ms ease-in-out;
+    
+    /* ===== Z-INDEX SYSTEM ===== */
+    --db-z-dropdown: 1000;
+    --db-z-sticky: 1020;
+    --db-z-fixed: 1030;
+    --db-z-modal-backdrop: 1040;
+    --db-z-modal: 1050;
+    --db-z-popover: 1060;
+    --db-z-tooltip: 1070;
+    --db-z-toast: 1080;
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Color Utilities */
+.db-text-primary { color: var(--db-color-primary); }
+.db-text-secondary { color: var(--db-color-secondary); }
+.db-text-neutral-500 { color: var(--db-color-neutral-500); }
+.db-text-neutral-700 { color: var(--db-color-neutral-700); }
+.db-text-neutral-900 { color: var(--db-color-neutral-900); }
+
+.db-bg-primary { background-color: var(--db-color-primary); }
+.db-bg-secondary { background-color: var(--db-color-secondary); }
+.db-bg-neutral-100 { background-color: var(--db-color-neutral-100); }
+.db-bg-neutral-200 { background-color: var(--db-color-neutral-200); }
+.db-bg-white { background-color: var(--db-color-white); }
+
+/* Typography Utilities */
+.db-font-sans { font-family: var(--db-font-primary-sans); }
+.db-font-serif { font-family: var(--db-font-primary-serif); }
+.db-font-mono { font-family: var(--db-font-monospace); }
+
+.db-text-xs { font-size: var(--db-font-size-xs); }
+.db-text-sm { font-size: var(--db-font-size-sm); }
+.db-text-base { font-size: var(--db-font-size-base); }
+.db-text-lg { font-size: var(--db-font-size-lg); }
+.db-text-xl { font-size: var(--db-font-size-xl); }
+.db-text-2xl { font-size: var(--db-font-size-2xl); }
+.db-text-3xl { font-size: var(--db-font-size-3xl); }
+
+.db-leading-tight { line-height: var(--db-line-height-tight); }
+.db-leading-normal { line-height: var(--db-line-height-normal); }
+.db-leading-relaxed { line-height: var(--db-line-height-relaxed); }
+
+/* Spacing Utilities */
+.db-p-xs { padding: var(--db-spacing-xs); }
+.db-p-sm { padding: var(--db-spacing-sm); }
+.db-p-md { padding: var(--db-spacing-md); }
+.db-p-lg { padding: var(--db-spacing-lg); }
+.db-p-xl { padding: var(--db-spacing-xl); }
+
+.db-m-xs { margin: var(--db-spacing-xs); }
+.db-m-sm { margin: var(--db-spacing-sm); }
+.db-m-md { margin: var(--db-spacing-md); }
+.db-m-lg { margin: var(--db-spacing-lg); }
+.db-m-xl { margin: var(--db-spacing-xl); }
+
+/* Border Radius Utilities */
+.db-rounded-sm { border-radius: var(--db-border-radius-sm); }
+.db-rounded-md { border-radius: var(--db-border-radius-md); }
+.db-rounded-lg { border-radius: var(--db-border-radius-lg); }
+.db-rounded-xl { border-radius: var(--db-border-radius-xl); }
+.db-rounded-full { border-radius: var(--db-border-radius-full); }
+
+/* Shadow Utilities */
+.db-shadow-sm { box-shadow: var(--db-shadow-sm); }
+.db-shadow-md { box-shadow: var(--db-shadow-md); }
+.db-shadow-lg { box-shadow: var(--db-shadow-lg); }
+.db-shadow-xl { box-shadow: var(--db-shadow-xl); }
+
+/* Transition Utilities */
+.db-transition-fast { transition: all var(--db-transition-fast); }
+.db-transition-normal { transition: all var(--db-transition-normal); }
+.db-transition-slow { transition: all var(--db-transition-slow); }
+
+/* ===== COMPONENT STYLES ===== */
+
+/* Buttons */
+.db-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--db-spacing-sm) var(--db-spacing-md);
+    font-family: var(--db-font-primary-sans);
+    font-size: var(--db-font-size-base);
+    font-weight: 500;
+    line-height: var(--db-line-height-normal);
+    text-decoration: none;
+    border: none;
+    border-radius: var(--db-border-radius-md);
+    cursor: pointer;
+    transition: var(--db-transition-fast);
+}
+
+.db-button--primary {
+    background-color: var(--db-color-primary);
+    color: var(--db-color-white);
+}
+
+.db-button--primary:hover {
+    background-color: var(--db-color-primary-dark);
+}
+
+.db-button--secondary {
+    background-color: var(--db-color-secondary);
+    color: var(--db-color-white);
+}
+
+.db-button--secondary:hover {
+    background-color: var(--db-color-secondary-dark);
+}
+
+.db-button--outline {
+    background-color: transparent;
+    color: var(--db-color-primary);
+    border: 1px solid var(--db-color-primary);
+}
+
+.db-button--outline:hover {
+    background-color: var(--db-color-primary);
+    color: var(--db-color-white);
+}
+
+/* Cards */
+.db-card {
+    background-color: var(--db-color-white);
+    border-radius: var(--db-border-radius-lg);
+    box-shadow: var(--db-shadow-md);
+    padding: var(--db-spacing-lg);
+    transition: var(--db-transition-normal);
+}
+
+.db-card:hover {
+    box-shadow: var(--db-shadow-lg);
+    transform: translateY(-2px);
+}
+
+/* Form Elements */
+.db-input {
+    width: 100%;
+    padding: var(--db-spacing-sm);
+    font-family: var(--db-font-primary-sans);
+    font-size: var(--db-font-size-base);
+    line-height: var(--db-line-height-normal);
+    color: var(--db-color-neutral-900);
+    background-color: var(--db-color-white);
+    border: 1px solid var(--db-color-neutral-300);
+    border-radius: var(--db-border-radius-md);
+    transition: var(--db-transition-fast);
+}
+
+.db-input:focus {
+    outline: none;
+    border-color: var(--db-color-primary);
+    box-shadow: 0 0 0 3px var(--db-color-primary-light);
+}
+
+/* Typography Components */
+.db-heading {
+    font-family: var(--db-font-primary-sans);
+    font-weight: 700;
+    line-height: var(--db-line-height-tight);
+    color: var(--db-color-neutral-900);
+    margin-bottom: var(--db-spacing-md);
+}
+
+.db-heading--h1 { font-size: var(--db-font-size-4xl); }
+.db-heading--h2 { font-size: var(--db-font-size-3xl); }
+.db-heading--h3 { font-size: var(--db-font-size-2xl); }
+.db-heading--h4 { font-size: var(--db-font-size-xl); }
+.db-heading--h5 { font-size: var(--db-font-size-lg); }
+.db-heading--h6 { font-size: var(--db-font-size-base); }
+
+.db-text {
+    font-family: var(--db-font-primary-sans);
+    font-size: var(--db-font-size-base);
+    line-height: var(--db-line-height-relaxed);
+    color: var(--db-color-neutral-700);
+    margin-bottom: var(--db-spacing-md);
+}
+
+.db-text--large {
+    font-size: var(--db-font-size-lg);
+}
+
+.db-text--small {
+    font-size: var(--db-font-size-sm);
+}
+
+/* Layout Components */
+.db-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--db-spacing-md);
+}
+
+.db-grid {
+    display: grid;
+    gap: var(--db-spacing-lg);
+}
+
+.db-grid--2 { grid-template-columns: repeat(2, 1fr); }
+.db-grid--3 { grid-template-columns: repeat(3, 1fr); }
+.db-grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 768px) {
+    .db-grid--2,
+    .db-grid--3,
+    .db-grid--4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.db-flex {
+    display: flex;
+    gap: var(--db-spacing-md);
+}
+
+.db-flex--center {
+    align-items: center;
+    justify-content: center;
+}
+
+.db-flex--between {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.db-flex--column {
+    flex-direction: column;
+}
+
+/* Responsive Utilities */
+@media (max-width: 640px) {
+    .db-hidden-mobile { display: none !important; }
+}
+
+@media (min-width: 641px) {
+    .db-hidden-desktop { display: none !important; }
+}
