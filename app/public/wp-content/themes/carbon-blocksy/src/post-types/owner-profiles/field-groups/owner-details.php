@@ -29,9 +29,10 @@ carbon_create_post_meta_with_tabs($post_type_slug, 'Owner Profile Details', [
             Field::make('text', 'last_name', 'Last Name')
                 ->set_width(50)
                 ->set_required(true),
-            Field::make('email', 'email_address', 'Email Address')
+            Field::make('text', 'email_address', 'Email Address')
                 ->set_width(50)
-                ->set_required(true),
+                ->set_required(true)
+                ->set_attribute('type', 'email'),
             Field::make('text', 'phone_primary', 'Primary Phone')
                 ->set_width(50)
                 ->set_attribute('placeholder', '(910) 555-0123'),
@@ -136,7 +137,7 @@ carbon_create_post_meta_with_tabs($post_type_slug, 'Owner Profile Details', [
                     [
                         'field' => 'portal_roles',
                         'value' => 'bod_member',
-                        'compare' => 'IN',
+                        'compare' => 'INCLUDES',
                     ]
                 ])
                 ->set_help_text('Specific position on the Board of Directors'),
@@ -146,7 +147,7 @@ carbon_create_post_meta_with_tabs($post_type_slug, 'Owner Profile Details', [
                     [
                         'field' => 'portal_roles',
                         'value' => 'bod_member',
-                        'compare' => 'IN',
+                        'compare' => 'INCLUDES',
                     ]
                 ]),
             Field::make('date', 'term_end_date', 'Term End Date')
@@ -155,7 +156,7 @@ carbon_create_post_meta_with_tabs($post_type_slug, 'Owner Profile Details', [
                     [
                         'field' => 'portal_roles',
                         'value' => 'bod_member',
-                        'compare' => 'IN',
+                        'compare' => 'INCLUDES',
                     ]
                 ]),
             Field::make('textarea', 'bio', 'Bio/Description')
