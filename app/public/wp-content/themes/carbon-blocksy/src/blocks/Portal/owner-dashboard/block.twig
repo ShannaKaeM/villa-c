@@ -1,0 +1,187 @@
+<div class="portal-owner-dashboard-block">
+    <div class="portal-container">
+        
+        {% if testing_mode %}
+            <div class="testing-banner" style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 10px; margin-bottom: 20px; border-radius: 5px;">
+                <strong>🧪 Testing Mode Active</strong> - Displaying simulated owner dashboard data
+            </div>
+        {% endif %}
+        
+        {# Portal Header #}
+        <div class="portal-header">
+            <h1 class="portal-title">{{ fields.portal_title }}</h1>
+            {% if fields.welcome_message %}
+                <p class="portal-welcome">{{ fields.welcome_message }}</p>
+            {% endif %}
+        </div>
+
+        {% if not is_logged_in %}
+            {# Login Form for Non-Authenticated Users #}
+            {% if fields.show_login_form %}
+                <div class="portal-login">
+                    <div class="login-card">
+                        <h2>Portal Access Required</h2>
+                        <p>Please log in to access your owner portal.</p>
+                        <a href="{{ login_url }}" class="btn btn-primary">Login to Portal</a>
+                    </div>
+                </div>
+            {% endif %}
+            
+        {% elseif not has_portal_access %}
+            {# Access Denied for Users Without Portal Roles #}
+            <div class="portal-access-denied">
+                <div class="access-card">
+                    <h2>Access Restricted</h2>
+                    <p>Your account does not have access to the owner portal. Please contact the property management office for assistance.</p>
+                    <a href="{{ logout_url }}" class="btn btn-secondary">Logout</a>
+                </div>
+            </div>
+            
+        {% else %}
+            {# Portal Dashboard for Authenticated Users #}
+            <div class="portal-dashboard">
+                
+                {# User Profile Section #}
+                <div class="dashboard-section profile-section">
+                    <h2>My Profile</h2>
+                    <div class="profile-card">
+                        {% if profile_data.avatar %}
+                            <div class="profile-avatar">
+                                <img src="{{ profile_data.avatar }}" alt="Profile Avatar" />
+                            </div>
+                        {% endif %}
+                        
+                        <div class="profile-info">
+                            <h3>{{ current_user.display_name }}</h3>
+                            <p class="user-email">{{ current_user.user_email }}</p>
+                            
+                            {% if profile_data %}
+                                <div class="profile-details">
+                                    {% if profile_data.status %}
+                                        <p><strong>Status:</strong> {{ profile_data.status }}</p>
+                                    {% endif %}
+                                    
+                                    {% if profile_data.owned_villas %}
+                                        <p><strong>Owned Villas:</strong> {{ profile_data.owned_villas|length }}</p>
+                                    {% endif %}
+                                    
+                                    {% if profile_data.contact_info.phone %}
+                                        <p><strong>Phone:</strong> {{ profile_data.contact_info.phone }}</p>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                            
+                            <p class="user-roles">
+                                <strong>Role:</strong> 
+                                {% for role in user_roles %}
+                                    {{ role|replace({'_': ' '})|title }}{% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            </p>
+                        </div>
+                        
+                        <div class="profile-actions">
+                            <a href="{{ logout_url }}" class="btn btn-secondary">Logout</a>
+                        </div>
+                    </div>
+                </div>
+
+                {# Property Information Section #}
+                {% if fields.show_property_info and profile_data.owned_villas %}
+                    <div class="dashboard-section property-section">
+                        <h2>My Properties</h2>
+                        <div class="property-grid">
+                            {% for villa in profile_data.owned_villas %}
+                                <div class="property-card">
+                                    <h3>{{ villa.post_title }}</h3>
+                                    <div class="property-details">
+                                        <p><strong>Unit:</strong> {{ villa.unit_number }}</p>
+                                        <p><strong>Building:</strong> {{ villa.building }}</p>
+                                        <p><strong>Type:</strong> {{ villa.property_type }}</p>
+                                    </div>
+                                    <div class="property-actions">
+                                        <a href="{{ villa.permalink }}" class="btn btn-sm">View Details</a>
+                                        <a href="#" class="btn btn-sm btn-secondary">Submit Ticket</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {# Quick Actions Section #}
+                {% if fields.show_quick_actions %}
+                    <div class="dashboard-section actions-section">
+                        <h2>Quick Actions</h2>
+                        <div class="actions-grid">
+                            <a href="#" class="action-card">
+                                <div class="action-icon">🎫</div>
+                                <h3>Submit Ticket</h3>
+                                <p>Report maintenance issues or submit requests</p>
+                            </a>
+                            
+                            <a href="#" class="action-card">
+                                <div class="action-icon">📄</div>
+                                <h3>Documents</h3>
+                                <p>Access HOA documents, bylaws, and forms</p>
+                            </a>
+                            
+                            <a href="#" class="action-card">
+                                <div class="action-icon">💰</div>
+                                <h3>Pay Bills</h3>
+                                <p>View and pay HOA fees and assessments</p>
+                            </a>
+                            
+                            {% if 'bod_member' in user_roles or 'committee_member' in user_roles %}
+                                <a href="#" class="action-card">
+                                    <div class="action-icon">👥</div>
+                                    <h3>Committee Area</h3>
+                                    <p>Access committee collaboration tools</p>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {# Announcements Section #}
+                {% if fields.show_announcements and stats.recent_announcements %}
+                    <div class="dashboard-section announcements-section">
+                        <h2>Recent Announcements</h2>
+                        <div class="announcements-list">
+                            {% for announcement in stats.recent_announcements %}
+                                <div class="announcement-card">
+                                    <h3>{{ announcement.post_title }}</h3>
+                                    <p class="announcement-date">{{ announcement.post_date|date('F j, Y') }}</p>
+                                    <p class="announcement-excerpt">{{ announcement.post_excerpt }}</p>
+                                    <a href="{{ announcement.permalink }}" class="btn btn-sm">Read More</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {# System Stats Section (for admins and staff) #}
+                {% if 'administrator' in user_roles or 'staff_member' in user_roles %}
+                    <div class="dashboard-section stats-section">
+                        <h2>System Overview</h2>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <h3>{{ stats.total_owners }}</h3>
+                                <p>Total Owners</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>{{ stats.total_villas }}</h3>
+                                <p>Total Villas</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>{{ stats.total_articles }}</h3>
+                                <p>Total Articles</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                
+            </div>
+        {% endif %}
+        
+    </div>
+</div>

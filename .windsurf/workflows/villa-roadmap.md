@@ -4,197 +4,319 @@ description: Villa Community Owner Portal Implementation Roadmap
 
 # 🏗️ Villa Community Owner Portal Implementation Roadmap
 
-## **Phase 1: Foundation Setup (Weeks 1-2)**
+## 📝 IMPLEMENTATION CHECKLIST
 
-### 1.1 Plugin Installation & Configuration
-- Install Fluent Boards, Fluent Tickets, Fluent CRM
-- Configure basic settings and permissions
+### ✅ COMPLETED FEATURES
+- [x] **User Roles System** - 5 custom roles with proper capabilities
+- [x] **Owner Profiles CPT** - Complete with avatar system and field groups
+- [x] **Villa CPT Portal Management** - Ownership, maintenance, HOA financial tracking
+- [x] **Sample Data Generator** - 20 test users with realistic data
+- [x] **Portal Dashboard Blocks** - Role-based dashboard with profile integration
+- [x] **DesignBook System** - Color and typography management
+- [x] **Authentication Cleanup** - Removed custom auth in favor of FluentBoards integration
 
-### 1.2 User Role System
-Create custom user roles:
-- `villa_owner` - Property owners
-- `bod_member` - Board of Directors (BOD)
-- `committee_member` - Committee participants
-- `staff_member` - Property management staff
--Director of Villa Opperations DVO 
+### 🚧 IN PROGRESS
+- [ ] **FluentBoards Integration** - Authentication and board management system
+- [ ] **Portal Block Updates** - Integrate FluentBoards shortcodes into dashboard
+- [ ] **Groups CPT** - Committee and staff structure
 
-### 1.3 Extend Villa CPT
-Add owner assignment fields to existing Villa post type:
-- Owner user selection
-- Property management status
-- Rental/sale listing toggles
-- Owner notes/preferences
+### 📋 PHASE 1: FLUENTBOARDS INTEGRATION (CURRENT PRIORITY)
+- [ ] Install and configure FluentBoards plugin
+- [ ] Set up FluentBoards frontend portal for authentication
+- [ ] Update portal-login block to redirect to FluentBoards auth
+- [ ] Add FluentBoards shortcode fields to dashboard blocks
+- [ ] Configure role-based board access (villa_owner, bod_member, committee_member)
+- [ ] Test integrated authentication flow
 
-## **Phase 2: Core Infrastructure (Weeks 3-4)**
+### 📋 PHASE 2: ENHANCED DASHBOARD INTEGRATION
+- [ ] Add maintenance request boards via FluentBoards shortcodes
+- [ ] Integrate BOD meeting management boards
+- [ ] Set up committee project tracking boards
+- [ ] Add community calendar integration
+- [ ] Configure role-specific board visibility
+- [ ] Test villa-owner associations and board assignments
 
-### 2.1 Groups Custom Post Type
-Create Groups CPT with:
-- Committee taxonomy (Technology, Legal, Grounds, Budget, Operations)
-- Staff hierarchy
-- Member assignment system
-- Meeting management fields
+### 📋 PHASE 3: FLUENT TICKETS INTEGRATION
+- [ ] Install and configure Fluent Tickets plugin
+- [ ] Configure ticket categories and auto-routing
+- [ ] Set up committee-based ticket assignment
+- [ ] Create ticket submission forms for owners
+- [ ] Implement escalation protocols
+- [ ] Test ticket workflow from submission to resolution
 
-### 2.2 Enhanced Articles System
-Extend existing Articles with:
-- Portal announcement taxonomy
-- Public categories (things to do, attractions)
-- Email notification triggers
-- Permission-based visibility
+### 📋 PHASE 4: ROADMAP & COLLABORATION
+- [ ] Configure public roadmap board with owner voting
+- [ ] Set up committee collaboration spaces
+- [ ] Implement roadmap categories and filtering
+- [ ] Create committee-specific project boards
+- [ ] Test owner suggestion and upvoting system
 
-### 2.3 Owner-Villa Assignment System
-- Link users to specific villa units
-- Support multiple owners per villa
-- Historical ownership tracking
+### 📋 PHASE 5: COMMUNICATION & NOTIFICATIONS
+- [ ] Evaluate Fluent CRM integration (optional)
+- [ ] Set up email notification system
+- [ ] Create announcement broadcast system
+- [ ] Implement role-based email segmentation
+- [ ] Test notification triggers and delivery
 
-## **Phase 3: Portal Dashboards (Weeks 5-6)**
+### 📋 PHASE 6: ADVANCED FEATURES
+- [ ] Build directory system (public and portal)
+- [ ] Implement document management system
+- [ ] Add bill payment integration links
+- [ ] Create property management features (rent/sale toggles)
+- [ ] Mobile responsive design optimization
 
-### 3.1 Owner Dashboard
-**Property Management Section:**
-- Villa details editing
-- Photo gallery management
-- Rental listing controls
-- Maintenance history
+### 📋 PHASE 7: TESTING & LAUNCH
+- [ ] Comprehensive user testing across all roles
+- [ ] Admin training documentation
+- [ ] Performance optimization
+- [ ] Security audit
+- [ ] Go-live preparation
 
-**Communication Hub:**
-- Submit tickets
-- View announcements
-- Committee contact forms
+---
 
-**Documents & Resources:**
-- HOA bylaws and rules
-- Meeting minutes
-- Bill payment links
+## 🏗️ TECHNICAL ARCHITECTURE
 
-### 3.2 Committee Dashboards
-- Fluent Boards integration
-- Committee-specific workspaces
-- Cross-committee collaboration
-- Category-based ticket routing
+### **Core WordPress Plugins:**
+- **Fluent Boards** - Project management, roadmap, committee collaboration
+- **Fluent Tickets** - Support system with committee oversight
+- **Fluent CRM** - Owner communication and email campaigns (optional)
 
-### 3.3 Staff/BOD Dashboards
-- Owner management
-- Property oversight
-- System-wide announcements
-- Analytics and reporting
+### **Custom Post Types (CPTs):**
+- **Owner Profiles** - User profile management with avatar system 
+- **Villas** - Property management (frontend + backend admin) 
+- **Groups** - Committee structure and staff hierarchy
+- **Articles** - Announcements with portal taxonomy (extend existing)
 
-## **Phase 4: Fluent Boards Integration (Weeks 7-8)**
+### **User Roles & Permissions:** 
+- **villa_owner** - Property owners with basic portal access
+- **bod_member** - Board of Directors with governance access
+- **committee_member** - Committee participants with project access
+- **staff_member** - Property management staff
+- **dvo_member** - Director of Villa Operations with full oversight
 
-### 4.1 Roadmap System
+---
+
+## 📋 DETAILED IMPLEMENTATION PHASES
+
+### **PHASE 1: FLUENTBOARDS INTEGRATION** 
+
+#### 1.1 Plugin Installation & Configuration
+```bash
+# Install required plugins
+- Fluent Boards (Project Management)
+- Fluent Tickets (Support System)
+- Fluent CRM (Optional - Communication)
+```
+
+#### 1.2 Groups CPT Development
+**Purpose:** Committee and staff structure management
+
+**Field Groups:**
+- **Basic Information:** Group name, type (committee/staff), description
+- **Members:** Association with Owner Profiles, roles within group
+- **Meetings:** Schedule, agendas, minutes
+- **Projects:** Current initiatives, status tracking
+
+**Group Types:**
+- Technology & Marketing Committee
+- Legal & Governance Committee  
+- Grounds & Appearance Committee
+- Budget & Revenue Committee
+- Operations & Maintenance Committee
+- Staff Groups (Management, Maintenance, Security)
+
+#### 1.3 Articles CPT Enhancement
+**Add Portal Taxonomy:**
+- **Public Announcements** - Visible to all visitors
+- **Owner Announcements** - Portal members only
+- **Committee Updates** - Committee-specific visibility
+- **BOD Communications** - Board member announcements
+
+### **PHASE 2: ENHANCED DASHBOARD INTEGRATION** 
+
+#### 2.1 FluentBoards Configuration
 **Public Roadmap Board:**
-- Owner suggestion submission
-- Upvoting system
-- Category filtering
-- Progress tracking
+- Owner suggestion submission form
+- Upvoting system for community priorities
+- Category filtering by committee area
+- Progress tracking with status updates
+- Public visibility for transparency
 
-**Backend Management:**
+**Backend Management Boards:**
 - Committee collaboration spaces
 - Project planning and execution
+- Cross-committee coordination
+- Task assignment and tracking
 
-### 4.2 Committee Collaboration
-Individual Committee Boards:
-- 💻 Technology & Marketing
-- ⚖️ Legal & Governance
-- 🌿 Grounds & Appearance
-- 💰 Budget & Revenue
-- 📋 Operations & Maintenance
+#### 2.2 Permission-Based Access System
+**Public Access:**
+- View roadmap items and progress
+- Submit suggestions (with account)
 
-## **Phase 5: Ticket System (Weeks 9-10)**
+**Logged-in Owners:**
+- Vote on roadmap items
+- View detailed project information
+- Access owner-specific announcements
 
-### 5.1 Fluent Tickets Configuration
+**Committee Members:**
+- Collaborate on committee projects
+- Manage committee-specific roadmap items
+- Access committee workspace
+
+**BOD/DVO:**
+- Full roadmap management
+- Cross-committee oversight
+- Strategic planning access
+
+### **PHASE 3: FLUENT TICKETS INTEGRATION** 
+
+#### 3.1 Fluent Tickets Configuration
 **Ticket Categories:**
-- Property Management (violations, billing, maintenance)
-- Committee Questions (specific committee routing)
-- General Inquiries
+- **Property Management** - Violations, billing, maintenance requests
+- **Committee Questions** - Specific committee routing
+- **General Inquiries** - General community questions
+- **Technical Support** - Website/portal issues
 
 **Auto-routing System:**
-- Category-based assignment
+- Category-based assignment to appropriate committees
 - Committee expertise matching
-- Escalation protocols
+- Escalation protocols for urgent issues
+- SLA tracking and notifications
 
-### 5.2 Communication Workflows
-- Simple ticket creation forms
-- Photo/document attachments
+#### 3.2 Integration with Portal Dashboard
+- Simple ticket creation forms in owner dashboard
+- Photo/document attachment capability
+- Real-time status updates
 - Committee collaboration on responses
-- Resolution tracking
 
-## **Phase 6: Communication System (Weeks 11-12)**
+### **PHASE 4: ROADMAP & COLLABORATION** 
 
-### 6.1 Fluent CRM Integration
-**Email Campaigns:**
-- Announcement broadcasts
-- Committee updates
-- Maintenance notifications
-- Event invitations
+#### 4.1 Roadmap Configuration
+**Public Roadmap Board:**
+- Owner suggestion submission form
+- Upvoting system for community priorities
+- Category filtering by committee area
+- Progress tracking with status updates
+- Public visibility for transparency
 
-**Segmentation:**
-- By user role
-- By committee membership
-- By property location/type
+**Backend Management Boards:**
+- Committee collaboration spaces
+- Project planning and execution
+- Cross-committee coordination
+- Task assignment and tracking
 
-### 6.2 Notification System
-Automated triggers for:
-- New announcements
-- Ticket updates
-- Roadmap item changes
+#### 4.2 Permission-Based Access System
+**Public Access:**
+- View roadmap items and progress
+- Submit suggestions (with account)
+
+**Logged-in Owners:**
+- Vote on roadmap items
+- View detailed project information
+- Access owner-specific announcements
+
+**Committee Members:**
+- Collaborate on committee projects
+- Manage committee-specific roadmap items
+- Access committee workspace
+
+**BOD/DVO:**
+- Full roadmap management
+- Cross-committee oversight
+- Strategic planning access
+
+### **PHASE 5: COMMUNICATION & NOTIFICATIONS** 
+
+#### 5.1 Notification System
+**Automated Triggers:**
+- New announcements by role/committee
+- Ticket status updates
+- Roadmap item changes and voting
 - Committee meeting reminders
+- Maintenance notifications
 
-## **Phase 7: Advanced Features (Weeks 13-14)**
+#### 5.2 Email Campaign Management (Optional)
+**Fluent CRM Integration:**
+- Announcement broadcasts
+- Committee-specific updates
+- Event invitations
+- Segmentation by role, committee, property type
 
-### 7.1 Directory System
+### **PHASE 6: ADVANCED FEATURES** 
+
+#### 6.1 Directory System
 **Public Directory:**
-- Committee members
-- Board of Directors
-- Staff contacts
+- Committee member listings
+- Board of Directors profiles
+- Staff contact information
+- Office hours and availability
 
 **Portal Directory:**
-- Owner contact information
-- Committee assignments
-- Role-based visibility
+- Owner contact information (privacy-controlled)
+- Committee assignments and roles
+- Role-based visibility settings
 
-### 7.2 Document Management
+#### 6.2 Document Management
 **Secure Document Access:**
-- HOA governing documents
+- HOA governing documents and bylaws
 - Meeting minutes and agendas
-- Financial reports
-- Maintenance schedules
-
-## **Phase 8: Testing & Launch (Weeks 15-16)**
-
-### 8.1 User Testing
-- Beta testing with select owners
-- Committee chairs feedback
-- Staff member testing
-- UI/UX improvements
-
-### 8.2 Training & Documentation
-- Owner portal navigation guides
-- Committee collaboration training
-- Admin system management docs
-
-## **Key Integration Points:**
-
-1. **Villa CPT ↔ User System** - Owner assignments
-2. **Groups CPT ↔ Fluent Boards** - Committee workspaces
-3. **Articles CPT ↔ Fluent CRM** - Announcement emails
-4. **User Roles ↔ Fluent Tickets** - Category routing
-
-## **Technical Architecture:**
-
-### Database Extensions:
-- User meta for villa assignments
-- Committee memberships tracking
-- Ticket routing rules
-
-### Security Features:
+- Financial reports and budgets
+- Maintenance schedules and procedures
 - Role-based access controls
-- Villa-specific data isolation
-- Committee-specific visibility
-- Secure document access
 
-## **Success Metrics:**
+#### 6.3 Property Management Features
+- Rental listing toggles for owners
+- Sale listing management
+- Bill payment integration links
+- Maintenance request tracking
+- Property status updates
 
-- 116 villa units with assigned owners
-- Active committee participation
-- Reduced support ticket resolution time
-- Increased owner engagement
-- Streamlined communication workflows
+---
+
+## 🎯 SUCCESS METRICS
+
+### **User Engagement:**
+- Owner portal login frequency
+- Roadmap voting participation
+- Ticket submission and resolution rates
+- Committee collaboration activity
+
+### **Operational Efficiency:**
+- Reduced email volume for announcements
+- Faster ticket resolution times
+- Improved committee coordination
+- Streamlined property management
+
+### **Community Building:**
+- Increased owner participation in governance
+- Better transparency in decision-making
+- Enhanced communication between stakeholders
+- Stronger sense of community ownership
+
+---
+
+## 🔧 TECHNICAL NOTES
+
+### **Carbon Blocks Framework Integration:**
+- All CPTs follow auto-discovery patterns
+- Field groups use Carbon Fields with tabs
+- Responsive CSS system for mobile optimization
+- Component-based architecture for maintainability
+
+### **Security Considerations:**
+- Role-based access controls throughout
+- Secure document storage and access
+- User data privacy protection
+- Regular security audits and updates
+
+### **Performance Optimization:**
+- Efficient database queries for large user bases
+- Caching strategies for frequently accessed data
+- Image optimization for avatars and documents
+- Mobile-first responsive design
+
+---
+
+## 🎭 IMPLEMENTED SYSTEMS INSTRUCTIONS
+
+### **User Role Switcher - Testing System**

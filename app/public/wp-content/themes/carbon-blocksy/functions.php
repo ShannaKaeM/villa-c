@@ -6,7 +6,6 @@ require_once get_stylesheet_directory() . '/src/config/setup.php';
 // Load Portal System
 require_once get_stylesheet_directory() . '/src/config/user_roles.php';
 require_once get_stylesheet_directory() . '/src/config/sample_data_generator.php';
-require_once get_stylesheet_directory() . '/src/config/user_role_switcher.php';
 
 // Load ColorBook system
 require_once get_stylesheet_directory() . '/inc/colorbook.php';
