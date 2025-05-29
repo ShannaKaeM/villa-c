@@ -166,7 +166,8 @@ function carbon_create_post_meta_with_tabs($post_type, $title, $tabs = [], $conf
     
     // Add tabs using the correct Carbon Fields syntax
     foreach ($tabs as $tab_id => $tab_config) {
-        $container->add_tab($tab_config['title'], $tab_config['fields']);
+        $tab_title = $tab_config['title'] ?? $tab_config['label'] ?? ucwords(str_replace('_', ' ', $tab_id));
+        $container->add_tab($tab_title, $tab_config['fields']);
     }
     
     return $container;

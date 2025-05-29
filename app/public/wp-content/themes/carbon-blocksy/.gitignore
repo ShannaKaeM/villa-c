@@ -1,0 +1,29 @@
+# Composer dependencies
+vendor/
+
+# Node modules (if any)
+node_modules/
+
+# Build files
+*.map
+*.min.js
+*.min.css
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# WordPress specific
+wp-config-local.php
+.htaccess.local

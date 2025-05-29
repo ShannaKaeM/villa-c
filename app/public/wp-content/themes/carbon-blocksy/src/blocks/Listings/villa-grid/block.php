@@ -10,10 +10,26 @@ $category = basename(dirname(dirname(__FILE__)));
 
 Block::make(__(ucwords(str_replace('-', ' ', $component))))
     ->add_fields([
+        Field::make('checkbox', 'show_title', __('Show Section Title'))
+            ->set_default_value(true),
         Field::make('text', 'title', __('Section Title'))
-            ->set_default_value('Featured Villas'),
+            ->set_default_value('Featured Villas')
+            ->set_conditional_logic([
+                [
+                    'field' => 'show_title',
+                    'value' => true
+                ]
+            ]),
+        Field::make('checkbox', 'show_subtitle', __('Show Section Description'))
+            ->set_default_value(true),
         Field::make('textarea', 'subtitle', __('Section Subtitle'))
-            ->set_default_value('Discover our handpicked collection of luxury vacation rentals'),
+            ->set_default_value('Discover our handpicked collection of luxury vacation rentals')
+            ->set_conditional_logic([
+                [
+                    'field' => 'show_subtitle',
+                    'value' => true
+                ]
+            ]),
         Field::make('select', 'columns_lg', __('Columns (Large Screens)'))
             ->set_options([
                 '2' => '2 Columns',

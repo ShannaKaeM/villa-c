@@ -5,12 +5,12 @@
     {% endif %}
     
     <div class="{{ block.css_class }}__container">
-        {% if fields.title or fields.subtitle %}
+        {% if (fields.show_title and fields.title) or (fields.show_subtitle and fields.subtitle) %}
             <div class="{{ block.css_class }}__header">
-                {% if fields.title %}
+                {% if fields.show_title and fields.title %}
                     <h2 class="{{ block.css_class }}__title">{{ fields.title }}</h2>
                 {% endif %}
-                {% if fields.subtitle %}
+                {% if fields.show_subtitle and fields.subtitle %}
                     <p class="{{ block.css_class }}__subtitle">{{ fields.subtitle }}</p>
                 {% endif %}
             </div>
