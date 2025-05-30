@@ -3,7 +3,7 @@
 // Load theme setup and dependencies
 require_once get_stylesheet_directory() . '/src/config/setup.php';
 
-// Load Portal System
+// Load Villa Community System (FluentBoards Integration)
 require_once get_stylesheet_directory() . '/src/config/user_roles.php';
 require_once get_stylesheet_directory() . '/src/config/sample_data_generator.php';
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Villa Details Field Group - Portal Management
+ * Villa Details Field Group - Community Management
  * Auto-discovered by Carbon Blocks Framework
  *
  * @package CarbonBlocks

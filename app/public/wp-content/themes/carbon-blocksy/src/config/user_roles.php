@@ -1,25 +1,21 @@
 <?php
 /**
- * Custom User Roles for Villa Community Portal
- *
- * @package CarbonBlocks
+ * Custom User Roles for Villa Community - FluentBoards Integration
  */
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+use Carbon_Fields\Container;
+use Carbon_Fields\Field;
 
 /**
- * Register custom user roles for the portal system
+ * Register custom user roles for FluentBoards integration
  */
-function carbon_register_portal_user_roles() {
+function carbon_register_villa_user_roles() {
     // Villa Owner Role
     add_role('villa_owner', 'Villa Owner', [
         'read' => true,
         'edit_posts' => false,
         'delete_posts' => false,
         'upload_files' => true,
-        'view_portal' => true,
         'manage_own_villa' => true,
         'submit_tickets' => true,
         'view_announcements' => true,
@@ -32,7 +28,6 @@ function carbon_register_portal_user_roles() {
         'edit_posts' => true,
         'delete_posts' => false,
         'upload_files' => true,
-        'view_portal' => true,
         'manage_own_villa' => true,
         'submit_tickets' => true,
         'view_announcements' => true,
@@ -50,7 +45,6 @@ function carbon_register_portal_user_roles() {
         'edit_posts' => false,
         'delete_posts' => false,
         'upload_files' => true,
-        'view_portal' => true,
         'manage_own_villa' => true,
         'submit_tickets' => true,
         'view_announcements' => true,
@@ -66,7 +60,6 @@ function carbon_register_portal_user_roles() {
         'edit_posts' => true,
         'delete_posts' => false,
         'upload_files' => true,
-        'view_portal' => true,
         'view_announcements' => true,
         'access_documents' => true,
         'manage_all_tickets' => true,
@@ -82,7 +75,6 @@ function carbon_register_portal_user_roles() {
         'edit_posts' => true,
         'delete_posts' => true,
         'upload_files' => true,
-        'view_portal' => true,
         'view_announcements' => true,
         'access_documents' => true,
         'manage_all_tickets' => true,
@@ -98,34 +90,31 @@ function carbon_register_portal_user_roles() {
 }
 
 /**
- * Add custom capabilities to existing roles
+ * Add villa capabilities to Administrator role
  */
-function carbon_add_portal_capabilities() {
-    // Add portal capabilities to Administrator
+function carbon_add_villa_capabilities() {
+    // Add villa capabilities to Administrator
     $admin_role = get_role('administrator');
     if ($admin_role) {
-        $admin_role->add_cap('view_portal');
-        $admin_role->add_cap('manage_own_villa');
-        $admin_role->add_cap('submit_tickets');
-        $admin_role->add_cap('view_announcements');
-        $admin_role->add_cap('access_documents');
-        $admin_role->add_cap('manage_committees');
-        $admin_role->add_cap('view_all_tickets');
-        $admin_role->add_cap('manage_all_tickets');
-        $admin_role->add_cap('create_announcements');
-        $admin_role->add_cap('manage_roadmap');
-        $admin_role->add_cap('view_financials');
-        $admin_role->add_cap('manage_properties');
-        $admin_role->add_cap('view_owner_profiles');
-        $admin_role->add_cap('manage_maintenance');
-        $admin_role->add_cap('manage_users');
+        // Add all villa-specific capabilities to admin
+        $villa_caps = [
+            'manage_own_villa', 'submit_tickets', 'view_announcements', 'access_documents',
+            'manage_committees', 'view_all_tickets', 'create_announcements', 'manage_roadmap',
+            'view_financials', 'manage_committee_projects', 'respond_to_tickets', 'contribute_roadmap',
+            'manage_all_tickets', 'manage_properties', 'view_owner_profiles', 'manage_maintenance',
+            'manage_users'
+        ];
+        
+        foreach ($villa_caps as $cap) {
+            $admin_role->add_cap($cap);
+        }
     }
 }
 
 /**
- * Remove custom roles (for deactivation)
+ * Remove villa user roles (for theme deactivation)
  */
-function carbon_remove_portal_user_roles() {
+function carbon_remove_villa_user_roles() {
     remove_role('villa_owner');
     remove_role('bod_member');
     remove_role('committee_member');
@@ -133,14 +122,17 @@ function carbon_remove_portal_user_roles() {
     remove_role('dvo_member');
 }
 
-// Hook to register roles on theme activation
-add_action('after_switch_theme', 'carbon_register_portal_user_roles');
-add_action('after_switch_theme', 'carbon_add_portal_capabilities');
+// Hook into theme activation
+add_action('after_switch_theme', 'carbon_register_villa_user_roles');
+add_action('after_switch_theme', 'carbon_add_villa_capabilities');
 
-// Register roles if they don't exist
+// Hook into theme deactivation
+register_deactivation_hook(__FILE__, 'carbon_remove_villa_user_roles');
+
+// Ensure roles exist if they don't
 add_action('init', function() {
     if (!get_role('villa_owner')) {
-        carbon_register_portal_user_roles();
-        carbon_add_portal_capabilities();
+        carbon_register_villa_user_roles();
+        carbon_add_villa_capabilities();
     }
 });

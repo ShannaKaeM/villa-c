@@ -123,7 +123,7 @@ carbon_create_post_meta_with_tabs($post_type_slug, 'Owner Profile Details', [
                 ])
                 ->set_max(1)
                 ->set_help_text('Link this profile to a WordPress user account'),
-            Field::make('multiselect', 'portal_roles', 'Portal Roles')
+            Field::make('multiselect', 'villa_roles', 'Villa Community Roles')
                 ->set_options([
                     'villa_owner' => 'Villa Owner',
                     'bod_member' => 'Board of Directors',
@@ -135,7 +135,7 @@ carbon_create_post_meta_with_tabs($post_type_slug, 'Owner Profile Details', [
             Field::make('text', 'board_position', 'Board Position')
                 ->set_conditional_logic([
                     [
-                        'field' => 'portal_roles',
+                        'field' => 'villa_roles',
                         'value' => 'bod_member',
                         'compare' => 'INCLUDES',
                     ]
@@ -145,7 +145,7 @@ carbon_create_post_meta_with_tabs($post_type_slug, 'Owner Profile Details', [
                 ->set_width(50)
                 ->set_conditional_logic([
                     [
-                        'field' => 'portal_roles',
+                        'field' => 'villa_roles',
                         'value' => 'bod_member',
                         'compare' => 'INCLUDES',
                     ]
@@ -154,7 +154,7 @@ carbon_create_post_meta_with_tabs($post_type_slug, 'Owner Profile Details', [
                 ->set_width(50)
                 ->set_conditional_logic([
                     [
-                        'field' => 'portal_roles',
+                        'field' => 'villa_roles',
                         'value' => 'bod_member',
                         'compare' => 'INCLUDES',
                     ]
@@ -164,13 +164,13 @@ carbon_create_post_meta_with_tabs($post_type_slug, 'Owner Profile Details', [
                 ->set_help_text('Brief biography or description for board members and committee chairs'),
         ]
     ],
-    'portal_preferences' => [
-        'label' => 'Portal Preferences',
+    'community_preferences' => [
+        'label' => 'Community Preferences',
         'fields' => [
-            Field::make('checkbox', 'portal_access_enabled', 'Portal Access Enabled')
+            Field::make('checkbox', 'community_access_enabled', 'Community Access Enabled')
                 ->set_option_value('yes')
                 ->set_default_value(true)
-                ->set_help_text('Enable or disable portal access for this user'),
+                ->set_help_text('Enable or disable community access for this user'),
             Field::make('select', 'dashboard_layout', 'Dashboard Layout')
                 ->set_options([
                     'standard' => 'Standard Layout',

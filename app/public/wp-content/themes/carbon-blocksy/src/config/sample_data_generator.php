@@ -1,22 +1,19 @@
 <?php
 /**
- * Sample Data Generator for Villa Community Portal
- * Creates sample users and owner profiles for testing
- *
- * @package CarbonBlocks
+ * Sample Data Generator for Villa Community - FluentBoards Integration
  */
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-// Debug: Log that this file is being loaded
-error_log('Sample Data Generator loaded successfully');
+use Carbon_Fields\Container;
+use Carbon_Fields\Field;
 
 /**
- * Generate sample users and owner profiles
+ * Generate sample users and owner profiles for testing
  */
-function carbon_generate_sample_portal_data() {
+function carbon_generate_sample_villa_data() {
     // Sample data arrays
     $first_names = [
         'John', 'Jane', 'Michael', 'Sarah', 'David', 'Emily', 'Robert', 'Lisa',
@@ -99,7 +96,7 @@ function carbon_generate_sample_portal_data() {
                     carbon_set_post_meta($profile_id, 'mailing_address', rand(100, 999) . ' Ocean View Dr, North Topsail Beach, NC 28460');
                     carbon_set_post_meta($profile_id, 'emergency_contact_name', $first_names[array_rand($first_names)] . ' ' . $last_names[array_rand($last_names)]);
                     carbon_set_post_meta($profile_id, 'emergency_contact_phone', '919-' . rand(200, 999) . '-' . rand(1000, 9999));
-                    carbon_set_post_meta($profile_id, 'preferred_contact_method', ['email', 'phone', 'portal'][array_rand(['email', 'phone', 'portal'])]);
+                    carbon_set_post_meta($profile_id, 'preferred_contact_method', ['email', 'phone', 'text'][array_rand(['email', 'phone', 'text'])]);
                     carbon_set_post_meta($profile_id, 'receive_newsletters', true);
                     carbon_set_post_meta($profile_id, 'receive_maintenance_alerts', true);
                     
@@ -118,7 +115,7 @@ function carbon_generate_sample_portal_data() {
                     }
                     
                     // Role-specific data
-                    carbon_set_post_meta($profile_id, 'portal_roles', [$role]);
+                    carbon_set_post_meta($profile_id, 'villa_roles', [$role]);
                     
                     switch ($role) {
                         case 'bod_member':
@@ -143,8 +140,8 @@ function carbon_generate_sample_portal_data() {
                             break;
                     }
                     
-                    // Portal preferences
-                    carbon_set_post_meta($profile_id, 'portal_access_enabled', true);
+                    // Villa community preferences
+                    carbon_set_post_meta($profile_id, 'community_access_enabled', true);
                     carbon_set_post_meta($profile_id, 'dashboard_layout', 'standard');
                     carbon_set_post_meta($profile_id, 'notification_preferences', ['announcements', 'maintenance', 'tickets']);
                     
@@ -168,7 +165,7 @@ function carbon_generate_sample_portal_data() {
  * Display sample data generation results
  */
 function carbon_display_sample_data_results($users) {
-    echo '<div class="notice notice-success"><p><strong>Sample Portal Data Generated Successfully!</strong></p>';
+    echo '<div class="notice notice-success"><p><strong>Sample Villa Community Data Generated Successfully!</strong></p>';
     echo '<table class="wp-list-table widefat fixed striped">';
     echo '<thead><tr><th>Name</th><th>Username</th><th>Email</th><th>Role</th><th>Profile ID</th></tr></thead>';
     echo '<tbody>';
@@ -193,14 +190,14 @@ function carbon_display_sample_data_results($users) {
  */
 function carbon_sample_data_admin_page() {
     if (isset($_POST['generate_sample_data']) && wp_verify_nonce($_POST['_wpnonce'], 'generate_sample_data')) {
-        $users = carbon_generate_sample_portal_data();
+        $users = carbon_generate_sample_villa_data();
         carbon_display_sample_data_results($users);
     }
     
     ?>
     <div class="wrap">
-        <h1>Generate Sample Portal Data</h1>
-        <p>This will create 20 sample users with various roles and corresponding owner profiles for testing the portal system.</p>
+        <h1>Generate Sample Villa Community Data</h1>
+        <p>This will create 20 sample users with various roles and corresponding owner profiles for testing the villa community system.</p>
         
         <form method="post">
             <?php wp_nonce_field('generate_sample_data'); ?>
@@ -220,7 +217,7 @@ function carbon_sample_data_admin_page() {
             </table>
             
             <p class="submit">
-                <input type="submit" name="generate_sample_data" class="button-primary" value="Generate Sample Data" />
+                <input type="submit" name="generate_sample_data" class="button-primary" value="Generate Sample Villa Community Data" />
             </p>
         </form>
     </div>
@@ -232,10 +229,10 @@ function carbon_sample_data_admin_page() {
  */
 function carbon_add_sample_data_menu() {
     add_management_page(
-        'Generate Sample Portal Data',
-        'Portal Sample Data',
+        'Generate Sample Villa Community Data',
+        'Villa Sample Data',
         'manage_options',
-        'portal-sample-data',
+        'villa-sample-data',
         'carbon_sample_data_admin_page'
     );
 }
